@@ -1,0 +1,17 @@
+# Default values for kafka-producers.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: lsstts/salkafka
+  tag: v1.1.0_salobj_v5.4.0_xml_v4.7.0
+  pullPolicy: IfNotPresent
+
+env:
+  lsst_dds_domain: rubinobs
+  broker_ip: kafka-0-tucson-teststand-efd.lsst.codes
+  broker_port: 31090
+  registry_addr: https://schema-registry-tucson-teststand-efd.lsst.codes
+  replication: 1
+  log_level: 10
+  csc_list: DSM Test
