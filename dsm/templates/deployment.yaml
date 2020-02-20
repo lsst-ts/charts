@@ -1,28 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: {{ include "dsm.name" . }}
-  labels:
-    helm.sh/chart: {{ include "dsm.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+  name: {{ .Release.Name }}
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: {{ include "dsm.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+  completions: 1
   template:
-    metadata:
-      labels:
-        app: {{ include "dsm.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ include "dsm.name" . }}
+        - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: LSST_DDS_DOMAIN
               value: "{{ .Values.env.lsst_dds_domain }}"
+            - name: CSC_INDEX
+              value: "{{ .Values.env.csc_index }}"
             - name: CSC_MODE
               value: "{{ .Values.env.csc_mode }}"
+      restartPolicy: Never
+  ttlSecondsAfterFinished: 5

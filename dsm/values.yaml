@@ -9,4 +9,5 @@ image:
 
 env:
   lsst_dds_domain: rubinobs
-  csc_mode: 1
+  csc_index: 1
+  csc_mode: 2
