@@ -14,4 +14,3 @@ env:
   registry_addr: https://schema-registry-tucson-teststand-efd.lsst.codes
   replication: 1
   log_level: 10
-  csc_list: DSM Test
