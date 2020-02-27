@@ -35,5 +35,5 @@ spec:
             - name: LOG_LEVEL
               value: "{{ .Values.env.log_level }}"
             - name: CSC_LIST
-              value: "{{ .Values.env.csc_list }}"
+              value: "DSM"
 
