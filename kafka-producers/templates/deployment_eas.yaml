@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kafka-producers.name" . }}
+  name: {{ include "eas-producers.name" . }}
   labels:
     helm.sh/chart: {{ include "kafka-producers.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
@@ -9,16 +9,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ include "kafka-producers.name" . }}
+      app: {{ include "eas-producers.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "kafka-producers.name" . }}
+        app: {{ include "eas-producers.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ include "kafka-producers.name" . }}
+        - name: {{ include "eas-producers.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
