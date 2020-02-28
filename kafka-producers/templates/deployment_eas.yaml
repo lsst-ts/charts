@@ -23,17 +23,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: LSST_DDS_DOMAIN
-              value: "{{ .Values.env.lsst_dds_domain }}"
+              value: "{{ .Values.env.lsstDdsDomain }}"
             - name: BROKER_IP
-              value: "{{ .Values.env.broker_ip }}"
+              value: "{{ .Values.env.brokerIp }}"
             - name: BROKER_PORT
-              value: "{{ .Values.env.broker_port }}"
+              value: "{{ .Values.env.brokerPort }}"
             - name: REGISTRY_ADDR
-              value: "{{ .Values.env.registry_addr }}"
+              value: "{{ .Values.env.registryAddr }}"
             - name: REPLICATION
               value: "{{ .Values.env.replication }}"
             - name: LOG_LEVEL
-              value: "{{ .Values.env.log_level }}"
+              value: "{{ .Values.env.logLevel }}"
             - name: CSC_LIST
               value: "DSM"
 
