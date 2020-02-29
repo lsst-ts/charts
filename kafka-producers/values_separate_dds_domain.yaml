@@ -1,0 +1,5 @@
+env:
+  lsstDdsDomain:
+    separate: true
+    eas: eas
+    test: test

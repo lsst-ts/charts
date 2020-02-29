@@ -8,7 +8,9 @@ image:
   pullPolicy: IfNotPresent
 
 env:
-  lsstDdsDomain: rubinobs
+  lsstDdsDomain: 
+    separate: false
+    default: rubinobs
   brokerIp: kafka-0-tucson-teststand-efd.lsst.codes
   brokerPort: 31090
   registryAddr: https://schema-registry-tucson-teststand-efd.lsst.codes

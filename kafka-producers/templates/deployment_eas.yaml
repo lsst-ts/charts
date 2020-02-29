@@ -23,7 +23,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: LSST_DDS_DOMAIN
-              value: "{{ .Values.env.lsstDdsDomain }}"
+              {{- if .Values.env.lsstDdsDomain.separate }}
+              value: "{{ .Values.env.lsstDdsDomain.eas }}"
+              {{- else }}
+              value: "{{ .Values.env.lsstDdsDomain.default }}"
+              {{- end }}
             - name: BROKER_IP
               value: "{{ .Values.env.brokerIp }}"
             - name: BROKER_PORT
