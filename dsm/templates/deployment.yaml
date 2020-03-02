@@ -12,10 +12,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: LSST_DDS_DOMAIN
-              value: "{{ .Values.env.lsst_dds_domain }}"
+              value: "{{ .Values.env.lsstDdsDomain }}"
             - name: CSC_INDEX
-              value: "{{ .Values.env.csc_index }}"
+              value: "{{ .Values.env.cscIndex }}"
             - name: CSC_MODE
-              value: "{{ .Values.env.csc_mode }}"
+              value: "{{ .Values.env.cscMode }}"
       restartPolicy: Never
   ttlSecondsAfterFinished: 5

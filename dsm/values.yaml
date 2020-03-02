@@ -8,6 +8,6 @@ image:
   pullPolicy: IfNotPresent
 
 env:
-  lsst_dds_domain: rubinobs
-  csc_index: 1
-  csc_mode: 2
+  lsstDdsDomain: rubinobs
+  cscIndex: 1
+  cscMode: 2

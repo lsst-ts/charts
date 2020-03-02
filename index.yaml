@@ -1,0 +1,21 @@
+apiVersion: v1
+entries:
+  dsm:
+  - apiVersion: v1
+    created: "2020-03-02T14:01:25.486641-07:00"
+    description: A Helm chart for deploying the Dome Seeing Monitor CSC.
+    digest: 346719fb507f37377004317157397876e4e23e8b46c5ff1539fb08de4868a82d
+    name: dsm
+    urls:
+    - https://lsst-ts.github.io/charts/dsm-0.1.0.tgz
+    version: 0.1.0
+  kafka-producers:
+  - apiVersion: v1
+    created: "2020-03-02T14:01:25.486918-07:00"
+    description: A Helm chart for deploying the Kafka producers.
+    digest: 39eb95fa7b41d71db2615667174f0e4845b7e078fa3c2efeb84d96677dce36fc
+    name: kafka-producers
+    urls:
+    - https://lsst-ts.github.io/charts/kafka-producers-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-03-02T14:01:25.486163-07:00"

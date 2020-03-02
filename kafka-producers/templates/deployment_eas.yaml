@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "eas-producers.name" . }}
+  labels:
+    helm.sh/chart: {{ include "kafka-producers.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "eas-producers.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "eas-producers.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "eas-producers.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: LSST_DDS_DOMAIN
+              {{- if .Values.env.lsstDdsDomain.separate }}
+              value: "{{ .Values.env.lsstDdsDomain.eas }}"
+              {{- else }}
+              value: "{{ .Values.env.lsstDdsDomain.default }}"
+              {{- end }}
+            - name: BROKER_IP
+              value: "{{ .Values.env.brokerIp }}"
+            - name: BROKER_PORT
+              value: "{{ .Values.env.brokerPort }}"
+            - name: REGISTRY_ADDR
+              value: "{{ .Values.env.registryAddr }}"
+            - name: REPLICATION
+              value: "{{ .Values.env.replication }}"
+            - name: LOG_LEVEL
+              value: "{{ .Values.env.logLevel }}"
+            - name: CSC_LIST
+              value: "DSM"
+
