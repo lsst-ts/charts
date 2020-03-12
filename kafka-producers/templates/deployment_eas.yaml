@@ -28,16 +28,7 @@ spec:
               {{- else }}
               value: "{{ .Values.env.lsstDdsDomain.default }}"
               {{- end }}
-            - name: BROKER_IP
-              value: "{{ .Values.env.brokerIp }}"
-            - name: BROKER_PORT
-              value: "{{ .Values.env.brokerPort }}"
-            - name: REGISTRY_ADDR
-              value: "{{ .Values.env.registryAddr }}"
-            - name: REPLICATION
-              value: "{{ .Values.env.replication }}"
-            - name: LOG_LEVEL
-              value: "{{ .Values.env.logLevel }}"
-            - name: CSC_LIST
+            {{- include "kafka-producers.boilerplate" . | nindent 12 }}
+            - name: CSC_LIST 
               value: "DSM"
 
