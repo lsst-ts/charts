@@ -18,7 +18,14 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-test" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "kafka-producers.boilerplate" -}}
+{{- define "kafka-producers.container-boilerplate" -}}
+image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+imagePullPolicy: {{ .Values.image.pullPolicy }}
+stdin: true
+tty: true
+{{- end -}}
+
+{{- define "kafka-producers.env-boilerplate" -}}
 - name: BROKER_IP
   value: "{{ .Values.env.brokerIp }}"
 - name: BROKER_PORT

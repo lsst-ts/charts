@@ -19,8 +19,7 @@ spec:
     spec:
       containers:
         - name: {{ include "eas-producers.name" . }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "kafka-producers.container-boilerplate" . | nindent 10 }}
           env:
             - name: LSST_DDS_DOMAIN
               {{- if .Values.env.lsstDdsDomain.separate }}
@@ -28,7 +27,7 @@ spec:
               {{- else }}
               value: "{{ .Values.env.lsstDdsDomain.default }}"
               {{- end }}
-            {{- include "kafka-producers.boilerplate" . | nindent 12 }}
+            {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
               value: "DSM"
 
