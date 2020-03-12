@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "auxtel-producers.name" . }}
+  labels:
+    helm.sh/chart: {{ include "kafka-producers.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "auxtel-producers.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "auxtel-producers.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "auxtel-producers.name" . }}
+          {{- include "kafka-producers.container-boilerplate" . | nindent 10 }}
+          env:
+            - name: LSST_DDS_DOMAIN
+              {{- if .Values.env.lsstDdsDomain.separate }}
+              value: "{{ .Values.env.lsstDdsDomain.auxtel }}"
+              {{- else }}
+              value: "{{ .Values.env.lsstDdsDomain.default }}"
+              {{- end }}
+            {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
+            - name: CSC_LIST 
+              value: "ATAOS ATDome ATDomeTrajectory ATHexapod ATPneumatics ATPtg ATMCS"
+
