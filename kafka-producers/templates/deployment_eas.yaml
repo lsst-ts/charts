@@ -29,5 +29,5 @@ spec:
               {{- end }}
             {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
-              value: "DSM"
+              value: "DIMM DSM Environment"
 
