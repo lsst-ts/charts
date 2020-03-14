@@ -22,10 +22,8 @@ spec:
           {{- include "kafka-producers.container-boilerplate" . | nindent 10 }}
           env:
             - name: LSST_DDS_DOMAIN
-              {{- if .Values.env.lsstDdsDomain.separate }}
-              value: "{{ .Values.env.lsstDdsDomain.comcam }}"
-              {{- else }}
-              value: "{{ .Values.env.lsstDdsDomain.default }}"
+              {{- with .Values.env.lsstDdsDomain }}
+              value: {{ .comcam | default .default | quote }}
               {{- end }}
             {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
