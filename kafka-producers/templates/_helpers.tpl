@@ -56,6 +56,8 @@ tty: true
   value: "{{ .Values.env.brokerPort }}"
 - name: REGISTRY_ADDR
   value: "{{ .Values.env.registryAddr }}"
+- name: PARTITIONS
+  value: "{{ .Values.env.partitions }}"
 - name: REPLICATION
   value: "{{ .Values.env.replication }}"
 - name: LOG_LEVEL
