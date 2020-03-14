@@ -14,6 +14,10 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-auxtel" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "comcam-producers.name" -}}
+{{- printf "%s-comcam" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "eas-producers.name" -}}
 {{- printf "%s-eas" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
