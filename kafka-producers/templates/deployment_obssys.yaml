@@ -27,5 +27,5 @@ spec:
               {{- end }}
             {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
-              value: "GenericCamera Script ScriptQueue Watcher"
+              value: "GenericCamera Scheduler Script ScriptQueue Watcher"
 
