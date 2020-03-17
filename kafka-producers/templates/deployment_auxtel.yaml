@@ -5,6 +5,8 @@ metadata:
   labels:
     helm.sh/chart: {{ include "kafka-producers.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+  annotations:
+    k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
 spec:
   replicas: 1
   selector:
