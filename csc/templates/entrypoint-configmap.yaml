@@ -1,0 +1,8 @@
+{{- if .Values.entrypoint }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-entrypoint
+data:
+  .setup.sh: {{ (.Files.Get .Values.entrypoint) .| quote }}
+{{- end }}

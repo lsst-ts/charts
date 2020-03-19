@@ -1,19 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: {{ .Release.Name }}
-  labels:
-    app: {{ .Release.Name }}
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: {{ .Release.Name }}
   template:
     metadata:
-      labels:
-        app: {{ .Release.Name }}
       {{- include "multicast.annotation" . | nindent 4 }}
     spec:
       {{- include "multicast.annotation" . | nindent 6 }}
@@ -30,3 +23,17 @@ spec:
               value: {{ $env_value | quote }}
           {{- end }}
           {{- end }}
+{{- if .Values.entrypoint }}
+          volumeMounts:
+            - name: entrypoint
+              mountPath: /home/saluser/.setup.sh
+              subPath: .setup.sh
+      volumes:
+        - name: entrypoint
+          configMap:
+            name: {{ .Release.Name }}-entrypoint
+            items:
+              - key: .setup.sh
+                path: .setup.sh
+{{- end }}
+      restartPolicy: Never

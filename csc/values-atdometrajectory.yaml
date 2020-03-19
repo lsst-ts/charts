@@ -1,0 +1,9 @@
+image:
+  repository: lsstts/atdometrajectory
+  tag: v1.2_salobj_v5.4.0_idl_v1.1.2_xml_v4.7.0
+  pullPolicy: IfNotPresent
+
+env:
+  LSST_DDS_DOMAIN: newcitest
+
+entrypoint: files/atdometrajectory_setup.sh
