@@ -37,3 +37,7 @@ spec:
                 path: .setup.sh
 {{- end }}
       restartPolicy: Never
+      {{- if .Values.image.useNexus3 }}
+      imagePullSecrets:
+        - name: nexus3-docker
+      {{- end }}
