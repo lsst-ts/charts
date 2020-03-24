@@ -5,8 +5,7 @@ metadata:
   labels:
     helm.sh/chart: {{ include "kafka-producers.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-  annotations:
-    k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
+  {{- include "multicast.annotation" . | nindent 2 }}
 spec:
   replicas: 1
   selector:
@@ -18,6 +17,7 @@ spec:
       labels:
         app: {{ include "latiss-producers.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "multicast.annotation" . | nindent 6 }}
     spec:
       containers:
         - name: {{ include "latiss-producers.name" . }}

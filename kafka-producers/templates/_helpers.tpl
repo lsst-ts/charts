@@ -63,3 +63,9 @@ tty: true
 - name: LOG_LEVEL
   value: "{{ .Values.env.logLevel }}"
 {{- end -}}
+
+
+{{- define "multicast.annotation" -}}
+annotations:
+  k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
+{{- end -}}
