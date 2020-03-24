@@ -7,9 +7,8 @@ spec:
   replicas: 1
   template:
     metadata:
-      {{- include "multicast.annotation" . | nindent 4 }}
-    spec:
       {{- include "multicast.annotation" . | nindent 6 }}
+    spec:
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
