@@ -13,5 +13,7 @@ To check logs for the individual Kafka Producers, try
 
 
 {{- range $csc := list "auxtel" "comcam" "eas" "latiss" "m1m3" "m2" "obssys" "test" }}
+{{- if (has $csc $.Values.producers ) }}
   kubectl logs $(kubectl get pods -l "app={{ $.Release.Name }}-{{ $csc }}" -o jsonpath="{.items[0].metadata.name}")
+{{- end }}
 {{- end -}}

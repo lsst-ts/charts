@@ -7,6 +7,10 @@ image:
   tag: v1.1.0_salobj_v5.4.0_xml_v4.7.0
   pullPolicy: IfNotPresent
 
+producers:
+  - eas
+  - test
+
 env:
   lsstDdsDomain: 
     default: rubinobs

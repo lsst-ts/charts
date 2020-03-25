@@ -7,7 +7,11 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
+  {{- if (has "m2" .Values.producers ) }}
   replicas: 1
+  {{- else }}
+  replicas: 0
+  {{- end }}
   selector:
     matchLabels:
       app: {{ include "m2-producers.name" . }}
