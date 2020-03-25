@@ -33,5 +33,5 @@ spec:
               {{- end }}
             {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
-              value: "CCArchiver CCCamera CCHeaderService"
+              value: {{ .Values.cscs.comcam | quote }}
 

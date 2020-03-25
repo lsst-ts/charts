@@ -33,5 +33,5 @@ spec:
               {{- end }}
             {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
-              value: "GenericCamera Scheduler Script ScriptQueue Watcher"
+              value: {{ .Values.cscs.obssys | quote }}
 

@@ -33,5 +33,5 @@ spec:
               {{- end }}
             {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
             - name: CSC_LIST 
-              value: "Hexapod MTM2 Rotator"
+              value: {{ .Values.cscs.m2 | quote }}
 
