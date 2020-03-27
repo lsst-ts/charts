@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "latiss-producers.name" . }}
+  labels:
+    helm.sh/chart: {{ include "kafka-producers.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  {{- include "multicast.annotation" . | nindent 2 }}
+spec:
+  {{- if (has "latiss" .Values.producers ) }}
+  replicas: 1
+  {{- else }}
+  replicas: 0
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ include "latiss-producers.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "latiss-producers.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "multicast.annotation" . | nindent 6 }}
+    spec:
+      containers:
+        - name: {{ include "latiss-producers.name" . }}
+          {{- include "kafka-producers.container-boilerplate" . | nindent 10 }}
+          env:
+            - name: LSST_DDS_DOMAIN
+              {{- with .Values.env.lsstDdsDomain }}
+              value: {{ .latiss | default .default | quote }}
+              {{- end }}
+            {{- include "kafka-producers.env-boilerplate" . | nindent 12 }}
+            - name: CSC_LIST 
+              value: {{ .Values.cscs.latiss | quote }}
+
