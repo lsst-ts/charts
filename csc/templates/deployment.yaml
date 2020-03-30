@@ -22,19 +22,34 @@ spec:
               value: {{ $env_value | quote }}
           {{- end }}
           {{- end }}
-{{- if .Values.entrypoint }}
+          {{- if or .Values.entrypoint .Values.mountpoint }}
           volumeMounts:
+          {{- end }}
+          {{- if .Values.entrypoint }}
             - name: entrypoint
               mountPath: /home/saluser/.setup.sh
               subPath: .setup.sh
+          {{- end }}
+          {{- if .Values.mountpoint }}
+            - name: localmountpoint
+              mountPath: {{ .Values.mountpoint.path }}
+          {{- end}}
+      {{- if or .Values.entrypoint .Values.mountpoint }}
       volumes:
+      {{- end }}
+      {{- if .Values.entrypoint }}
         - name: entrypoint
           configMap:
             name: {{ .Release.Name }}-entrypoint
             items:
               - key: .setup.sh
                 path: .setup.sh
-{{- end }}
+      {{- end }}
+      {{- if .Values.mountpoint }}
+        - name: localmountpoint
+          peristentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc
+      {{- end }}
       restartPolicy: Never
       {{- if .Values.image.useNexus3 }}
       imagePullSecrets:
