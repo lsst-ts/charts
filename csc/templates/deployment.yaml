@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
-  replicas: 1
+  completions: 1
   template:
     metadata:
       {{- include "multicast.annotation" . | nindent 6 }}
