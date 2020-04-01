@@ -1,0 +1,9 @@
+image:
+  repository: lsstts/dsm
+  tag: develop
+  pullPolicy: IfNotPresent
+
+env:
+  LSST_DDS_DOMAIN: citest
+  CSC_INDEX: 1
+  CSC_MODE: 1

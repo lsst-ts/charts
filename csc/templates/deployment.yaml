@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}
+  {{- include "multicast.annotation" . | nindent 2 }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      {{- include "multicast.annotation" . | nindent 6 }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          stdin: true
+          tty: true
+          {{- if .Values.env }}
+          env:
+          {{- range $env_var, $env_value := .Values.env }}
+            - name: {{ $env_var }}
+              value: {{ $env_value | quote }}
+          {{- end }}
+          {{- end }}
+          {{- if or .Values.entrypoint .Values.mountpoint }}
+          volumeMounts:
+          {{- end }}
+          {{- if .Values.entrypoint }}
+            - name: entrypoint
+              mountPath: /home/saluser/.setup.sh
+              subPath: .setup.sh
+          {{- end }}
+          {{- if .Values.mountpoint }}
+            - name: localmountpoint
+              mountPath: {{ .Values.mountpoint.path }}
+          {{- end}}
+      {{- if or .Values.entrypoint .Values.mountpoint }}
+      volumes:
+      {{- end }}
+      {{- if .Values.entrypoint }}
+        - name: entrypoint
+          configMap:
+            name: {{ .Release.Name }}-entrypoint
+            items:
+              - key: .setup.sh
+                path: .setup.sh
+      {{- end }}
+      {{- if .Values.mountpoint }}
+        - name: localmountpoint
+          peristentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc
+      {{- end }}
+      restartPolicy: Never
+      {{- if .Values.image.useNexus3 }}
+      imagePullSecrets:
+        - name: nexus3-docker
+      {{- end }}
