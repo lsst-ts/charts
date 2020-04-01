@@ -5,6 +5,7 @@ metadata:
   name: {{ .Release.Name }}-pvc
   {{- if .Values.mountpoint.gid }}
   annotations:
+    pv.beta.kubernetes.io/uid: "{{ .Values.mountpoint.uid }}"
     pv.beta.kubernetes.io/gid: "{{ .Values.mountpoint.gid }}"
   {{- end }}
 spec:
