@@ -4,5 +4,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-entrypoint
 data:
-  .setup.sh: {{ (.Files.Get .Values.entrypoint) .| quote }}
+  .setup.sh:
+{{ .Values.entrypoint | indent 4 }}
 {{- end }}
