@@ -5,5 +5,5 @@ metadata:
   name: {{ .Release.Name }}-entrypoint
 data:
   .setup.sh:
-{{ .Values.entrypoint | indent 4 }}
+{{ .Values.entrypoint | toYaml | indent 4 }}
 {{- end }}
