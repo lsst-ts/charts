@@ -2,7 +2,15 @@ apiVersion: v1
 entries:
   csc:
   - apiVersion: v1
-    created: "2020-04-01T17:00:26.518951-07:00"
+    created: "2020-04-06T11:22:39.256472-07:00"
+    description: A Helm chart for deploying control system CSCs.
+    digest: 4f3365e139bccefae89b238980c432ac64bc9f0b4a20c9d4bebe05e05f2908a4
+    name: csc
+    urls:
+    - https://lsst-ts.github.io/charts/csc-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v1
+    created: "2020-04-06T11:22:39.256215-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: f1661c04a90fcc33e22af883c0cb7082648292ac75c6d02a96f46f4c63f820ab
     name: csc
@@ -10,7 +18,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: "2020-04-01T17:00:26.518208-07:00"
+    created: "2020-04-06T11:22:39.255703-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: e4d89b46dd2355057f929b46900ebb57064e8e1487a5725d2a7bfbdf552fe069
     name: csc
@@ -19,7 +27,7 @@ entries:
     version: 0.1.0
   dsm:
   - apiVersion: v1
-    created: "2020-04-01T17:00:26.519486-07:00"
+    created: "2020-04-06T11:22:39.256919-07:00"
     description: A Helm chart for deploying the Dome Seeing Monitor CSC.
     digest: 346719fb507f37377004317157397876e4e23e8b46c5ff1539fb08de4868a82d
     name: dsm
@@ -28,7 +36,7 @@ entries:
     version: 0.1.0
   kafka-producers:
   - apiVersion: v1
-    created: "2020-04-01T17:00:26.524134-07:00"
+    created: "2020-04-06T11:22:39.258193-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: d7cac0e16d4f12e561ab9c42c41c2e9708eb87d079fa15dd0bc1c13daa2ee7c1
     name: kafka-producers
@@ -36,11 +44,11 @@ entries:
     - https://lsst-ts.github.io/charts/kafka-producers-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: "2020-04-01T17:00:26.523133-07:00"
+    created: "2020-04-06T11:22:39.257428-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: 39eb95fa7b41d71db2615667174f0e4845b7e078fa3c2efeb84d96677dce36fc
     name: kafka-producers
     urls:
     - https://lsst-ts.github.io/charts/kafka-producers-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-01T17:00:26.514838-07:00"
+generated: "2020-04-06T11:22:39.254012-07:00"
