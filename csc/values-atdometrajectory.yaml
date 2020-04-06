@@ -6,4 +6,13 @@ image:
 env:
   LSST_DDS_DOMAIN: newcitest
 
-entrypoint: files/atdometrajectory_setup.sh
+entrypoint: |
+  #!/usr/bin/env bash
+
+  source ~/miniconda3/bin/activate
+
+  source $OSPL_HOME/release.com
+
+  source /home/saluser/.bashrc
+
+  run_atdometrajectory.py
