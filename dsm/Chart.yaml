@@ -1,4 +1,0 @@
-apiVersion: v1
-name: dsm
-description: A Helm chart for deploying the Dome Seeing Monitor CSC.
-version: 0.1.0
