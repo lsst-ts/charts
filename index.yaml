@@ -2,7 +2,15 @@ apiVersion: v1
 entries:
   csc:
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.597015-07:00"
+    created: "2020-04-13T14:15:09.378723-07:00"
+    description: A Helm chart for deploying control system CSCs.
+    digest: 959d4201950b43aa09ad74b3061fcecf184043f85a4fef789fe0159b62e436e3
+    name: csc
+    urls:
+    - https://lsst-ts.github.io/charts/csc-0.3.3.tgz
+    version: 0.3.3
+  - apiVersion: v1
+    created: "2020-04-13T14:15:09.376365-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: f907c6f1ec919f459e1c2c3b29deea105e5bee3f24ee686d33bc83e7f2b19cfc
     name: csc
@@ -10,7 +18,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.3.2.tgz
     version: 0.3.2
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.59673-07:00"
+    created: "2020-04-13T14:15:09.373486-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: 308f8b01fda7cd986b32956f1e5f1962f73580108e259c2d415ba37200b08d3a
     name: csc
@@ -18,7 +26,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.595923-07:00"
+    created: "2020-04-13T14:15:09.372593-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: bf0152472f266866bdeba4be61c4529db257e41c3660cd4c94641e4c92dc02d5
     name: csc
@@ -26,7 +34,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.594876-07:00"
+    created: "2020-04-13T14:15:09.371962-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: c64d6614af2d6071f5072571b80d43ca037e43bcfca22787cc4c0823da544169
     name: csc
@@ -34,7 +42,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.594382-07:00"
+    created: "2020-04-13T14:15:09.371417-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: 4f3365e139bccefae89b238980c432ac64bc9f0b4a20c9d4bebe05e05f2908a4
     name: csc
@@ -42,7 +50,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.59361-07:00"
+    created: "2020-04-13T14:15:09.370547-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: f1661c04a90fcc33e22af883c0cb7082648292ac75c6d02a96f46f4c63f820ab
     name: csc
@@ -50,7 +58,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.592836-07:00"
+    created: "2020-04-13T14:15:09.369729-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: e4d89b46dd2355057f929b46900ebb57064e8e1487a5725d2a7bfbdf552fe069
     name: csc
@@ -59,7 +67,7 @@ entries:
     version: 0.1.0
   dsm:
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.59748-07:00"
+    created: "2020-04-13T14:15:09.37929-07:00"
     description: A Helm chart for deploying the Dome Seeing Monitor CSC.
     digest: 346719fb507f37377004317157397876e4e23e8b46c5ff1539fb08de4868a82d
     name: dsm
@@ -68,7 +76,7 @@ entries:
     version: 0.1.0
   kafka-producers:
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.598604-07:00"
+    created: "2020-04-13T14:15:09.381428-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: d7cac0e16d4f12e561ab9c42c41c2e9708eb87d079fa15dd0bc1c13daa2ee7c1
     name: kafka-producers
@@ -76,11 +84,11 @@ entries:
     - https://lsst-ts.github.io/charts/kafka-producers-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: "2020-04-09T17:52:58.597907-07:00"
+    created: "2020-04-13T14:15:09.379844-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: 39eb95fa7b41d71db2615667174f0e4845b7e078fa3c2efeb84d96677dce36fc
     name: kafka-producers
     urls:
     - https://lsst-ts.github.io/charts/kafka-producers-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-09T17:52:58.589459-07:00"
+generated: "2020-04-13T14:15:09.36633-07:00"
