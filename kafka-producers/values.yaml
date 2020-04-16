@@ -1,60 +1,27 @@
 # Default values for kafka-producers.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+defaults:
+  image:
+    repository: lsstts/salkafka
+    tag: v1.1.0_salobj_v5.4.0_xml_v4.7.0
+    pullPolicy: IfNotPresent
 
-image:
-  repository: lsstts/salkafka
-  tag: v1.1.0_salobj_v5.4.0_xml_v4.7.0
-  pullPolicy: IfNotPresent
+  env:
+    lsstDdsDomain: rubinobs
+    brokerIp: kafka-0-tucson-teststand-efd.lsst.codes
+    brokerPort: 31090
+    registryAddr: https://schema-registry-tucson-teststand-efd.lsst.codes
+    partitions: 1
+    replication: 3
+    logLevel: 10
 
 producers:
-  - eas
-  - test
-
-env:
-  lsstDdsDomain: 
-    default: rubinobs
-  brokerIp: kafka-0-tucson-teststand-efd.lsst.codes
-  brokerPort: 31090
-  registryAddr: https://schema-registry-tucson-teststand-efd.lsst.codes
-  partitions: 1
-  replication: 3
-  logLevel: 10
-
-cscs:
-  auxtel: >-
-    ATAOS
-    ATDome
-    ATDomeTrajectory
-    ATHexapod
-    ATPneumatics
-    ATPtg
-    ATMCS
-  comcam: >-
-    CCArchiver
-    CCCamera
-    CCHeaderService
-  eas: >-
-    DIMM
-    DSM
-    Environment
-  latiss: >-
-    ATArchiver
-    ATCamera
-    ATHeaderService
-    ATSpectrograph
-  m1m3: >-
-    MTM1M3
-    MTVMS
-  m2: >-
-    Hexapod
-    MTM2
-    Rotator
-  obssys: >-
-    GenericCamera
-    Scheduler
-    Script
-    ScriptQueue
-    Watcher
-  test: >-
-    Test 
+  "eas":
+    cscs: >-
+      DIMM
+      DSM
+      Environment
+  "test":
+    cscs: >-
+      Test

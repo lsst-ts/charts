@@ -1,0 +1,68 @@
+{{- range $producer, $values := .Values.producers }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+  labels:
+    helm.sh/chart: {{ include "kafka-producers.chart" $ }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+  {{- include "multicast.annotation" . | nindent 2 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+        app.kubernetes.io/instance: {{ $.Release.Name }}
+      {{- include "multicast.annotation" . | nindent 6 }}
+    spec:
+      containers:
+        - name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+          {{- if .image }}
+          {{- $image := .image.repository | default $.Values.defaults.image.repository }}
+          {{- $tag := .image.tag | default $.Values.defaults.image.tag}}
+          image: "{{ $image }}:{{ $tag }}"
+          {{- else }}
+          image: "{{ $.Values.defaults.image.repository }}:{{ $.Values.defaults.image.tag }}"
+          {{- end }}
+          {{- if .image }}
+          {{- $pullPolicy := .image.pullPolicy | default $.Values.defaults.image.pullPolicy }}
+          imagePullPolicy: {{ $pullPolicy }}
+          {{- else }}
+          imagePullPolicy: {{ $.Values.defaults.image.pullPolicy }}
+          {{- end }}
+          {{- include "kafka-producers.container-boilerplate" $ | nindent 10 }}
+          env:
+            - name: LSST_DDS_DOMAIN
+              {{- if .env }}
+              value: {{ .env.lsstDdsDomain | default $.Values.defaults.env.lsstDdsDomain | quote }}
+              {{- else }}
+              value: {{ $.Values.defaults.env.lsstDdsDomain | quote }}
+              {{- end }}
+              {{- include "kafka-producers.env-boilerplate" $ | nindent 12 }}
+            - name: PARTITIONS
+              {{- if .env }}
+              value: {{ .env.partitions | default $.Values.defaults.env.partitions | quote }}
+              {{- else }}
+              value: {{ $.Values.defaults.env.partitions | quote }}
+              {{- end }}
+            - name: REPLICATION
+              {{- if .env }}
+              value: {{ .env.partitions | default $.Values.defaults.env.replication | quote }}
+              {{- else }}
+              value: {{ $.Values.defaults.env.replication | quote }}
+              {{- end }}
+            - name: LOG_LEVEL
+              {{- if .env }}
+              value: {{ .env.partitions | default $.Values.defaults.env.logLevel | quote }}
+              {{- else }}
+              value: {{ $.Values.defaults.env.logLevel | quote }}
+              {{- end }}
+            - name: CSC_LIST 
+              value: {{ .cscs | quote }}
+{{ end }}
