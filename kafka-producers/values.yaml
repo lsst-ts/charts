@@ -17,11 +17,11 @@ defaults:
     logLevel: 10
 
 producers:
-  "eas":
+  eas:
     cscs: >-
       DIMM
       DSM
       Environment
-  "test":
+  test:
     cscs: >-
       Test

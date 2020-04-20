@@ -1,5 +1,5 @@
 producers:
-  "auxtel":
+  auxtel:
     image:
       tag: v1.1.0_salobj_v5.7.0_xml_4.8.0
       pullPolicy: Always
@@ -8,8 +8,8 @@ producers:
     cscs: >-
       ATPtg
       ATDome
-  "eas":
+  eas:
     cscs: >-
       Test
       DIMM
-  "test": null
+  test: null

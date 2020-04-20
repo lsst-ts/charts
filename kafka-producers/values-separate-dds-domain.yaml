@@ -1,7 +1,7 @@
 producers:
-  "eas":
+  eas:
     env:
       lsstDdsDomain: eas
-  "test":
+  test:
     env:
       lsstDdsDomain: test
