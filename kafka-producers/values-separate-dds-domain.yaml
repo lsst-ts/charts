@@ -1,4 +1,7 @@
-env:
-  lsstDdsDomain:
-    eas: eas
-    test: test
+producers:
+  eas:
+    env:
+      lsstDdsDomain: eas
+  test:
+    env:
+      lsstDdsDomain: test

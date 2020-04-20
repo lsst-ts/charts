@@ -1,0 +1,15 @@
+producers:
+  auxtel:
+    image:
+      tag: v1.1.0_salobj_v5.7.0_xml_4.8.0
+      pullPolicy: Always
+    env:
+      partitions: 3
+    cscs: >-
+      ATPtg
+      ATDome
+  eas:
+    cscs: >-
+      Test
+      DIMM
+  test: null

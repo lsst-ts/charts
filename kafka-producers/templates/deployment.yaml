@@ -1,0 +1,74 @@
+{{- range $producer, $values := .Values.producers }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+  labels:
+    helm.sh/chart: {{ include "kafka-producers.chart" $ }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+  {{- include "multicast.annotation" . | nindent 2 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+        app.kubernetes.io/instance: {{ $.Release.Name }}
+      {{- include "multicast.annotation" . | nindent 6 }}
+    spec:
+      containers:
+        - name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+          {{- if .image }}
+          {{- $image := .image.repository | default $.Values.image.repository }}
+          {{- $tag := .image.tag | default $.Values.image.tag}}
+          image: "{{ $image }}:{{ $tag }}"
+          {{- else }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+          {{- end }}
+          {{- if .image }}
+          {{- $pullPolicy := .image.pullPolicy | default $.Values.image.pullPolicy }}
+          imagePullPolicy: {{ $pullPolicy }}
+          {{- else }}
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          {{- end }}
+          stdin: true
+          tty: true
+          env:
+            - name: LSST_DDS_DOMAIN
+              {{- if .env }}
+              value: {{ .env.lsstDdsDomain | default $.Values.env.lsstDdsDomain | quote }}
+              {{- else }}
+              value: {{ $.Values.env.lsstDdsDomain | quote }}
+              {{- end }}
+            - name: BROKER_IP
+              value: "{{ $.Values.env.brokerIp }}"
+            - name: BROKER_PORT
+              value: "{{ $.Values.env.brokerPort }}"
+            - name: REGISTRY_ADDR
+              value: "{{ $.Values.env.registryAddr }}"
+            - name: PARTITIONS
+              {{- if .env }}
+              value: {{ .env.partitions | default $.Values.env.partitions | quote }}
+              {{- else }}
+              value: {{ $.Values.env.partitions | quote }}
+              {{- end }}
+            - name: REPLICATION
+              {{- if .env }}
+              value: {{ .env.partitions | default $.Values.env.replication | quote }}
+              {{- else }}
+              value: {{ $.Values.env.replication | quote }}
+              {{- end }}
+            - name: LOG_LEVEL
+              {{- if .env }}
+              value: {{ .env.partitions | default $.Values.env.logLevel | quote }}
+              {{- else }}
+              value: {{ $.Values.env.logLevel | quote }}
+              {{- end }}
+            - name: CSC_LIST 
+              value: {{ .cscs | quote }}
+{{ end }}
