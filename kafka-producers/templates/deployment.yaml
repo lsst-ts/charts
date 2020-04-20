@@ -24,50 +24,50 @@ spec:
       containers:
         - name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
           {{- if .image }}
-          {{- $image := .image.repository | default $.Values.defaults.image.repository }}
-          {{- $tag := .image.tag | default $.Values.defaults.image.tag}}
+          {{- $image := .image.repository | default $.Values.image.repository }}
+          {{- $tag := .image.tag | default $.Values.image.tag}}
           image: "{{ $image }}:{{ $tag }}"
           {{- else }}
-          image: "{{ $.Values.defaults.image.repository }}:{{ $.Values.defaults.image.tag }}"
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
           {{- end }}
           {{- if .image }}
-          {{- $pullPolicy := .image.pullPolicy | default $.Values.defaults.image.pullPolicy }}
+          {{- $pullPolicy := .image.pullPolicy | default $.Values.image.pullPolicy }}
           imagePullPolicy: {{ $pullPolicy }}
           {{- else }}
-          imagePullPolicy: {{ $.Values.defaults.image.pullPolicy }}
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
           {{- end }}
           stdin: true
           tty: true
           env:
             - name: LSST_DDS_DOMAIN
               {{- if .env }}
-              value: {{ .env.lsstDdsDomain | default $.Values.defaults.env.lsstDdsDomain | quote }}
+              value: {{ .env.lsstDdsDomain | default $.Values.env.lsstDdsDomain | quote }}
               {{- else }}
-              value: {{ $.Values.defaults.env.lsstDdsDomain | quote }}
+              value: {{ $.Values.env.lsstDdsDomain | quote }}
               {{- end }}
             - name: BROKER_IP
-              value: "{{ $.Values.defaults.env.brokerIp }}"
+              value: "{{ $.Values.env.brokerIp }}"
             - name: BROKER_PORT
-              value: "{{ $.Values.defaults.env.brokerPort }}"
+              value: "{{ $.Values.env.brokerPort }}"
             - name: REGISTRY_ADDR
-              value: "{{ $.Values.defaults.env.registryAddr }}"
+              value: "{{ $.Values.env.registryAddr }}"
             - name: PARTITIONS
               {{- if .env }}
-              value: {{ .env.partitions | default $.Values.defaults.env.partitions | quote }}
+              value: {{ .env.partitions | default $.Values.env.partitions | quote }}
               {{- else }}
-              value: {{ $.Values.defaults.env.partitions | quote }}
+              value: {{ $.Values.env.partitions | quote }}
               {{- end }}
             - name: REPLICATION
               {{- if .env }}
-              value: {{ .env.partitions | default $.Values.defaults.env.replication | quote }}
+              value: {{ .env.partitions | default $.Values.env.replication | quote }}
               {{- else }}
-              value: {{ $.Values.defaults.env.replication | quote }}
+              value: {{ $.Values.env.replication | quote }}
               {{- end }}
             - name: LOG_LEVEL
               {{- if .env }}
-              value: {{ .env.partitions | default $.Values.defaults.env.logLevel | quote }}
+              value: {{ .env.partitions | default $.Values.env.logLevel | quote }}
               {{- else }}
-              value: {{ $.Values.defaults.env.logLevel | quote }}
+              value: {{ $.Values.env.logLevel | quote }}
               {{- end }}
             - name: CSC_LIST 
               value: {{ .cscs | quote }}
