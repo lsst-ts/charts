@@ -36,7 +36,8 @@ spec:
           {{- else }}
           imagePullPolicy: {{ $.Values.defaults.image.pullPolicy }}
           {{- end }}
-          {{- include "kafka-producers.container-boilerplate" $ | nindent 10 }}
+          stdin: true
+          tty: true
           env:
             - name: LSST_DDS_DOMAIN
               {{- if .env }}
@@ -44,7 +45,12 @@ spec:
               {{- else }}
               value: {{ $.Values.defaults.env.lsstDdsDomain | quote }}
               {{- end }}
-              {{- include "kafka-producers.env-boilerplate" $ | nindent 12 }}
+            - name: BROKER_IP
+              value: "{{ $.Values.defaults.env.brokerIp }}"
+            - name: BROKER_PORT
+              value: "{{ $.Values.defaults.env.brokerPort }}"
+            - name: REGISTRY_ADDR
+              value: "{{ $.Values.defaults.env.registryAddr }}"
             - name: PARTITIONS
               {{- if .env }}
               value: {{ .env.partitions | default $.Values.defaults.env.partitions | quote }}
