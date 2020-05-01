@@ -2,6 +2,12 @@ producers:
   eas:
     env:
       lsstDdsDomain: eas
+    cscs: >-
+      DIMM
+      DSM
+      Environment
   test:
     env:
       lsstDdsDomain: test
+    cscs: >-
+      Test
