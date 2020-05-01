@@ -14,13 +14,3 @@ env:
   partitions: 1
   replication: 3
   logLevel: 10
-
-producers:
-  eas:
-    cscs: >-
-      DIMM
-      DSM
-      Environment
-  test:
-    cscs: >-
-      Test
