@@ -1,0 +1,11 @@
+{{- range $namespace := .Values.namespaces }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $namespace }}-ospl-config
+  namespace: {{ $namespace }}
+data:
+  ospl.xml:
+{{ $.Values.osplConfig | toYaml | indent 4 }}
+{{- end }}
