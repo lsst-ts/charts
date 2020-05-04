@@ -1,0 +1,4 @@
+apiVersion: v1
+name: cluster-config
+description: A Helm chart for handling CSC cluster configuration.
+version: 0.1.0
