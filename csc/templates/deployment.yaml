@@ -1,12 +1,27 @@
+{{- $apiType := .Values.apiType | default "Job" }}
+{{- if eq $apiType "Deployment" }}
+apiVersion: apps/v1
+{{- else }}
 apiVersion: batch/v1
-kind: Job
+{{- end }}
+kind: {{ $apiType }}
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
   completions: 1
+  {{- if eq $apiType "Deployment" }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+  {{- end }}
   template:
     metadata:
+      labels:
+      {{- if eq $apiType "Deployment" }}
+        app.kubernetes.io/instance: {{ $.Release.Name }}
+      {{- end }}
       {{- include "multicast.annotation" . | nindent 6 }}
     spec:
       containers:
@@ -22,9 +37,10 @@ spec:
               value: {{ $env_value | quote }}
           {{- end }}
           {{- end }}
-          {{- if or .Values.entrypoint .Values.mountpoint }}
           volumeMounts:
-          {{- end }}
+            - name: osplconfig
+              mountPath: /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+              subPath: ospl.xml
           {{- if .Values.entrypoint }}
             - name: entrypoint
               mountPath: /home/saluser/.setup.sh
@@ -34,9 +50,13 @@ spec:
             - name: localmountpoint
               mountPath: {{ .Values.mountpoint.path }}
           {{- end}}
-      {{- if or .Values.entrypoint .Values.mountpoint }}
       volumes:
-      {{- end }}
+        - name: osplconfig
+          configMap:
+            name: {{ $.Values.namespace }}-ospl-config
+            items:
+              - key: ospl.xml
+                path: ospl.xml
       {{- if .Values.entrypoint }}
         - name: entrypoint
           configMap:
@@ -50,8 +70,10 @@ spec:
           peristentVolumeClaim:
             claimName: {{ .Release.Name }}-pvc
       {{- end }}
-      restartPolicy: Never
-      {{- if .Values.image.useNexus3 }}
+      {{- if eq $apiType "Job" }}
+      restartPolicy: OnFailure
+      {{- end }}
+      {{- if .Values.image.nexus3 }}
       imagePullSecrets:
-        - name: nexus3-docker
+        - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
       {{- end }}

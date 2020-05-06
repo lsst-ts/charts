@@ -2,11 +2,11 @@ image:
   repository: ts-dockerhub.lsst.org/dsm
   tag: b42
   pullPolicy: IfNotPresent
-  useNexus3: true
+  nexus3: nexus3-docker
 
 env:
   LSST_DDS_DOMAIN: citest
   CSC_INDEX: 1
   CSC_MODE: 1
 
-deployEnv: sandbox
+namespace: csc
