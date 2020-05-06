@@ -6,6 +6,8 @@ image:
 env:
   LSST_DDS_DOMAIN: newcitest
 
+namespace: csc
+
 entrypoint: |
   #!/usr/bin/env bash
 

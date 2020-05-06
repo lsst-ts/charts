@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: {{ .Values.apiType | default "Job" }}
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
   completions: 1
