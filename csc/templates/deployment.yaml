@@ -23,9 +23,10 @@ spec:
               value: {{ $env_value | quote }}
           {{- end }}
           {{- end }}
-          {{- if or .Values.entrypoint .Values.mountpoint }}
           volumeMounts:
-          {{- end }}
+            - name: osplconfig
+              mountPath: /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+              subPath: ospl.xml
           {{- if .Values.entrypoint }}
             - name: entrypoint
               mountPath: /home/saluser/.setup.sh
@@ -35,9 +36,13 @@ spec:
             - name: localmountpoint
               mountPath: {{ .Values.mountpoint.path }}
           {{- end}}
-      {{- if or .Values.entrypoint .Values.mountpoint }}
       volumes:
-      {{- end }}
+        - name: osplconfig
+          configMap:
+            name: {{ $.Values.namespace }}-ospl-config
+            items:
+              - key: ospl.xml
+                path: ospl.xml
       {{- if .Values.entrypoint }}
         - name: entrypoint
           configMap:
