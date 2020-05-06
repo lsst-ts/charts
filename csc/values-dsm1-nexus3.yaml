@@ -2,7 +2,7 @@ image:
   repository: ts-dockerhub.lsst.org/dsm
   tag: b42
   pullPolicy: IfNotPresent
-  useNexus3: true
+  nexus3: nexus3-docker
 
 env:
   LSST_DDS_DOMAIN: citest

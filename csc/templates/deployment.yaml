@@ -57,7 +57,7 @@ spec:
             claimName: {{ .Release.Name }}-pvc
       {{- end }}
       restartPolicy: Never
-      {{- if .Values.image.useNexus3 }}
+      {{- if .Values.image.nexus3 }}
       imagePullSecrets:
-        - name: nexus3-docker
+        - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
       {{- end }}
