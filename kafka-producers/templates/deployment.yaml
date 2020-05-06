@@ -4,6 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+  namespace: {{ $.Values.namespace }}
   labels:
     helm.sh/chart: {{ include "kafka-producers.chart" $ }}
     app.kubernetes.io/instance: {{ $.Release.Name }}
@@ -71,4 +72,19 @@ spec:
               {{- end }}
             - name: CSC_LIST 
               value: {{ .cscs | quote }}
+          volumeMounts:
+            - name: osplconfig
+              mountPath: /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+              subPath: ospl.xml
+      volumes:
+        - name: osplconfig
+          configMap:
+            name: {{ $.Values.namespace }}-ospl-config
+            items:
+              - key: ospl.xml
+                path: ospl.xml
+      {{- if $.Values.image.nexus3 }}
+      imagePullSecrets:
+        - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
+      {{- end }}
 {{ end }}

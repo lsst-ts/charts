@@ -12,3 +12,6 @@ producers:
     cscs: >-
       Test
       DIMM
+
+image:
+  nexus3: nexus3-docker
