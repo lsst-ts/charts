@@ -1,0 +1,10 @@
+producers:
+  eas:
+    cscs: >-
+      DSM
+
+  test:
+    cscs: >-
+      Test
+
+namespace: csc

@@ -14,3 +14,5 @@ env:
   partitions: 1
   replication: 3
   logLevel: 10
+
+namespace: kafka-producers
