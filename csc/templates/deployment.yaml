@@ -56,7 +56,7 @@ spec:
           peristentVolumeClaim:
             claimName: {{ .Release.Name }}-pvc
       {{- end }}
-      restartPolicy: Never
+      restartPolicy: OnFailure
       {{- if .Values.image.nexus3 }}
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
