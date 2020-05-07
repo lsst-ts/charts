@@ -74,7 +74,7 @@ spec:
             claimName: {{ .Release.Name }}-pvc
       {{- end }}
       {{- if eq $apiType "Job" }}
-      restartPolicy: OnFailure
+      restartPolicy: {{ $.Values.restartPolicy | default "Never" }}
       {{- end }}
       {{- if .Values.image.nexus3 }}
       imagePullSecrets:
