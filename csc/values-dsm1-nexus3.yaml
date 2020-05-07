@@ -10,3 +10,5 @@ env:
   CSC_MODE: 1
 
 namespace: csc
+
+restartPolicy: OnFailure
