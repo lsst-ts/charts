@@ -8,6 +8,8 @@ kind: {{ $apiType }}
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
+  labels:
+    csc: {{ .Release.Name }}
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
   completions: 1
@@ -19,6 +21,7 @@ spec:
   template:
     metadata:
       labels:
+        csc: {{ .Release.Name }}
       {{- if eq $apiType "Deployment" }}
         app.kubernetes.io/instance: {{ $.Release.Name }}
       {{- end }}
