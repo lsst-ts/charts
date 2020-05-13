@@ -1,17 +1,24 @@
 {{- if .Values.mountpoint }}
+{{- range $values := .Values.mountpoint }}
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ .Release.Name }}-pvc
-  {{- if .Values.mountpoint.gid }}
+  name: {{ $.Release.Name }}-{{ $values.name }}-pvc
+  {{- if $values.ids }}
   annotations:
-    pv.beta.kubernetes.io/uid: "{{ .Values.mountpoint.uid }}"
-    pv.beta.kubernetes.io/gid: "{{ .Values.mountpoint.gid }}"
+    {{- if $values.ids.uid }}
+    pv.beta.kubernetes.io/uid: "{{ $values.ids.uid }}"
+    {{- end }}
+    {{- if $values.ids.gid }}
+    pv.beta.kubernetes.io/gid: "{{ $values.ids.gid }}"
+    {{- end }}
   {{- end }}
 spec:
   accessModes:
-    - "ReadWriteOnce"
+    - {{ $values.accessMode | quote }}
   resources:
     requests:
-      storage: 1Gi
+      storage: {{ $values.claimSize }}
+{{- end }}
 {{- end }}

@@ -8,5 +8,25 @@ env:
   CSC_INDEX: 1
   CSC_MODE: 1
 
+namespace: csc
+
 mountpoint:
-  path: /home/saluser/telemetry
+  - name: path1
+    path: /home/saluser/telemetry
+    accessMode: ReadWriteOnce
+    ids:
+      uid: 123
+    claimSize: 1G
+  - name: path2
+    path: /tmp
+    ids:
+      gid: 432
+    accessMode: ReadOnlyMany
+    claimSize: 500Mb
+  - name: path3
+    path: /mnt
+    ids:
+      uid: 123
+      gid: 432
+    accessMode: ReadWriteMany
+    claimSize: 500G

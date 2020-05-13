@@ -37,8 +37,10 @@ spec:
               subPath: .setup.sh
           {{- end }}
           {{- if .Values.mountpoint }}
-            - name: localmountpoint
-              mountPath: {{ .Values.mountpoint.path }}
+          {{- range $values := .Values.mountpoint }}
+            - name: {{ $values.name }}
+              mountPath: {{ $values.path }}
+          {{- end}}
           {{- end}}
       volumes:
         - name: osplconfig
@@ -56,9 +58,11 @@ spec:
                 path: .setup.sh
       {{- end }}
       {{- if .Values.mountpoint }}
-        - name: localmountpoint
+      {{- range $values := .Values.mountpoint }}
+        - name: {{ $values.name }}
           peristentVolumeClaim:
-            claimName: {{ .Release.Name }}-pvc
+            claimName: {{ $.Release.Name }}-{{ $values.name }}-pvc
+      {{- end }}
       {{- end }}
       restartPolicy: Never
       {{- if .Values.image.nexus3 }}
