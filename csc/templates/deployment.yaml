@@ -1,10 +1,5 @@
-{{- $apiType := .Values.apiType | default "Job" }}
-{{- if eq $apiType "Deployment" }}
-apiVersion: apps/v1
-{{- else }}
 apiVersion: batch/v1
-{{- end }}
-kind: {{ $apiType }}
+kind: Job
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
@@ -13,18 +8,10 @@ metadata:
   {{- include "multicast.annotation" . | nindent 2 }}
 spec:
   completions: 1
-  {{- if eq $apiType "Deployment" }}
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: {{ $.Release.Name }}
-  {{- end }}
   template:
     metadata:
       labels:
         csc: {{ .Release.Name }}
-      {{- if eq $apiType "Deployment" }}
-        app.kubernetes.io/instance: {{ $.Release.Name }}
-      {{- end }}
       {{- include "multicast.annotation" . | nindent 6 }}
     spec:
       containers:
@@ -73,9 +60,7 @@ spec:
           peristentVolumeClaim:
             claimName: {{ .Release.Name }}-pvc
       {{- end }}
-      {{- if eq $apiType "Job" }}
-      restartPolicy: {{ $.Values.restartPolicy | default "Never" }}
-      {{- end }}
+      restartPolicy: Never
       {{- if .Values.image.nexus3 }}
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
