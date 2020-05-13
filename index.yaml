@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   cluster-config:
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.818384-07:00"
+    created: "2020-05-13T16:41:38.167269-07:00"
     description: A Helm chart for handling CSC cluster configuration.
     digest: 163b079b9adbfa0a6c58bdb0e612db3e0ccf895204ada6d93ec71b1bb280be9e
     name: cluster-config
@@ -11,7 +11,7 @@ entries:
     version: 0.1.0
   csc:
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.820716-07:00"
+    created: "2020-05-13T16:41:38.168295-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: c60ba9a6fe963a1e80fa6d6f5d7cbbf9819c1a3b9f89a31262bef1e4a071de6c
     name: csc
@@ -19,32 +19,16 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.820425-07:00"
+    created: "2020-05-13T16:41:38.167832-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: 9ab56c31df561eb82923e700e92d88c60943409ccecacc81d57ea637ddf64eb7
     name: csc
     urls:
     - https://lsst-ts.github.io/charts/csc-0.4.0.tgz
     version: 0.4.0
-  - apiVersion: v1
-    created: "2020-05-07T11:37:49.8197-07:00"
-    description: A Helm chart for deploying control system CSCs.
-    digest: 915c44e04d7e42ba499cd509280c7cf158bed0627227f1ebcde904e9bcba3d22
-    name: csc
-    urls:
-    - https://lsst-ts.github.io/charts/csc-0.3.6.tgz
-    version: 0.3.6
-  - apiVersion: v1
-    created: "2020-05-07T11:37:49.819016-07:00"
-    description: A Helm chart for deploying control system CSCs.
-    digest: 03ecc5aac06d15d72e39a37dc96329f26e564e2f4e46952d56bd0487459d7e49
-    name: csc
-    urls:
-    - https://lsst-ts.github.io/charts/csc-0.3.5.tgz
-    version: 0.3.5
   kafka-producers:
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.825283-07:00"
+    created: "2020-05-13T16:41:38.169744-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: ade40799cca50dbf42cd4440f5f8d2181baabeb40b31886da6f9f13cafc98bb0
     name: kafka-producers
@@ -52,7 +36,7 @@ entries:
     - https://lsst-ts.github.io/charts/kafka-producers-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.824596-07:00"
+    created: "2020-05-13T16:41:38.169268-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: 2facf96c7e78f7e1f10c563595d67c127efe3c79d35e93de1f5d7af4bbe3fc60
     name: kafka-producers
@@ -60,7 +44,7 @@ entries:
     - https://lsst-ts.github.io/charts/kafka-producers-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.8221-07:00"
+    created: "2020-05-13T16:41:38.168779-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: 9b51e3cfcf3750f6a40dcc088acae6f92b3daaed28d5ef3e620f7937afa39aa1
     name: kafka-producers
@@ -69,11 +53,11 @@ entries:
     version: 0.3.0
   ospl-config:
   - apiVersion: v1
-    created: "2020-05-07T11:37:49.825777-07:00"
+    created: "2020-05-13T16:41:38.170219-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 1679714de2885b50db4078e540c69d89d5e7ff5203b3d78f5b0e9d1e1acab4df
     name: ospl-config
     urls:
     - https://lsst-ts.github.io/charts/ospl-config-0.1.0.tgz
     version: 0.1.0
-generated: "2020-05-07T11:37:49.81737-07:00"
+generated: "2020-05-13T16:41:38.161806-07:00"
