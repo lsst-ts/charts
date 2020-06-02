@@ -5,6 +5,9 @@ producers:
       pullPolicy: Always
     env:
       partitions: 3
+      waitAck: all
+      replication: 10
+      logLevel: 50
     cscs: >-
       ATPtg
       ATDome
