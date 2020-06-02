@@ -64,6 +64,12 @@ spec:
               {{- else }}
               value: {{ $.Values.env.replication | quote }}
               {{- end }}
+            - name: WAIT_ACK
+              {{- if .env }}
+              value: {{ .env.waitAck | default $.Values.env.waitAck | quote }}
+              {{- else }}
+              value: {{ $.Values.env.waitAck | quote }}
+              {{- end }}
             - name: LOG_LEVEL
               {{- if .env }}
               value: {{ .env.partitions | default $.Values.env.logLevel | quote }}

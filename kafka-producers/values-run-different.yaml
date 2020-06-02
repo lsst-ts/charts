@@ -5,6 +5,7 @@ producers:
       pullPolicy: Always
     env:
       partitions: 3
+      waitAck: all
     cscs: >-
       ATPtg
       ATDome
