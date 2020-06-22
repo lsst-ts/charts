@@ -82,6 +82,13 @@ spec:
             - name: osplconfig
               mountPath: /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
+          startupProbe:
+            exec:
+              command:
+              - cat
+              - /tmp/RUNNING
+            initialDelaySeconds: 10
+            periodSeconds: 10
       volumes:
         - name: osplconfig
           configMap:
