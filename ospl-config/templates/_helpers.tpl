@@ -64,6 +64,7 @@ Create chart name and version as used by the chart label.
             <Policy alignee="Initial"
                     aligner="true"
                     durability="Durable"
+                    masterPriority="${OSPL_MASTER_PRIORITY:-1}"
                     nameSpace="defaultNamespace"/>
         </NameSpaces>
     </DurabilityService>
