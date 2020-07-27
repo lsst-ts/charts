@@ -69,3 +69,5 @@ spec:
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
       {{- end }}
+      hostIPC: {{ $.Values.useHostIpc | default true }}
+      hostPID: {{ $.Values.useHostPid | default true }}
