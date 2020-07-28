@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  {{- include "multicast.annotation" . | nindent 2 }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}
+      {{- include "multicast.annotation" . | nindent 6  }}
+    spec:
+      tolerations:
+      # this toleration is to have the daemonset runnable on master nodes
+      # remove it if your masters can't run pods
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          stdin: true
+          tty: true
+          {{- if .Values.env }}
+          env:
+          {{- range $env_var, $env_value := .Values.env }}
+            - name: {{ $env_var }}
+              value: {{ $env_value | quote }}
+          {{- end }}
+          {{- end }}
+          volumeMounts:
+            - name: osplconfig
+              mountPath: /opt/OpenSpliceDDS/{{ .Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
+              subPath: ospl.xml
+            - name: osplshmem
+              mountPath: /tmp 
+      volumes:
+        - name: osplconfig
+          configMap:
+            name: {{ .Values.namespace }}-ospl-config
+            items:
+              - key: ospl.xml
+                path: ospl.xml
+        - name: osplshmem
+          hostPath:
+            path: /tmp/osplshmem
+            type: DirectoryOrCreate
+      {{- if .Values.image.nexus3 }}
+      imagePullSecrets:
+        - name: {{ .Values.namespace }}-{{ .Values.image.nexus3 }}
+      {{- end }}
+      hostIPC: {{ .Values.useHostIpc | default true }}
+      hostPID: {{ .Values.useHostPid | default true }}

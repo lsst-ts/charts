@@ -1,0 +1,11 @@
+image:
+  repository: ts-dockerhub.lsst.org/ospl-daemon 
+  tag: c0010
+  pullPolicy: IfNotPresent
+  nexus3: nexus3-docker
+
+env:
+  LSST_DDS_DOMAIN: ncsa
+
+osplVersion: V6.10.4
+namespace: ospl-daemon
