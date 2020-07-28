@@ -29,8 +29,10 @@ spec:
           {{- end }}
           volumeMounts:
             - name: osplconfig
-              mountPath: /opt/OpenSpliceDDS/V6.9.0/HDE/x86_64.linux/etc/config/ospl.xml
+              mountPath: /opt/OpenSpliceDDS/{{ $.Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
+            - name: osplshmem
+              mountPath: /tmp
           {{- if .Values.entrypoint }}
             - name: entrypoint
               mountPath: /home/saluser/.setup.sh
@@ -49,6 +51,9 @@ spec:
             items:
               - key: ospl.xml
                 path: ospl.xml
+        - name: osplshmem
+          hostPath:
+            path: /tmp/osplshmem
       {{- if .Values.entrypoint }}
         - name: entrypoint
           configMap:

@@ -6,6 +6,7 @@ image:
 env:
   LSST_DDS_DOMAIN: newcitest
 
+osplVersion: V6.9.0
 namespace: csc
 
 entrypoint: |
