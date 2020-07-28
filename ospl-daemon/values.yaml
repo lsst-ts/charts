@@ -8,4 +8,5 @@ env:
   LSST_DDS_DOMAIN: ncsa
 
 osplVersion: V6.10.4
+shmemDir: /tmp/test
 namespace: ospl-daemon
