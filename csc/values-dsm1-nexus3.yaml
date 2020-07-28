@@ -10,4 +10,5 @@ env:
   CSC_MODE: 1
 
 osplVersion: V6.9.0
+shmemDir: /my/test
 namespace: csc

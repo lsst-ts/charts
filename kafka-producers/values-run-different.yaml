@@ -18,3 +18,5 @@ producers:
 
 image:
   nexus3: nexus3-docker
+
+shmemDir: /my/test
