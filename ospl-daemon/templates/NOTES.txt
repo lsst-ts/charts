@@ -1,0 +1,12 @@
+Your release is named {{ .Release.Name }}.
+
+To learn more about the release, try:
+
+  helm status {{ .Release.Name }}
+  helm get {{ .Release.Name }}
+
+To check if all the OSPL daemons are running, try:
+
+{{- range $namespace := $.Values.namespaces }}
+  kubectl get ds --namespace={{ $namespace }} -o jsonpath="{.items[0].metadata.name}"
+{{- end }}

@@ -15,8 +15,10 @@ Create chart name and version as used by the chart label.
     <Domain>
         <Name>ospl_sp_ddsi</Name>
         <Id>0</Id>
-        <SingleProcess>true</SingleProcess>
-        <Description>Stand-alone 'single-process' deployment and standard DDSI networking.</Description>
+        <Description>Federated deployment using shared-memory and standard DDSI networking.</Description>
+        <Database>
+           <Size>104857600</Size>
+        </Database>
         <Service name="ddsi2">
             <Command>ddsi2</Command>
         </Service>
@@ -70,7 +72,7 @@ Create chart name and version as used by the chart label.
     </DurabilityService>
     <TunerService name="cmsoap">
         <Server>
-            <PortNr>Auto</PortNr>
+            <PortNr>50000</PortNr>
         </Server>
     </TunerService>
 </OpenSplice>
