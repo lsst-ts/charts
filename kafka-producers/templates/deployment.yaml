@@ -93,7 +93,7 @@ spec:
                 path: ospl.xml
         - name: osplshmem
           hostPath:
-            path: /tmp/osplshmem
+            path: {{ $.Values.shmemDir | default "/tmp/openshmem" }}
       {{- if $.Values.image.nexus3 }}
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}

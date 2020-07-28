@@ -53,7 +53,7 @@ spec:
                 path: ospl.xml
         - name: osplshmem
           hostPath:
-            path: /tmp/osplshmem
+            path: {{ $.Values.shmemDir | default "/tmp/openshmem" }}
       {{- if .Values.entrypoint }}
         - name: entrypoint
           configMap:
