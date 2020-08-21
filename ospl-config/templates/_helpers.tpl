@@ -14,7 +14,7 @@ Create chart name and version as used by the chart label.
 <OpenSplice>
     <Domain>
         <Name>ospl_sp_ddsi</Name>
-        <Id>0</Id>
+        <Id>{{- .Values.domainId | default 0 -}}</Id>
         <Description>Federated deployment using shared-memory and standard DDSI networking.</Description>
         <Database>
            <Size>104857600</Size>
