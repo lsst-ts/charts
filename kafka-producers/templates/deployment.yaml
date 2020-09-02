@@ -40,11 +40,11 @@ spec:
           stdin: true
           tty: true
           env:
-            - name: LSST_DDS_DOMAIN
+            - name: LSST_DDS_PARTITION_PREFIX
               {{- if .env }}
-              value: {{ .env.lsstDdsDomain | default $.Values.env.lsstDdsDomain | quote }}
+              value: {{ .env.lsstDdsPartitionPrefix | default $.Values.env.lsstDdsPartitionPrefix | quote }}
               {{- else }}
-              value: {{ $.Values.env.lsstDdsDomain | quote }}
+              value: {{ $.Values.env.lsstDdsPartitionPrefix | quote }}
               {{- end }}
             - name: BROKER_IP
               value: "{{ $.Values.env.brokerIp }}"
