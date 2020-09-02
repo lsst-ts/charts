@@ -1,13 +1,13 @@
 producers:
   eas:
     env:
-      lsstDdsDomain: eas
+      lsstDdsPartitionPrefix: eas
     cscs: >-
       DIMM
       DSM
       Environment
   test:
     env:
-      lsstDdsDomain: test
+      lsstDdsPartitionPrefix: test
     cscs: >-
       Test
