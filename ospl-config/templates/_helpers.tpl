@@ -81,7 +81,7 @@ Create chart name and version as used by the chart label.
         </Network>
         <NameSpaces>
             <NameSpace name="defaultNamespace">
-                <Partition>"{{- .Values.lsstDdsPartitionPrefix -}}.*"</Partition>
+                <Partition>${LSST_DDS_PARTITION_PREFIX}*</Partition>
             </NameSpace>
             <Policy alignee="Initial"
                     aligner="true"
