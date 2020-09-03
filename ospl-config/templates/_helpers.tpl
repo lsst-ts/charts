@@ -17,7 +17,7 @@ Create chart name and version as used by the chart label.
         <Id>{{- .Values.domainId | default 0 -}}</Id>
         <Description>Federated deployment using shared-memory and standard DDSI networking.</Description>
         <Database>
-           <Size>104857600</Size>
+           <Size>{{- .Values.shmemSize | default 104857600 -}}</Size>
         </Database>
         <Service name="ddsi2">
             <Command>ddsi2</Command>
@@ -28,6 +28,20 @@ Create chart name and version as used by the chart label.
         <Service enabled="false" name="cmsoap">
             <Command>cmsoap</Command>
         </Service>
+        <ResourceLimits>
+           <MaxSamples>
+             <WarnAt>{{- .Values.maxSamplesWarnAt | default 50000 -}}</WarnAt>
+           </MaxSamples>
+        </ResourceLimits>
+        <Daemon>
+          <shmMonitor>
+             <Scheduling>
+               <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
+               <Priority>{{- .Values.schedulingPriority | default 0 -}}</Priority>
+             </Scheduling>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 -}}</StackSize>
+          </shmMonitor>
+        </Daemon>
     </Domain>
     <DDSI2Service name="ddsi2">
         <General>
@@ -45,6 +59,12 @@ Create chart name and version as used by the chart label.
         <Discovery>
            <ParticipantIndex>none</ParticipantIndex>
         </Discovery>
+        <Internal>
+          <Watermarks>
+             <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
+          </Watermarks>
+          <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 -}}</DeliveryQueueMaxSamples>
+        </Internal>
     </DDSI2Service>
     <DurabilityService name="durability">
         <Network>
@@ -61,7 +81,7 @@ Create chart name and version as used by the chart label.
         </Network>
         <NameSpaces>
             <NameSpace name="defaultNamespace">
-                <Partition>*</Partition>
+                <Partition>"{{- .Values.lsstDdsPartitionPrefix -}}.*"</Partition>
             </NameSpace>
             <Policy alignee="Initial"
                     aligner="true"
