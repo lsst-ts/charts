@@ -41,7 +41,45 @@ Create chart name and version as used by the chart label.
              </Scheduling>
              <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
           </shmMonitor>
+          <Watchdog>
+             <Scheduling>
+               <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
+               <Priority>{{- .Values.schedulingPriority | default 0 | int -}}</Priority>
+             </Scheduling>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
+          </Watchdog>
+          <KernelManager>
+             <Scheduling>
+               <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
+               <Priority>{{- .Values.schedulingPriority | default 0 | int -}}</Priority>
+             </Scheduling>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
+          </KernelManager>
+          <GarbageCollector>
+             <Scheduling>
+               <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
+               <Priority>{{- .Values.schedulingPriority | default 0 | int -}}</Priority>
+             </Scheduling>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
+          </GarbageCollector>
+          <ResendManager>
+             <Scheduling>
+               <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
+               <Priority>{{- .Values.schedulingPriority | default 0 | int -}}</Priority>
+             </Scheduling>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
+          </ResendManager>
+          <Heartbeat>
+             <Scheduling>
+               <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
+               <Priority>{{- .Values.schedulingPriority | default 0 | int -}}</Priority>
+             </Scheduling>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
+          </Heartbeat>
         </Daemon>
+        <Listeners>
+          <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
+        </Listeners>
     </Domain>
     <DDSI2Service name="ddsi2">
         <General>
@@ -58,12 +96,14 @@ Create chart name and version as used by the chart label.
         </Compatibility>
         <Discovery>
            <ParticipantIndex>none</ParticipantIndex>
+           <DSGracePeriod>{{- .Values.dsGracePeriod | default "60s" -}}</DSGracePeriod>
         </Discovery>
         <Internal>
           <Watermarks>
              <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
           </Watermarks>
           <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 | int -}}</DeliveryQueueMaxSamples>
+          <SquashParticipants>{{- .Values.squashParticipants | default "false" -}}</SquashParticipants>
         </Internal>
     </DDSI2Service>
     <DurabilityService name="durability">
