@@ -17,7 +17,7 @@ Create chart name and version as used by the chart label.
         <Id>{{- .Values.domainId | default 0 -}}</Id>
         <Description>Federated deployment using shared-memory and standard DDSI networking.</Description>
         <Database>
-           <Size>{{- .Values.shmemSize | default 104857600 -}}</Size>
+           <Size>{{- .Values.shmemSize | default 104857600 | int -}}</Size>
         </Database>
         <Service name="ddsi2">
             <Command>ddsi2</Command>
@@ -30,16 +30,16 @@ Create chart name and version as used by the chart label.
         </Service>
         <ResourceLimits>
            <MaxSamples>
-             <WarnAt>{{- .Values.maxSamplesWarnAt | default 50000 -}}</WarnAt>
+             <WarnAt>{{- .Values.maxSamplesWarnAt | default 50000 | int -}}</WarnAt>
            </MaxSamples>
         </ResourceLimits>
         <Daemon>
           <shmMonitor>
              <Scheduling>
                <Class>{{- .Values.schedulingClass | default "Default" -}}</Class>
-               <Priority>{{- .Values.schedulingPriority | default 0 -}}</Priority>
+               <Priority>{{- .Values.schedulingPriority | default 0 | int -}}</Priority>
              </Scheduling>
-             <StackSize>{{- .Values.monitorStackSize | default 6000000 -}}</StackSize>
+             <StackSize>{{- .Values.monitorStackSize | default 6000000 | int -}}</StackSize>
           </shmMonitor>
         </Daemon>
     </Domain>
@@ -63,7 +63,7 @@ Create chart name and version as used by the chart label.
           <Watermarks>
              <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
           </Watermarks>
-          <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 -}}</DeliveryQueueMaxSamples>
+          <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 | int -}}</DeliveryQueueMaxSamples>
         </Internal>
     </DDSI2Service>
     <DurabilityService name="durability">
