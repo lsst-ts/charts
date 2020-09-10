@@ -123,7 +123,7 @@ Create chart name and version as used by the chart label.
             <NameSpace name="defaultNamespace">
                 <Partition>${LSST_DDS_PARTITION_PREFIX}*</Partition>
             </NameSpace>
-            <Policy alignee="Initial"
+            <Policy alignee={{- .Values.namespacePolicyAlignee | default "Initial" | quote }}
                     aligner="true"
                     durability="Durable"
                     masterPriority="${OSPL_MASTER_PRIORITY:-1}"
