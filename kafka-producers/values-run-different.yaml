@@ -12,6 +12,9 @@ producers:
       ATPtg
       ATDome
   eas:
+    env:
+      extras:
+        TOPIC_CONFIG_FILE: /tmp/test.yaml
     cscs: >-
       Test
       DIMM
