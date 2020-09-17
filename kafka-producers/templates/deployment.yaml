@@ -76,6 +76,14 @@ spec:
               {{- else }}
               value: {{ $.Values.env.logLevel | quote }}
               {{- end }}
+            {{- if .env }}
+            {{- if .env.extras }}
+            {{- range $env_var, $env_value := .env.extras }}
+            - name: {{ $env_var }}
+              value: {{ $env_value | quote }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
             - name: CSC_LIST 
               value: {{ .cscs | quote }}
           volumeMounts:
