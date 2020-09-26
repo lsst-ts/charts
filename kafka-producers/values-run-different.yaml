@@ -22,4 +22,8 @@ producers:
 image:
   nexus3: nexus3-docker
 
+env:
+  extras:
+    TEST_IT: 127
+
 shmemDir: /my/test
