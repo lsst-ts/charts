@@ -25,6 +25,9 @@ Create chart name and version as used by the chart label.
         <Service name="durability">
             <Command>durability</Command>
         </Service>
+        <Service name="networking">
+            <Command>networking</Command>
+        </Service>
         <Service enabled="false" name="cmsoap">
             <Command>cmsoap</Command>
         </Service>
@@ -95,18 +98,30 @@ Create chart name and version as used by the chart label.
             <!-- <ExplicitlyPublishQosSetToDefault>true</ExplicitlyPublishQosSetToDefault> -->
         </Compatibility>
         <Discovery>
-           <ParticipantIndex>none</ParticipantIndex>
-           <DSGracePeriod>{{- .Values.dsGracePeriod | default "60s" -}}</DSGracePeriod>
+            <ParticipantIndex>none</ParticipantIndex>
+            <DSGracePeriod>{{- .Values.dsGracePeriod | default "60s" -}}</DSGracePeriod>
         </Discovery>
         <Internal>
-          <Watermarks>
-             <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
-          </Watermarks>
-          <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 | int -}}</DeliveryQueueMaxSamples>
-          <SquashParticipants>{{- .Values.squashParticipants | default "false" -}}</SquashParticipants>
+            <Watermarks>
+               <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
+            </Watermarks>
+            <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 | int -}}</DeliveryQueueMaxSamples>
+            <SquashParticipants>{{- .Values.squashParticipants | default "false" -}}</SquashParticipants>
         </Internal>
+        {{- if .Values.ddsi2TracingEnabled }}
+        <Tracing>
+            <Verbosity>{{- .Values.ddsi2TracingVerbosity -}}</Verbosity>
+            <OutputFile>{{- .Values.ddsi2TracingLogfile -}}</OutputFile>
+        </Tracing>
+        {{- end }}
     </DDSI2Service>
     <DurabilityService name="durability">
+        {{- if .Values.durabilityServiceTracingEnabled }}
+        <Tracing>
+            <Verbosity>{{- .Values.durabilityServiceTracingVerbosity -}}</Verbosity>
+            <OutputFile>{{- .Values.durabilityServiceTracingLogfile -}}</OutputFile>
+        </Tracing>
+        {{- end }}
         <Network>
             <Alignment>
                 <TimeAlignment>false</TimeAlignment>
@@ -130,6 +145,18 @@ Create chart name and version as used by the chart label.
                     nameSpace="defaultNamespace"/>
         </NameSpaces>
     </DurabilityService>
+    <NetworkService name="networking">
+        <Tracing enabled={{- .Values.networkServiceTracingEnabled | default "false" | quote }}>
+            <OutputFile>{{- .Values.networkServiceTracingLogfile }}</OutputFile>
+            <Verbosity>{{- .Values.networkServiceTracingVerbosity }}</Verbosity>
+            <Categories/>
+        </Tracing>
+        <Channels>
+            <Channel enabled="false" name="aChannel" reliable="false">
+                <PortNr>53400</PortNr>
+            </Channel>
+        </Channels>
+    </NetworkService>
     <TunerService name="cmsoap">
         <Server>
             <PortNr>50000</PortNr>

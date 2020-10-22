@@ -12,3 +12,12 @@ deliveryQueueMaxSamples: 2500
 dsGracePeriod: 60s
 squashParticipants: false
 namespacePolicyAlignee: Lazy
+ddsi2TracingEnabled: true
+ddsi2TracingVerbosity: finer
+ddsi2TracingLogfile: /tmp/ddsi2.log
+durabilityServiceTracingEnabled: true
+durabilityServiceTracingVerbosity: FINER
+durabilityServiceTracingLogfile: /tmp/durability.log
+networkServiceTracingEnabled: true
+networkServiceTracingVerbosity: finer
+networkServiceTracingLogfile: /tmp/network.log
