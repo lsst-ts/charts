@@ -25,9 +25,6 @@ Create chart name and version as used by the chart label.
         <Service name="durability">
             <Command>durability</Command>
         </Service>
-        <Service name="networking">
-            <Command>networking</Command>
-        </Service>
         <Service enabled="false" name="cmsoap">
             <Command>cmsoap</Command>
         </Service>
@@ -145,18 +142,6 @@ Create chart name and version as used by the chart label.
                     nameSpace="defaultNamespace"/>
         </NameSpaces>
     </DurabilityService>
-    <NetworkService name="networking">
-        <Tracing enabled={{- .Values.networkServiceTracingEnabled | default "false" | quote }}>
-            <OutputFile>{{- .Values.networkServiceTracingLogfile }}</OutputFile>
-            <Verbosity>{{- .Values.networkServiceTracingVerbosity }}</Verbosity>
-            <Categories/>
-        </Tracing>
-        <Channels>
-            <Channel enabled="false" name="aChannel" reliable="false">
-                <PortNr>53400</PortNr>
-            </Channel>
-        </Channels>
-    </NetworkService>
     <TunerService name="cmsoap">
         <Server>
             <PortNr>50000</PortNr>
