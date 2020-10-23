@@ -18,6 +18,3 @@ ddsi2TracingLogfile: /tmp/ddsi2.log
 durabilityServiceTracingEnabled: true
 durabilityServiceTracingVerbosity: FINER
 durabilityServiceTracingLogfile: /tmp/durability.log
-networkServiceTracingEnabled: true
-networkServiceTracingVerbosity: finer
-networkServiceTracingLogfile: /tmp/network.log

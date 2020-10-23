@@ -1,4 +1,4 @@
 apiVersion: v1
 name: ospl-config
 description: A Helm chart for handling OSPL configuration.
-version: 0.5.5
+version: 0.5.6
