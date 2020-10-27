@@ -19,6 +19,9 @@ Create chart name and version as used by the chart label.
         <Database>
            <Size>{{- .Values.shmemSize | default 104857600 | int -}}</Size>
         </Database>
+        {{- if .Values.domainReportEnabled }}
+        <Report verbosity="DEBUG/>
+        {{- end }}
         <Service name="ddsi2">
             <Command>ddsi2</Command>
         </Service>
