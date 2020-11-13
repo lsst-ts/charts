@@ -65,7 +65,7 @@ spec:
       {{- if .Values.mountpoint }}
       {{- range $values := .Values.mountpoint }}
         - name: {{ $values.name }}
-          peristentVolumeClaim:
+          persistentVolumeClaim:
             claimName: {{ $.Release.Name }}-{{ $values.name }}-pvc
       {{- end }}
       {{- end }}

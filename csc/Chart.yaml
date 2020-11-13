@@ -1,4 +1,4 @@
 apiVersion: v1
 name: csc
 description: A Helm chart for deploying control system CSCs.
-version: 0.6.1
+version: 0.6.2
