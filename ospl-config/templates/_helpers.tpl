@@ -104,9 +104,11 @@ Create chart name and version as used by the chart label.
         <Internal>
             <Watermarks>
                <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
+               <WhcAdaptive>{{- .Values.waterMarksWhcAdaptive | default "true" -}}</WhcAdaptive>
             </Watermarks>
             <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 | int -}}</DeliveryQueueMaxSamples>
             <SquashParticipants>{{- .Values.squashParticipants | default "false" -}}</SquashParticipants>
+            <ResponsivenessTimeout>${LSST_DDS_RESPONSIVENESS_TIMEOUT:-inf}</ResponsivenessTimeout>
         </Internal>
         {{- if .Values.ddsi2TracingEnabled }}
         <Tracing>
