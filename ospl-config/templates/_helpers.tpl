@@ -104,6 +104,7 @@ Create chart name and version as used by the chart label.
         <Internal>
             <Watermarks>
                <WhcHigh>{{- .Values.waterMarksWhcHigh | default "8MB" -}}</WhcHigh>
+               <WhcHighInit>{{- .Values.waterMarksWhcHighInit | default "8MB" -}}</WhcHighInit>
                <WhcAdaptive>{{- .Values.waterMarksWhcAdaptive | default "true" -}}</WhcAdaptive>
             </Watermarks>
             <DeliveryQueueMaxSamples>{{- .Values.deliveryQueueMaxSamples | default 2500 | int -}}</DeliveryQueueMaxSamples>
