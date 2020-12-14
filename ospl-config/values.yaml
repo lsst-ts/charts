@@ -8,6 +8,7 @@ schedulingClass: Default
 schedulingPriority: 0
 monitorStackSize: 6000000
 waterMarksWhcHigh: 8MB
+waterMarksWhcHighInit: 8MB
 waterMarksWhcAdaptive: true
 deliveryQueueMaxSamples: 2500
 dsGracePeriod: 60s
