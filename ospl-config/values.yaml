@@ -18,6 +18,8 @@ domainReportEnabled: true
 ddsi2TracingEnabled: true
 ddsi2TracingVerbosity: finer
 ddsi2TracingLogfile: /tmp/ddsi2.log
+durabilityServiceAligmentComboPeriodInitial: 2.5
+durabilityServiceAligmentComboPeriodOperational: 0.1
 durabilityServiceTracingEnabled: true
 durabilityServiceTracingVerbosity: FINER
 durabilityServiceTracingLogfile: /tmp/durability.log
