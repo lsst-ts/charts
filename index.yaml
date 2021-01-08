@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   cluster-config:
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.802531-07:00"
+    created: "2021-01-08T11:38:07.565719-07:00"
     description: A Helm chart for handling CSC cluster configuration.
     digest: 163b079b9adbfa0a6c58bdb0e612db3e0ccf895204ada6d93ec71b1bb280be9e
     name: cluster-config
@@ -11,7 +11,7 @@ entries:
     version: 0.1.0
   csc:
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.805093-07:00"
+    created: "2021-01-08T11:38:07.568559-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: 8b048c63ce12dc1d65722f4b1c83f54e96b3292c7ddb317e7d2f101ea3539359
     name: csc
@@ -19,7 +19,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.6.2.tgz
     version: 0.6.2
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.804173-07:00"
+    created: "2021-01-08T11:38:07.567015-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: 685f17f60d3053254a800ef7980add617d750af09da8bd06ae33fcdf22ed557d
     name: csc
@@ -27,7 +27,7 @@ entries:
     - https://lsst-ts.github.io/charts/csc-0.6.1.tgz
     version: 0.6.1
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.803282-07:00"
+    created: "2021-01-08T11:38:07.566335-07:00"
     description: A Helm chart for deploying control system CSCs.
     digest: c60ba9a6fe963a1e80fa6d6f5d7cbbf9819c1a3b9f89a31262bef1e4a071de6c
     name: csc
@@ -36,7 +36,7 @@ entries:
     version: 0.4.1
   kafka-producers:
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.805738-07:00"
+    created: "2021-01-08T11:38:07.569539-07:00"
     description: A Helm chart for deploying the Kafka producers.
     digest: 52b07799557cad45ce900c1d9098b8f3083f527e0fc129517fd8d6503bfc3f6a
     name: kafka-producers
@@ -45,7 +45,15 @@ entries:
     version: 0.6.4
   ospl-config:
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.809428-07:00"
+    created: "2021-01-08T11:38:07.573683-07:00"
+    description: A Helm chart for handling OSPL configuration.
+    digest: bada1c325dfdd5a316737a66c061bbe24a1482a24af261eaae8d3b28157cc063
+    name: ospl-config
+    urls:
+    - https://lsst-ts.github.io/charts/ospl-config-0.5.13.tgz
+    version: 0.5.13
+  - apiVersion: v1
+    created: "2021-01-08T11:38:07.572239-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 31c8f351170768e61ad3ce96be86c0b746905250ea44904bb843a3bf6d7c7b78
     name: ospl-config
@@ -53,7 +61,7 @@ entries:
     - https://lsst-ts.github.io/charts/ospl-config-0.5.12.tgz
     version: 0.5.12
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.809155-07:00"
+    created: "2021-01-08T11:38:07.571494-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 9a52e7a5c6b69e2c5e8af17152b581838b7edf55e39262121f13c096f39882d7
     name: ospl-config
@@ -61,7 +69,7 @@ entries:
     - https://lsst-ts.github.io/charts/ospl-config-0.5.11.tgz
     version: 0.5.11
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.806463-07:00"
+    created: "2021-01-08T11:38:07.570524-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 3c6d246aca5824316a3a295a4c7cb188ea53ec63f5c07728b832201af525da1c
     name: ospl-config
@@ -69,7 +77,7 @@ entries:
     - https://lsst-ts.github.io/charts/ospl-config-0.5.10.tgz
     version: 0.5.10
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.811675-07:00"
+    created: "2021-01-08T11:38:07.575214-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 12c06ddf882260452815647169363f9fd2a471fc50ec939be2d5b81acfbb589b
     name: ospl-config
@@ -77,7 +85,7 @@ entries:
     - https://lsst-ts.github.io/charts/ospl-config-0.5.9.tgz
     version: 0.5.9
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.810898-07:00"
+    created: "2021-01-08T11:38:07.574679-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 902ac6afa7d4b800bae3f33fa107c53e0a601162c556415186b14e6ad53aeaec
     name: ospl-config
@@ -85,7 +93,7 @@ entries:
     - https://lsst-ts.github.io/charts/ospl-config-0.5.8.tgz
     version: 0.5.8
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.810158-07:00"
+    created: "2021-01-08T11:38:07.574217-07:00"
     description: A Helm chart for handling OSPL configuration.
     digest: 6c8a3f33711cd60af77b0b9cd3ea8b93590caf0d0fcf2f42e6505ef232d681a2
     name: ospl-config
@@ -94,11 +102,11 @@ entries:
     version: 0.5.7
   ospl-daemon:
   - apiVersion: v1
-    created: "2021-01-08T10:36:34.812376-07:00"
+    created: "2021-01-08T11:38:07.575762-07:00"
     description: A Helm chart for handling OSPL shared memory daemon.
     digest: 8784d43a0772449a0b515b2b068ad0d5aebfacb1e812e17f0830a43b5a321b18
     name: ospl-daemon
     urls:
     - https://lsst-ts.github.io/charts/ospl-daemon-0.1.2.tgz
     version: 0.1.2
-generated: "2021-01-08T10:36:34.799738-07:00"
+generated: "2021-01-08T11:38:07.56485-07:00"
