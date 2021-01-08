@@ -18,6 +18,7 @@ domainReportEnabled: true
 ddsi2TracingEnabled: true
 ddsi2TracingVerbosity: finer
 ddsi2TracingLogfile: /tmp/ddsi2.log
+durabilityServiceInitialDiscoveryPeriod: "10.0"
 durabilityServiceAlignmentComboPeriodInitial: 2.5
 durabilityServiceAlignmentComboPeriodOperational: 0.1
 durabilityServiceTracingEnabled: true
