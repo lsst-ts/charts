@@ -126,6 +126,7 @@ Create chart name and version as used by the chart label.
         </Tracing>
         {{- end }}
         <Network>
+            <InitialDiscoveryPeriod>{{- .Values.durabilityServiceInitialDiscoveryPeriod | default 10.0 -}}</InitialDiscoveryPeriod>
             <Alignment>
                 <TimeAlignment>false</TimeAlignment>
                 <RequestCombinePeriod>
