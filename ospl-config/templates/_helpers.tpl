@@ -129,8 +129,8 @@ Create chart name and version as used by the chart label.
             <Alignment>
                 <TimeAlignment>false</TimeAlignment>
                 <RequestCombinePeriod>
-                    <Initial>{{- .Values.durabilityServiceAligmentComboPeriodInitial | default 5.0 -}}</Initial>
-                    <Operational>{{- .Values.durabilityServiceAligmentComboPeriodOperational | default 0.1 -}}</Operational>
+                    <Initial>{{- .Values.durabilityServiceAlignmentComboPeriodInitial | default 5.0 -}}</Initial>
+                    <Operational>{{- .Values.durabilityServiceAlignmentComboPeriodOperational | default 0.1 -}}</Operational>
                 </RequestCombinePeriod>
             </Alignment>
             <WaitForAttachment maxWaitCount="100">
