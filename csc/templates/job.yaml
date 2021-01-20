@@ -35,13 +35,20 @@ spec:
               mountPath: /tmp
           {{- if .Values.entrypoint }}
             - name: entrypoint
-              mountPath: /home/saluser/.setup.sh
-              subPath: .setup.sh
+              mountPath: /home/saluser/.startup.sh
+              subPath: .startup.sh
           {{- end }}
-          {{- if .Values.mountpoint }}
-          {{- range $values := .Values.mountpoint }}
+          {{- if .Values.pvcMountpoint }}
+          {{- range $values := .Values.pvcMountpoint }}
             - name: {{ $values.name }}
               mountPath: {{ $values.path }}
+          {{- end}}
+          {{- end}}
+          {{- if .Values.nfsMountpoint }}
+          {{- range $values := .Values.nfsMountpoint }}
+            - name: {{ $values.name }}
+              mountPath: {{ $values.containerPath }}
+              readOnly: {{ $values.readOnly }}
           {{- end}}
           {{- end}}
       volumes:
@@ -59,14 +66,23 @@ spec:
           configMap:
             name: {{ .Release.Name }}-entrypoint
             items:
-              - key: .setup.sh
-                path: .setup.sh
+              - key: .startup.sh
+                path: .startup.sh
       {{- end }}
-      {{- if .Values.mountpoint }}
-      {{- range $values := .Values.mountpoint }}
+      {{- if .Values.pvcMountpoint }}
+      {{- range $values := .Values.pvcMountpoint }}
         - name: {{ $values.name }}
           persistentVolumeClaim:
             claimName: {{ $.Release.Name }}-{{ $values.name }}-pvc
+      {{- end }}
+      {{- end }}
+      {{- if .Values.nfsMountpoint }}
+      {{- range $values := .Values.nfsMountpoint }}
+        - name: {{ $values.name }}
+          nfs:
+            path: {{ $values.serverPath }}
+            readOnly: {{ $values.readOnly }}
+            server: {{ $values.server }}
       {{- end }}
       {{- end }}
       restartPolicy: Never
