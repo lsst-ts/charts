@@ -38,8 +38,8 @@ spec:
               mountPath: /home/saluser/.startup.sh
               subPath: .startup.sh
           {{- end }}
-          {{- if .Values.mountpoint }}
-          {{- range $values := .Values.mountpoint }}
+          {{- if .Values.pvcMountpoint }}
+          {{- range $values := .Values.pvcMountpoint }}
             - name: {{ $values.name }}
               mountPath: {{ $values.path }}
           {{- end}}
@@ -62,8 +62,8 @@ spec:
               - key: .startup.sh
                 path: .startup.sh
       {{- end }}
-      {{- if .Values.mountpoint }}
-      {{- range $values := .Values.mountpoint }}
+      {{- if .Values.pvcMountpoint }}
+      {{- range $values := .Values.pvcMountpoint }}
         - name: {{ $values.name }}
           persistentVolumeClaim:
             claimName: {{ $.Release.Name }}-{{ $values.name }}-pvc
