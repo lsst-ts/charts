@@ -44,6 +44,13 @@ spec:
               mountPath: {{ $values.path }}
           {{- end}}
           {{- end}}
+          {{- if .Values.nfsMountpoint }}
+          {{- range $values := .Values.nfsMountpoint }}
+            - name: {{ $values.name }}
+              mountPath: {{ $values.containerPath }}
+              readOnly: {{ $values.readOnly }}
+          {{- end}}
+          {{- end}}
       volumes:
         - name: osplconfig
           configMap:
@@ -67,6 +74,15 @@ spec:
         - name: {{ $values.name }}
           persistentVolumeClaim:
             claimName: {{ $.Release.Name }}-{{ $values.name }}-pvc
+      {{- end }}
+      {{- end }}
+      {{- if .Values.nfsMountpoint }}
+      {{- range $values := .Values.nfsMountpoint }}
+        - name: {{ $values.name }}
+          nfs:
+            path: {{ $values.serverPath }}
+            readOnly: {{ $values.readOnly }}
+            server: {{ $values.server }}
       {{- end }}
       {{- end }}
       restartPolicy: Never
