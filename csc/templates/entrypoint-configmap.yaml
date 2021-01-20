@@ -4,6 +4,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-entrypoint
 data:
-  .setup.sh:
+  .startup.sh:
 {{ .Values.entrypoint | toYaml | indent 4 }}
 {{- end }}
