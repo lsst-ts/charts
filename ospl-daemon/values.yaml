@@ -5,7 +5,7 @@ image:
   nexus3: nexus3-docker
 
 env:
-  LSST_DDS_DOMAIN: ncsa
+  LSST_DDS_PARTITION_PREFIX: ncsa
 
 osplVersion: V6.10.4
 shmemDir: /tmp/test
