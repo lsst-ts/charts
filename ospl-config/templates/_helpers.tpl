@@ -149,6 +149,11 @@ Create chart name and version as used by the chart label.
                     nameSpace="defaultNamespace"/>
         </NameSpaces>
     </DurabilityService>
+    <NetworkService>
+        <General>
+            <Reconnection allowed="true"/>
+        </General>
+    </NetworkService>
     <TunerService name="cmsoap">
         <Server>
             <PortNr>50000</PortNr>
