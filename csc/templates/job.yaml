@@ -5,14 +5,18 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     csc: {{ .Release.Name }}
+  {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
   {{- include "multicast.annotation" . | nindent 2 }}
+  {{- end }}
 spec:
   completions: 1
   template:
     metadata:
       labels:
         csc: {{ .Release.Name }}
+      {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
       {{- include "multicast.annotation" . | nindent 6 }}
+      {{- end }}
     spec:
       containers:
         - name: {{ .Release.Name }}
@@ -90,5 +94,5 @@ spec:
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
       {{- end }}
-      hostIPC: {{ $.Values.useHostIpc | default true }}
-      hostPID: {{ $.Values.useHostPid | default true }}
+      hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
+      hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}

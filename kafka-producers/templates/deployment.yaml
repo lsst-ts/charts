@@ -8,7 +8,9 @@ metadata:
   labels:
     helm.sh/chart: {{ include "kafka-producers.chart" $ }}
     app.kubernetes.io/instance: {{ $.Release.Name }}
+  {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
   {{- include "multicast.annotation" . | nindent 2 }}
+  {{- end }}
 spec:
   replicas: 1
   selector:
@@ -20,7 +22,9 @@ spec:
       labels:
         app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
         app.kubernetes.io/instance: {{ $.Release.Name }}
+      {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
       {{- include "multicast.annotation" . | nindent 6 }}
+      {{- end }}
     spec:
       containers:
         - name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
@@ -112,6 +116,6 @@ spec:
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
       {{- end }}
-      hostIPC: {{ $.Values.useHostIpc | default true }}
-      hostPID: {{ $.Values.useHostPid | default true }}
+      hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
+      hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}
 {{ end }}

@@ -27,3 +27,5 @@ env:
     TEST_IT: 127
 
 shmemDir: /my/test
+useMulticast: true
+useHostPid: false

@@ -32,7 +32,15 @@ spec:
               mountPath: /opt/OpenSpliceDDS/{{ .Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
             - name: osplshmem
-              mountPath: /tmp 
+              mountPath: /tmp
+      {{- if .Values.initContainer }}
+      initContainers:
+        - name: {{ .Release.Name }}-route-fixer
+          image: "{{ .Values.initContainer.repository }}:{{ .Values.initContainer.tag }}"
+          imagePullPolicy: {{ .Values.initContainer.pullPolicy }}
+          securityContext:
+            privledged: true
+      {{- end }} 
       volumes:
         - name: osplconfig
           configMap:
@@ -48,5 +56,5 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.namespace }}-{{ .Values.image.nexus3 }}
       {{- end }}
-      hostIPC: {{ .Values.useHostIpc | default true }}
-      hostPID: {{ .Values.useHostPid | default true }}
+      hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
+      hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}

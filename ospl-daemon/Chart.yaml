@@ -1,4 +1,4 @@
 apiVersion: v1
 name: ospl-daemon
 description: A Helm chart for handling OSPL shared memory daemon.
-version: 0.1.2
+version: 0.2.0
