@@ -39,7 +39,7 @@ spec:
           image: "{{ .Values.initContainer.repository }}:{{ .Values.initContainer.tag }}"
           imagePullPolicy: {{ .Values.initContainer.pullPolicy }}
           securityContext:
-            privledged: true
+            privileged: true
       {{- end }} 
       volumes:
         - name: osplconfig
