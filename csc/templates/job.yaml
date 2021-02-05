@@ -55,6 +55,14 @@ spec:
               readOnly: {{ $values.readOnly }}
           {{- end}}
           {{- end}}
+      {{- if .Values.initContainer }}
+      initContainers:
+        - name: {{ .Release.Name }}-route-fixer
+          image: "{{ .Values.initContainer.repository }}:{{ .Values.initContainer.tag }}"
+          imagePullPolicy: {{ .Values.initContainer.pullPolicy }}
+          securityContext:
+            privileged: true
+      {{- end }} 
       volumes:
         - name: osplconfig
           configMap:
