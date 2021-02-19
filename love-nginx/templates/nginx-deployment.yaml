@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ $.Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  replicas: {{ .Values.replicas | default 1 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Release.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.ports.container }}
+        volumeMounts:
+          - mountPath: /etc/nginx/conf.d # mount nginx.conf
+            readOnly: true
+            name: nginx-conf
+        {{- if .Values.pvcMountpoint }}
+        {{- range $values := .Values.pvcMountpoint }}
+          - mountPath: {{ $values.path }}
+            name: {{ $values.name }}
+        {{- end }}
+        {{- end }}
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+      {{- if .Values.pvcMountpoint }}
+      {{- range $values := .Values.pvcMountpoint }}
+        - name: {{ $values.name }}
+          persistentVolumeClaim:
+            claimName: {{ $values.name }}-pvc
+      {{- end }}
+      {{- end }}

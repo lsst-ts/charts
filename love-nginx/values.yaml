@@ -1,0 +1,48 @@
+namespace: love
+
+image:
+  repository: nginx
+  tag: 1.14.2
+  pullPolicy: IfNotPresent
+serviceType: ClusterIP
+ports:
+  container: 80
+  node: 30000
+ingress:
+  hostname: love.local
+  httpPath: /
+config: |
+  {
+    server {
+    listen 80;
+    server_name localhost;
+    location / {
+      root   /usr/src/frontend/love-frontend;
+      try_files $uri$args $uri$args/ $uri/ /index.html;
+    }
+    location /manager {
+        proxy_pass http://love-manager:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+    location /manager/static {
+      alias /usr/src/manager/love-manager/static;
+    }
+    location /manager/media {
+      alias /usr/src/manager/love-manager/media;
+    }
+  }
+pvcMountpoint:
+- name: love-frontend
+  path: /usr/src/love-frontend
+  storageClass: local-store
+  accessMode: ReadWriteMany
+  claimSize: 1Gi
+- name: love-manager
+  path: /usr/src/love-manager
+  storageClass: local-store
+  accessMode: ReadWriteMany
+  claimSize: 1Gi
