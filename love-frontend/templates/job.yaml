@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: {{ .Release.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: [ "/bin/sh", "-c", "cp -R /usr/src/love/ /usr/src/love-frontend" ]
+        volumeMounts:
+        {{- if .Values.pvcMountpoint }}
+        {{- range $values := .Values.pvcMountpoint }}
+          - mountPath: {{ $values.path }}
+            name: {{ $values.name }}
+        {{- end }}
+        {{- end }}
+      restartPolicy: {{ .Values.restartPolicy }}
+      volumes:
+      {{- if .Values.pvcMountpoint }}
+      {{- range $values := .Values.pvcMountpoint }}
+        - name: {{ $values.name }}
+          persistentVolumeClaim:
+            claimName: {{ $values.name }}-pvc
+      {{- end }}
+      {{- end }}

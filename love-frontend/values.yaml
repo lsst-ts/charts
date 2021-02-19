@@ -1,0 +1,10 @@
+namespace: love
+
+image:
+  repository: lsstts/love-frontend
+  tag: develop
+  pullPolicy: IfNotPresent
+restartPolicy: Never
+pvcMountpoint:
+- name: love-frontend
+  path: /usr/src
