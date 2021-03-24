@@ -24,11 +24,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           stdin: true
           tty: true
-          {{- if .Values.env }}
+          {{- if or .Values.env .Values.envSecrets }}
           env:
           {{- range $env_var, $env_value := .Values.env }}
             - name: {{ $env_var }}
               value: {{ $env_value | quote }}
+          {{- end }}
+          {{- range $secret := .Values.envSecrets }}
+            - name: {{ $secret.key }}
+              valueFrom:
+                secretRef:
+                  name: {{ $.Values.namespace }}-{{ $secret.value }}
           {{- end }}
           {{- end }}
           volumeMounts:

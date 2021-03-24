@@ -4,7 +4,7 @@ image:
   pullPolicy: IfNotPresent
 
 env:
-  LSST_DDS_DOMAIN: citest
+  LSST_DDS_PARTITION_PREFIX: citest
   CSC_INDEX: 1
   CSC_MODE: 1
 
