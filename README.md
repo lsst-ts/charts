@@ -82,4 +82,5 @@ Here is the (fairly manual) process for doing that.
 8. Verify the resulting `index.yaml` file contains the restored chart metadata and no other changes (in particular, that it's not missing any other chart metadata that was previously there).
 9. Commit and push the `index.yaml` file.
 
+
 ⎈ Happy Helming!⎈
