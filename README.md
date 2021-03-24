@@ -83,5 +83,4 @@ Here is the (fairly manual) process for doing that.
 9. Commit and push the `index.yaml` file.
 
 
-
 ⎈ Happy Helming!⎈
