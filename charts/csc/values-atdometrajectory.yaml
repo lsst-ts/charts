@@ -4,7 +4,7 @@ image:
   pullPolicy: IfNotPresent
 
 env:
-  LSST_DDS_DOMAIN: newcitest
+  LSST_DDS_PARTITION_PREFIX: newcitest
 
 osplVersion: V6.9.0
 namespace: csc
