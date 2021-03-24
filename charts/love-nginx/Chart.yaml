@@ -1,0 +1,4 @@
+apiVersion: v2
+name: love-nginx
+version: 0.1.0
+description: Helm chart for the LOVE Nginx server.

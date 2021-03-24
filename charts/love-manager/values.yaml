@@ -1,0 +1,89 @@
+namespace: love
+secret_path: lsst.local
+image:
+  repository: lsstts/love-manager
+  tag: develop
+  pullPolicy: IfNotPresent
+serviceType: ClusterIP
+ports:
+  container: 8000
+  node: 30000
+ingress:
+  hostname: love.local
+  httpPath: /
+pvcMountpoint:
+- name: love-manager
+  path: /usr/src/love/manager
+env:
+  - key: SECRET_KEY
+    value: manager-secret-key
+    isSecret: true
+  - key: PROCESS_CONNECTION_PASS
+    value: manager-connection-password
+    isSecret: true
+  - key: ADMIN_USER_PASS
+    value: manager-admin-password
+    isSecret: true
+  - key: USER_USER_PASS
+    value: manager-user-user-password
+    isSecret: true
+  - key: CMD_USER_PASS
+    value: manager-cmd-user-password
+    isSecret: true
+  - key: SERVER_URL
+    value: "love.lsst.local"
+  - key: LOVE_PRODUCER_WEBSOCKET_HOST
+    value: "love-service/manager/ws/subscription"
+  - key: COMMANDER_HOSTNAME
+    value: "love-commander-service"
+  - key: COMMANDER_PORT
+    value: 5000
+config: |
+    {
+      "alarms": {
+        "minSeveritySound": "serious",
+        "minSeverityNotification": "warning"
+      },
+      "camFeeds": {
+        "generic": "/gencam",
+        "allSky": "/gencam"
+      }
+    }
+database:
+  image:
+    repository: postgres
+    tag: 12.0
+    pullPolicy: IfNotPresent
+  port: 5432
+  pvcMountpoint:
+    name: love-manager-database
+    path: /var/lib/postgresql/data
+    storageClass: local-store
+    accessMode: ReadWriteMany
+    claimSize: 2Gi
+  env:
+    - key: DB_ENGINE
+      value: postgresql
+    - key: DB_NAME
+      value: postgres
+    - key: DB_USER
+      value: postgres
+    - key: DB_HOST
+      value: love-manager-database-service
+    - key: DB_PORT
+      value: 5432
+    - key: DB_PASS
+      value: postgres-password
+      isSecret: true
+redis:
+  image:
+    repository: redis
+    tag: 5.0.3
+    pullPolicy: IfNotPresent
+  env:
+    - key: REDIS_HOST
+      value: love-manager-redis-service
+    - key: REDIS_PASS
+      value: redis-password
+      isSecret: true
+  port: 6379

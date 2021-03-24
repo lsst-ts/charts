@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-redis
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-redis-service
+  replicas: {{ .Values.redis.replicas | default 1 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-redis-service
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-redis
+        image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+        imagepullPolicy: {{ .Values.redis.image.pullPolicy }}
+        command: [ "redis-server", "--appendonly", "yes", "--requirepass", "$(REDIS_PASS)" ] 
+        ports:
+          - containerPort: {{ .Values.redis.port }}
+        env:
+        {{- $data := dict "env" .Values.redis.env }}
+        {{- include "helpers.envFromList" $data | indent 10 }}

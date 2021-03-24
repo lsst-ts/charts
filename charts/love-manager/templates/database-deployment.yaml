@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-database
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-database-service
+  replicas: {{ .Values.database.replicas | default 1 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-database-service
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-database
+        image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+        imagepullPolicy: {{ .Values.redis.image.pullPolicy }}
+        ports:
+          - containerPort: {{ .Values.database.port }}
+        volumeMounts:
+          - mountPath: {{ .Values.database.pvcMountpoint.path }}
+            name: {{ .Values.database.pvcMountpoint.name }}-pvc
+        env:
+        {{- $data := dict "env" .Values.database.env }}
+        {{- include "helpers.envFromList" $data | indent 10 }}
+      volumes:
+        - name: {{ .Values.database.pvcMountpoint.name }}-pvc
+          persistentVolumeClaim:
+            claimName: {{ .Values.database.pvcMountpoint.name }}-pvc
+            storageClass: {{ .Values.database.pvcMountpoint.storageClass }}
