@@ -33,7 +33,7 @@ spec:
           {{- range $env := .Values.envSecrets }}
             - name: {{ $env.name }}
               valueFrom:
-                secretRef:
+                secretKeyRef:
                   name: {{ $.Values.namespace }}-{{ $env.secretName }}
                   key: {{ $env.secretKey }}
           {{- end }}
