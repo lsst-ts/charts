@@ -30,11 +30,12 @@ spec:
             - name: {{ $env_var }}
               value: {{ $env_value | quote }}
           {{- end }}
-          {{- range $secret := .Values.envSecrets }}
-            - name: {{ $secret.key }}
+          {{- range $env := .Values.envSecrets }}
+            - name: {{ $env.name }}
               valueFrom:
                 secretRef:
-                  name: {{ $.Values.namespace }}-{{ $secret.value }}
+                  name: {{ $.Values.namespace }}-{{ $env.secretName }}
+                  key: {{ $env.secretKey }}
           {{- end }}
           {{- end }}
           volumeMounts:
