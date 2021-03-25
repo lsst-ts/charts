@@ -11,6 +11,16 @@ entries:
     version: 0.1.0
   csc:
   - apiVersion: v2
+    created: "2021-03-25T00:27:57.333132977Z"
+    description: A Helm chart for deploying control system CSCs.
+    digest: 4bcb9e055b92af133e36accbbd0e1429c482a420cedf85b6a7b2da054c854ba6
+    maintainers:
+    - name: mareuter
+    name: csc
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/csc-0.7.4/csc-0.7.4.tgz
+    version: 0.7.4
+  - apiVersion: v2
     created: "2021-03-24T22:22:04.937774811Z"
     description: A Helm chart for deploying control system CSCs.
     digest: 4f92a654be8e4a812e8e9ef6d42343b562b3e3382bb7e8624d3d3de2f1a126eb
@@ -148,4 +158,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-03-24T22:22:04.937821812Z"
+generated: "2021-03-25T00:27:57.333166778Z"
