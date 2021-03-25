@@ -3,4 +3,4 @@ name: csc
 maintainers:
   - name: mareuter
 description: A Helm chart for deploying control system CSCs.
-version: 0.7.3
+version: 0.7.4
