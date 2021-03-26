@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-service
+  name: {{ include "love-nginx.fullname" . }}-service
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ include "love-nginx.fullname" . }}
   type: {{ .Values.serviceType }}
   ports:
     - port: {{ .Values.ports.container }}

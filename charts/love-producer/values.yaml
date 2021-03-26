@@ -1,0 +1,33 @@
+replicaCount: 1
+
+namespace: love
+
+image:
+  repository: lsstts/love-producer
+  tag: develop
+  pullPolicy: IfNotPresent
+  nexus3: nexus3-docker
+
+env:
+  LSST_DDS_PARTITION_PREFIX: test
+  WEBSOCKET_HOST: love-nginx/manager/ws/subscription
+
+envSecrets:
+  PROCESS_CONNECTION_PASS: manager-process-connection-password
+
+producers:
+  test1: Test:1
+  test2: Test:2
+
+osplVersion: V6.9.0
+shmemDir: /my/test
+
+podAnnotations: {}
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

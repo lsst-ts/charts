@@ -8,3 +8,11 @@ restartPolicy: Never
 pvcMountpoint:
 - name: love-frontend
   path: /usr/src
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
