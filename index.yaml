@@ -83,6 +83,16 @@ entries:
     version: 0.6.4
   love-frontend:
   - apiVersion: v2
+    created: "2021-03-31T03:20:09.722058377Z"
+    description: Helm chart for the LOVE Frontend.
+    digest: a9e44f0986be47db8d2801ff8bdbde3da5e50e5fde63be5641a13e205f8d066f
+    maintainers:
+    - name: mareuter
+    name: love-frontend
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-frontend-0.1.2/love-frontend-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     created: "2021-03-23T21:45:17.788263-07:00"
     description: Helm chart for the LOVE Frontend.
     digest: a445f9009522c6fbb44d0b0072ee0999a6bccd55b73f7f5244bd347ac131d3f4
@@ -92,6 +102,16 @@ entries:
     version: 0.1.0
   love-manager:
   - apiVersion: v2
+    created: "2021-03-31T03:20:09.793652217Z"
+    description: Helm chart for the LOVE manager service.
+    digest: 5c9527103096c563e3b7c9b6a6d10111e0f28cff5bf55c8db37cbb996687e04c
+    maintainers:
+    - name: mareuter
+    name: love-manager
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-manager-0.1.2/love-manager-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     created: "2021-03-23T21:45:17.919255-07:00"
     description: Helm chart for the LOVE manager service.
     digest: bb8bccc5b43dffe9563b34bf5346032c1b40248310861fdae9d02e2609c0401e
@@ -100,6 +120,16 @@ entries:
     - https://github.com/lsst-ts/charts/releases/download/love-manager-0.1.0/love-manager-0.1.0.tgz
     version: 0.1.0
   love-nginx:
+  - apiVersion: v2
+    created: "2021-03-31T03:20:09.860856555Z"
+    description: Helm chart for the LOVE Nginx server.
+    digest: d63a7f47e24abdfb91ecdee26147942f0ab7d1cb9340f03d7c33aebe6ae2f4e2
+    maintainers:
+    - name: mareuter
+    name: love-nginx
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-nginx-0.1.2/love-nginx-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     created: "2021-03-24T04:11:16.232740461Z"
     description: Helm chart for the LOVE Nginx server.
@@ -117,6 +147,18 @@ entries:
     name: love-nginx
     urls:
     - https://github.com/lsst-ts/charts/releases/download/love-nginx-0.1.0/love-nginx-0.1.0.tgz
+    version: 0.1.0
+  love-producer:
+  - apiVersion: v2
+    created: "2021-03-31T03:20:09.943518159Z"
+    description: Helm chart for the LOVE producer.
+    digest: 3ba16404565bd0ebcad5946912b68100b3b850888a12d4d37b16e0a074e9ed88
+    maintainers:
+    - name: mareuter
+    name: love-producer
+    type: application
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-producer-0.1.0/love-producer-0.1.0.tgz
     version: 0.1.0
   ospl-config:
   - apiVersion: v1
@@ -168,4 +210,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-03-25T21:22:23.625471909Z"
+generated: "2021-03-31T03:20:09.943564362Z"
