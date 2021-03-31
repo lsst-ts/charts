@@ -83,6 +83,16 @@ entries:
     version: 0.6.4
   love-frontend:
   - apiVersion: v2
+    created: "2021-03-31T17:06:20.940878278Z"
+    description: Helm chart for the LOVE Frontend.
+    digest: a803e2e1e3a064f65656dd69860c805bc78988faad1414b8c69c84e77f2d6991
+    maintainers:
+    - name: mareuter
+    name: love-frontend
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-frontend-0.1.3/love-frontend-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     created: "2021-03-31T03:20:09.722058377Z"
     description: Helm chart for the LOVE Frontend.
     digest: a9e44f0986be47db8d2801ff8bdbde3da5e50e5fde63be5641a13e205f8d066f
@@ -101,6 +111,16 @@ entries:
     - https://github.com/lsst-ts/charts/releases/download/love-frontend-0.1.0/love-frontend-0.1.0.tgz
     version: 0.1.0
   love-manager:
+  - apiVersion: v2
+    created: "2021-03-31T17:06:21.093265377Z"
+    description: Helm chart for the LOVE manager service.
+    digest: 885e21f2d0dd4d359583b6a0309d33f73ff3fe779d66e52fe2d9dc14e783f248
+    maintainers:
+    - name: mareuter
+    name: love-manager
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-manager-0.1.3/love-manager-0.1.3.tgz
+    version: 0.1.3
   - apiVersion: v2
     created: "2021-03-31T03:20:09.793652217Z"
     description: Helm chart for the LOVE manager service.
@@ -221,4 +241,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-03-31T16:18:45.171689414Z"
+generated: "2021-03-31T17:06:21.093326378Z"
