@@ -55,6 +55,10 @@ spec:
             claimName: {{ $values.name }}-pvc
       {{- end }}
       {{- end }}
+      {{- if $.Values.image.nexus3 }}
+      imagePullSecrets:
+        - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
+      {{- end }}
       {{- with $.Values.nodeSelector }}
       nodeSelector:
         {{- toYaml $ | nindent 8 }}
