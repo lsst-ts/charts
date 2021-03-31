@@ -2,6 +2,6 @@ apiVersion: v2
 name: love-producer
 description: Helm chart for the LOVE producer.
 type: application
-version: 0.1.1
+version: 0.1.2
 maintainers:
   - name: mareuter
