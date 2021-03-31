@@ -1,6 +1,6 @@
 apiVersion: v2
 name: love-frontend
-version: 0.1.3
+version: 0.1.4
 maintainers:
   - name: mareuter
 description: Helm chart for the LOVE Frontend.
