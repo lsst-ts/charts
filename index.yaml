@@ -170,6 +170,17 @@ entries:
     version: 0.1.0
   love-producer:
   - apiVersion: v2
+    created: "2021-03-31T21:45:59.177165752Z"
+    description: Helm chart for the LOVE producer.
+    digest: 7b6c3a48f4d52c7479f83443d8062bb0f1916dacd20f303f6d6a7b224e3dc3a6
+    maintainers:
+    - name: mareuter
+    name: love-producer
+    type: application
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-producer-0.1.2/love-producer-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     created: "2021-03-31T16:18:45.171645611Z"
     description: Helm chart for the LOVE producer.
     digest: 91f5cc9c623d075433fdc9facc573b985bc4d4260af37aa0b6cc63a8dbcb7db3
@@ -241,4 +252,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-03-31T17:06:21.093326378Z"
+generated: "2021-03-31T21:45:59.177228653Z"
