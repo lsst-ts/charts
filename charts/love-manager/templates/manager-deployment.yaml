@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "love-manager.fullname" . }}
   namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "love-manager.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "love-manager.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicas | default 1 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "love-manager.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Release.Name }}
+      - name: {{ include "love-manager.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagepullPolicy: {{ .Values.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.ports.container }}
         command: [ "/bin/bash", "-c" ]
@@ -24,7 +26,7 @@ spec:
           - cp -R /usr/src/love/manager/ /usr/src/love/manager-volume/love-manager;
             /usr/src/love/manager-volume/love-manager/runserver.sh;
         volumeMounts:
-          - mountPath: /usr/src/love/manager/config # mount love.json
+          - mountPath: /usr/src/love/manager/config
             name: love-conf
         {{- if .Values.pvcMountpoint }}
         {{- range $values := .Values.pvcMountpoint }}
@@ -33,8 +35,12 @@ spec:
         {{- end }}
         {{- end }}
         env:
-        {{- $data := dict "env" .Values.env .Values.redis.env }}
+        {{- $data := dict "secretName" .Values.envSecretKeyName "env" .Values.env .Values.redis.env }}
         {{- include "helpers.envFromList" $data | indent 10 }}
+        {{- with $.Values.resources }}
+        resources:
+          {{- toYaml $.Values.resources | nindent 10 }}
+        {{- end }}
       volumes:
         - name: love-conf
           configMap:
@@ -48,4 +54,16 @@ spec:
           persistentVolumeClaim:
             claimName: {{ $values.name }}-pvc
       {{- end }}
+      {{- end }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
       {{- end }}

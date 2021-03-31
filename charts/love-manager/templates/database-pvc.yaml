@@ -8,3 +8,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.database.pvcMountpoint.claimSize }}
+  storageClassName: {{ .Values.database.pvcMountpoint.storageClass }}

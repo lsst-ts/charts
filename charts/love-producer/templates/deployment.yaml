@@ -1,0 +1,81 @@
+{{- range $producer, $csc := .Values.producers }}
+{{ $appName := printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $appName }}
+  labels:
+    {{- include "love-producer.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ $.Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "love-producer.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/instance: {{ $appName }}
+  template:
+    metadata:
+      {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "love-producer.selectorLabels" $ | nindent 8 }}
+        app.kubernetes.io/instance: {{ $appName }}
+    spec:
+      containers:
+        - name: {{ $appName }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          env:
+            - name: LOVE_CSC_PRODUCER
+              value: {{ $csc | quote }}
+          {{- range $env_var, $env_value := $.Values.env }}
+            - name: {{ $env_var }}
+              value: {{ $env_value | quote }}
+          {{- end }}
+          {{- range $env_var, $env_value := $.Values.envSecrets }}
+            - name: {{ $env_var }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.namespace }}-secrets
+                  key: {{ $env_value }}
+          {{- end }}
+          volumeMounts:
+            - name: osplconfig
+              mountPath: /opt/OpenSpliceDDS/{{ $.Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
+              subPath: ospl.xml
+            - name: osplshmem
+              mountPath: /tmp
+          {{- with $.Values.resources }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: osplconfig
+          configMap:
+            name: {{ $.Values.namespace }}-ospl-config
+            items:
+              - key: ospl.xml
+                path: ospl.xml
+        - name: osplshmem
+          hostPath:
+            path: {{ $.Values.shmemDir | default "/tmp/openshmem" }}
+      {{- if $.Values.image.nexus3 }}
+      imagePullSecrets:
+        - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
+      {{- end }}
+      hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
+      hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+{{- end }}

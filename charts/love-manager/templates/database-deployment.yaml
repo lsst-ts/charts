@@ -1,32 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-database
+  name: {{ include "love-manager.database.fullname" . }}
   namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "love-manager.database.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-database-service
+      {{- include "love-manager.database.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.database.replicas | default 1 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-database-service
+        {{- include "love-manager.database.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Release.Name }}-database
+      - name: {{ include "love-manager.database.fullname" . }}
         image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
-        imagepullPolicy: {{ .Values.redis.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
         ports:
           - containerPort: {{ .Values.database.port }}
         volumeMounts:
           - mountPath: {{ .Values.database.pvcMountpoint.path }}
             name: {{ .Values.database.pvcMountpoint.name }}-pvc
         env:
-        {{- $data := dict "env" .Values.database.env }}
+        {{- $data := dict "env" .Values.database.env "secretName" .Values.envSecretKeyName }}
         {{- include "helpers.envFromList" $data | indent 10 }}
+        {{- with $.Values.resources }}
+        resources:
+          {{- toYaml $.Values.resources | nindent 10 }}
+        {{- end }}
       volumes:
         - name: {{ .Values.database.pvcMountpoint.name }}-pvc
           persistentVolumeClaim:
             claimName: {{ .Values.database.pvcMountpoint.name }}-pvc
-            storageClass: {{ .Values.database.pvcMountpoint.storageClass }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}

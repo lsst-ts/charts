@@ -11,5 +11,6 @@ spec:
   resources:
     requests:
       storage: {{ $values.claimSize }}
+  storageClassName: {{ $values.storageClass }}
 {{- end }}
 {{- end }}

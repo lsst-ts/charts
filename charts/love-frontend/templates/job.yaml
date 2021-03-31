@@ -1,13 +1,21 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "love-frontend.fullname" . }}
   namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "love-frontend.labels" . | nindent 4 }}
 spec:
+  selector:
+    matchLabels:
+      {{- include "love-frontend.selectorLabels" . | nindent 6 }}
   template:
+    metadata:
+      labels:
+        {{- include "love-frontend.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Release.Name }}
+      - name: {{ include "love-frontend.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command: [ "/bin/sh", "-c", "cp -R /usr/src/love/ /usr/src/love-frontend" ]
@@ -18,6 +26,10 @@ spec:
             name: {{ $values.name }}
         {{- end }}
         {{- end }}
+        {{- with $.Values.resources }}
+        resources:
+          {{- toYaml $.Values.resources | nindent 10 }}
+        {{- end }}
       restartPolicy: {{ .Values.restartPolicy }}
       volumes:
       {{- if .Values.pvcMountpoint }}
@@ -26,4 +38,16 @@ spec:
           persistentVolumeClaim:
             claimName: {{ $values.name }}-pvc
       {{- end }}
+      {{- end }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
       {{- end }}

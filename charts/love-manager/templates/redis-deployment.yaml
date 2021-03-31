@@ -1,24 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-redis
+  name: {{ include "love-manager.redis.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "love-manager.redis.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-redis-service
+      {{- include "love-manager.redis.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.redis.replicas | default 1 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-redis-service
+        {{- include "love-manager.redis.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Release.Name }}-redis
+      - name: {{ include "love-manager.redis.fullname" . }}
         image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
-        imagepullPolicy: {{ .Values.redis.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
         command: [ "redis-server", "--appendonly", "yes", "--requirepass", "$(REDIS_PASS)" ] 
         ports:
           - containerPort: {{ .Values.redis.port }}
         env:
-        {{- $data := dict "env" .Values.redis.env }}
+        {{- $data := dict "env" .Values.redis.env "secretName" .Values.envSecretKeyName }}
         {{- include "helpers.envFromList" $data | indent 10 }}
+        {{- with $.Values.resources }}
+        resources:
+          {{- toYaml $.Values.resources | nindent 10 }}
+        {{- end }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}

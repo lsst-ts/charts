@@ -1,26 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "love-nginx.fullname" . }}
   namespace: {{ $.Values.namespace }}
+  labels:
+    {{- include "love-nginx.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "love-nginx.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicas | default 1 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "love-nginx.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Release.Name }}
+      - name: {{ include "love-nginx.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.ports.container }}
         volumeMounts:
-          - mountPath: /etc/nginx/conf.d # mount nginx.conf
+          - mountPath: /etc/nginx/conf.d
             readOnly: true
             name: nginx-conf
         {{- if .Values.pvcMountpoint }}
@@ -28,6 +30,10 @@ spec:
           - mountPath: {{ $values.path }}
             name: {{ $values.name }}
         {{- end }}
+        {{- end }}
+        {{- with $.Values.resources }}
+        resources:
+          {{- toYaml $.Values.resources | nindent 10 }}
         {{- end }}
       volumes:
         - name: nginx-conf
@@ -42,4 +48,16 @@ spec:
           persistentVolumeClaim:
             claimName: {{ $values.name }}-pvc
       {{- end }}
+      {{- end }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
       {{- end }}
