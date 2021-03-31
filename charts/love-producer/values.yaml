@@ -15,9 +15,7 @@ env:
 envSecrets:
   PROCESS_CONNECTION_PASS: manager-process-connection-password
 
-producers:
-  test1: Test:1
-  test2: Test:2
+producers: {}
 
 osplVersion: V6.9.0
 shmemDir: /my/test
