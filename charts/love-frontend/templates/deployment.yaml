@@ -1,11 +1,12 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ include "love-frontend.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
     {{- include "love-frontend.labels" . | nindent 4 }}
 spec:
+  replicas: {{ $.Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "love-frontend.selectorLabels" . | nindent 6 }}
