@@ -41,9 +41,9 @@ spec:
         {{- end }}
         {{- end }}
         env:
-        {{- $data := dict "secretName" "" "env" .Values.env .Values.redis.env }}
+        {{- $data := dict "env" .Values.env "secretName" "" }}
         {{- include "helpers.envFromList" $data | indent 10 }}
-        {{- $data := dict "secretName" .Values.envSecretKeyName "env" .Values.envSecrets .Values.redis.envSecrets }}
+        {{- $data := dict "secretName" .Values.envSecretKeyName "env" .Values.envSecrets }}
         {{- include "helpers.envFromList" $data | indent 10 }}
         {{- with $.Values.resources }}
         resources:

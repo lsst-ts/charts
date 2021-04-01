@@ -17,12 +17,20 @@ env:
   LOVE_PRODUCER_WEBSOCKET_HOST: love-service/manager/ws/subscription
   COMMANDER_HOSTNAME: love-commander-service
   COMMANDER_PORT: 5000
+  DB_ENGINE: postgresql
+  DB_NAME: postgres
+  DB_USER: postgres
+  DB_HOST: love-manager-database-service
+  DB_PORT: 5432
+  REDIS_HOST: love-manager-redis-service
 envSecrets:
   SECRET_KEY: manager-secret-key
   PROCESS_CONNECTION_PASS: manager-process-connection-password
   ADMIN_USER_PASS: manager-admin-user-password
   USER_USER_PASS: manager-user-user-password
   CMD_USER_PASS: manager-cmd-user-password
+  DB_PASS: database-password
+  REDIS_PASS: redis-password
 configMount: /usr/src/love-manager
 config: |
     {
@@ -38,7 +46,7 @@ config: |
 database:
   image:
     repository: postgres
-    tag: 12.0
+    tag: "12.0"
     pullPolicy: IfNotPresent
   port: 5432
   pvcMountpoint:
@@ -48,20 +56,15 @@ database:
     accessMode: ReadWriteMany
     claimSize: 2Gi
   env:
-    DB_ENGINE: postgresql
-    DB_NAME: postgres
-    DB_USER: postgres
-    DB_HOST: love-manager-database-service
-    DB_PORT: 5432
+    POSTGRES_DB: postgres
+    POSTGRES_USER: postgres
   envSecrets:
-    DB_PASS: database-password
+    POSTGRES_PASSWORD: database-password
 redis:
   image:
     repository: redis
     tag: 5.0.3
     pullPolicy: IfNotPresent
-  env:
-    REDIS_HOST: love-manager-redis-service
   envSecrets:
     REDIS_PASS: redis-password
   port: 6379

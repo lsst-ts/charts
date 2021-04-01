@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: {{ include "love-manager.database.fullname" . }}
-        image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
-        imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+        image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
+        imagePullPolicy: {{ .Values.database.image.pullPolicy }}
         ports:
           - containerPort: {{ .Values.database.port }}
         volumeMounts:
@@ -27,7 +27,7 @@ spec:
         env:
         {{- $data := dict "env" .Values.database.env "secretName" "" }}
         {{- include "helpers.envFromList" $data | indent 10 }}
-        {{- $data := dict "env" .Values.redis.envSecrets "secretName" .Values.envSecretKeyName }}
+        {{- $data := dict "env" .Values.database.envSecrets "secretName" .Values.envSecretKeyName }}
         {{- include "helpers.envFromList" $data | indent 10 }}
         {{- with $.Values.resources }}
         resources:

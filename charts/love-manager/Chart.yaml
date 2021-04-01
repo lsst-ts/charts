@@ -1,6 +1,6 @@
 apiVersion: v2
 name: love-manager
-version: 0.1.7
+version: 0.1.8
 maintainers:
   - name: mareuter
 description: Helm chart for the LOVE manager service.
