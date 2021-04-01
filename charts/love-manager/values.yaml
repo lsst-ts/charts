@@ -10,7 +10,7 @@ ports:
   node: 30000
 pvcMountpoint:
 - name: love-manager
-  path: /usr/src/love/manager
+  path: /usr/src/love-manager
 envSecretKeyName: love
 env:
   SERVER_URL: love.lsst.local
