@@ -35,13 +35,4 @@ Common labels
 */}}
 {{- define "love-frontend.labels" -}}
 helm.sh/chart: {{ include "love-frontend.chart" . }}
-{{ include "love-frontend.selectorLabels" . }}
-{{- end }}
-
-{{/*
-Selector labels
-*/}}
-{{- define "love-frontend.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "love-frontend.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

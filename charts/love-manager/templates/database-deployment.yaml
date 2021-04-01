@@ -25,7 +25,9 @@ spec:
           - mountPath: {{ .Values.database.pvcMountpoint.path }}
             name: {{ .Values.database.pvcMountpoint.name }}-pvc
         env:
-        {{- $data := dict "env" .Values.database.env "secretName" .Values.envSecretKeyName }}
+        {{- $data := dict "env" .Values.database.env "secretName" "" }}
+        {{- include "helpers.envFromList" $data | indent 10 }}
+        {{- $data := dict "env" .Values.redis.envSecrets "secretName" .Values.envSecretKeyName }}
         {{- include "helpers.envFromList" $data | indent 10 }}
         {{- with $.Values.resources }}
         resources:

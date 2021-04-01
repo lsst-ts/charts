@@ -23,10 +23,10 @@ spec:
         - containerPort: {{ .Values.ports.container }}
         command: [ "/bin/bash", "-c" ]
         args:
-          - cp -R /usr/src/love/manager/ /usr/src/love/manager-volume/love-manager;
-            /usr/src/love/manager-volume/love-manager/runserver.sh;
+          - cp -R /usr/src/love/manager/ /usr/src/love-manager;
+            /usr/src/love-manager/runserver.sh;
         volumeMounts:
-          - mountPath: /usr/src/love/manager/config
+          - mountPath: /usr/src/love-manager/config
             name: love-conf
         {{- if .Values.pvcMountpoint }}
         {{- range $values := .Values.pvcMountpoint }}
@@ -35,7 +35,9 @@ spec:
         {{- end }}
         {{- end }}
         env:
-        {{- $data := dict "secretName" .Values.envSecretKeyName "env" .Values.env .Values.redis.env }}
+        {{- $data := dict "secretName" "" "env" .Values.env .Values.redis.env }}
+        {{- include "helpers.envFromList" $data | indent 10 }}
+        {{- $data := dict "secretName" .Values.envSecretKeyName "env" .Values.envSecrets .Values.redis.envSecrets }}
         {{- include "helpers.envFromList" $data | indent 10 }}
         {{- with $.Values.resources }}
         resources:

@@ -12,13 +12,12 @@ ingress:
   hostname: love.local
   httpPath: /
 config: |
-  {
-    server {
-        listen 80;
-        server_name localhost;
-        location / {
-          root   /usr/src/love-frontend;
-          try_files $uri$args $uri$args/ $uri/ /index.html;
+  server {
+    listen 80;
+    server_name localhost;
+    location / {
+      root   /usr/src/love-frontend;
+      try_files $uri$args $uri$args/ $uri/ /index.html;
     }
     location /manager {
         proxy_pass http://manager:8000;

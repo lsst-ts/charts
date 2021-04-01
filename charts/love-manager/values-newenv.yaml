@@ -1,0 +1,4 @@
+env:
+  SERVER_URL: the.new.server.com
+envSecrets:
+  NEW_SECRET: the-key

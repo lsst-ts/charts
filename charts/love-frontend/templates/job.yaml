@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "love-frontend.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "love-frontend.labels" . | nindent 4 }}
+spec:
+  completions: 1
+  template:
+    metadata:
+      labels:
+        {{- include "love-frontend.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ include "love-frontend.fullname" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: [ "/bin/sh", "-c", "cp -R /usr/src/love/ /usr/src/love-frontend" ]
+        volumeMounts:
+          - mountPath: {{ .Values.mountpoint.path }}
+            name: {{ .Values.mountpoint.name }}
+      volumes:
+        - name: {{ .Values.mountpoint.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.mountpoint.name }}-pvc
+      restartPolicy: Never
+      {{- if $.Values.image.nexus3 }}
+      imagePullSecrets:
+        - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
+      {{- end }}
