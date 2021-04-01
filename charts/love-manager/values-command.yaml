@@ -1,0 +1,7 @@
+command:
+  run:
+    - "/bin/bash"
+    - "-c"
+  args: 
+    - "cp -R /usr/src/love/manager/ /usr/src/love-manager;
+            /usr/src/love-manager/runserver.sh;"

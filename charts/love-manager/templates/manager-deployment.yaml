@@ -21,12 +21,18 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.ports.container }}
-        command: [ "/bin/bash", "-c" ]
+        {{- with .Values.command }}
+        command:
+          {{- range $cmd := $.Values.command.run }}
+          - {{ $cmd | quote }}
+          {{- end }}
         args:
-          - cp -R /usr/src/love/manager/ /usr/src/love-manager;
-            /usr/src/love-manager/runserver.sh;
+          {{- range $arg := $.Values.command.args }}
+          - {{ $arg | quote }}
+          {{- end }}
+        {{- end }}
         volumeMounts:
-          - mountPath: /usr/src/love-manager/config
+          - mountPath: {{ .Values.configMount }}
             name: love-conf
         {{- if .Values.pvcMountpoint }}
         {{- range $values := .Values.pvcMountpoint }}

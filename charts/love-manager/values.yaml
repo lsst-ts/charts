@@ -20,9 +20,10 @@ env:
 envSecrets:
   SECRET_KEY: manager-secret-key
   PROCESS_CONNECTION_PASS: manager-process-connection-password
-  ADMIN_USER_PASS: manager-admin-password
+  ADMIN_USER_PASS: manager-admin-user-password
   USER_USER_PASS: manager-user-user-password
   CMD_USER_PASS: manager-cmd-user-password
+configMount: /usr/src/love-manager
 config: |
     {
       "alarms": {
