@@ -132,6 +132,16 @@ entries:
     version: 0.1.0
   love-manager:
   - apiVersion: v2
+    created: "2021-04-01T23:43:04.082978171Z"
+    description: Helm chart for the LOVE manager service.
+    digest: f8777cbd6ee38171277c1e000ef60ba79edf7baa68638aaca49554065fb49f60
+    maintainers:
+    - name: mareuter
+    name: love-manager
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-manager-0.1.8/love-manager-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
     created: "2021-04-01T22:32:15.558446827Z"
     description: Helm chart for the LOVE manager service.
     digest: d5c633eb2911b64bc3902c0f09f784496f21ae7d0ce267acdc9d663941a8d611
@@ -322,4 +332,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-04-01T22:32:15.558843632Z"
+generated: "2021-04-01T23:43:04.083110184Z"
