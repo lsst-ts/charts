@@ -83,6 +83,16 @@ entries:
     version: 0.6.4
   love-frontend:
   - apiVersion: v2
+    created: "2021-04-01T16:01:46.937418499Z"
+    description: Helm chart for the LOVE Frontend.
+    digest: 914e509d577ef5da44f5ace62dcd4995f71550f0e67bc5a08e42411456cc5b69
+    maintainers:
+    - name: mareuter
+    name: love-frontend
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-frontend-0.1.5/love-frontend-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     created: "2021-03-31T22:36:46.194864609Z"
     description: Helm chart for the LOVE Frontend.
     digest: 4492326917c8ee30936ff357de786d02db5e96aa2e4e4dc4e661679570df93e3
@@ -122,6 +132,16 @@ entries:
     version: 0.1.0
   love-manager:
   - apiVersion: v2
+    created: "2021-04-01T16:01:47.014740433Z"
+    description: Helm chart for the LOVE manager service.
+    digest: 7d49a9203cda518a40a9f9e76e10107819c5f9f8c5bffa814284f82f57455c4c
+    maintainers:
+    - name: mareuter
+    name: love-manager
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-manager-0.1.5/love-manager-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     created: "2021-03-31T23:45:06.028223537Z"
     description: Helm chart for the LOVE manager service.
     digest: 6a8559d1ff16119823e291646d48213b0da953dcb67e5cd75edb1b70aa54fb64
@@ -160,6 +180,16 @@ entries:
     - https://github.com/lsst-ts/charts/releases/download/love-manager-0.1.0/love-manager-0.1.0.tgz
     version: 0.1.0
   love-nginx:
+  - apiVersion: v2
+    created: "2021-04-01T16:01:47.102414052Z"
+    description: Helm chart for the LOVE Nginx server.
+    digest: 8354270952988b73b692dad5dee0c02647c79f3b983e3c128cdb6269b0cbb1e7
+    maintainers:
+    - name: mareuter
+    name: love-nginx
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-nginx-0.1.3/love-nginx-0.1.3.tgz
+    version: 0.1.3
   - apiVersion: v2
     created: "2021-03-31T03:20:09.860856555Z"
     description: Helm chart for the LOVE Nginx server.
@@ -272,4 +302,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-03-31T23:45:06.028279438Z"
+generated: "2021-04-01T16:01:47.102494353Z"
