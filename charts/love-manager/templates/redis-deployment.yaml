@@ -23,7 +23,9 @@ spec:
         ports:
           - containerPort: {{ .Values.redis.port }}
         env:
-        {{- $data := dict "env" .Values.redis.env "secretName" .Values.envSecretKeyName }}
+        {{- $data := dict "env" .Values.redis.env "secretName" "" }}
+        {{- include "helpers.envFromList" $data | indent 10 }}
+        {{- $data := dict "env" .Values.redis.envSecrets "secretName" .Values.envSecretKeyName }}
         {{- include "helpers.envFromList" $data | indent 10 }}
         {{- with $.Values.resources }}
         resources:

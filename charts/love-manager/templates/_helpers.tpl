@@ -51,8 +51,8 @@ Handle environment parameters
  */}}
 {{- define "helpers.envFromList" -}}
 {{- $secretName := .secretName }}
-{{- range $item := .env }}
-{{- $_ := set $item "secretName" $secretName }}
+{{- range $var, $value := .env }}
+{{- $item := dict "var" $var "value" $value "secretName" $secretName }}
 {{ include "helpers.envType" $item }}
 {{- end }}
 {{- end }}
@@ -62,7 +62,7 @@ Determine type of environment
 */}}
 {{- define "helpers.envType" -}}
 - name: {{ .var }}
-{{- if .isSecret }}
+{{- if ne .secretName "" }}
   valueFrom:
     secretKeyRef:
       name: {{ .secretName }}-secrets

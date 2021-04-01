@@ -4,15 +4,6 @@ image:
   repository: lsstts/love-frontend
   tag: develop
   pullPolicy: IfNotPresent
-restartPolicy: Never
-pvcMountpoint:
-- name: love-frontend
-  path: /usr/src
-replicaCount: 1
-resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+mountpoint:
+  name: love-frontend
+  path: /usr/src/love-frontend
