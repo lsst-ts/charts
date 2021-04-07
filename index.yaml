@@ -221,6 +221,16 @@ entries:
     version: 0.1.0
   love-nginx:
   - apiVersion: v2
+    created: "2021-04-07T22:44:28.153038845Z"
+    description: Helm chart for the LOVE Nginx server.
+    digest: a89f2b128d9554fce44adc9943243d7f41bd91c9fdbd4e0b04f71af3aea1d447
+    maintainers:
+    - name: mareuter
+    name: love-nginx
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-nginx-0.1.6/love-nginx-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     created: "2021-04-07T21:58:50.587953026Z"
     description: Helm chart for the LOVE Nginx server.
     digest: 7fc59d56c9be39b729bbc9c81a0cfc6673de6ad89cc938876edbec68ccdfc768
@@ -362,4 +372,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-04-07T21:58:50.588032926Z"
+generated: "2021-04-07T22:44:28.15312015Z"
