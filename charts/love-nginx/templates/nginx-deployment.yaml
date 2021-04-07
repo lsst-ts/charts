@@ -15,6 +15,21 @@ spec:
       labels:
         {{- include "love-nginx.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+      - name: love-frontend
+        image: "{{ .Values.initContainers.frontend.image.repository }}:{{ .Values.initContainers.frontend.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: [ "/bin/sh", "-c", "cp -R /usr/src/love/ /usr/src/love-frontend" ]
+        volumeMounts:
+          - mountPath: /usr/src
+            name: {{ .Values.staticStore.name }}
+      - name: love-manager-static
+        image: "{{ .Values.initContainers.manager.image.repository }}:{{ .Values.initContainers.manager.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: [ "/bin/sh", "-c", "mkdir /usr/src/love-manager; cp -R /usr/src/love/manager/static /usr/src/love/manager/media /usr/src/love-manager" ]
+        volumeMounts:
+          - mountPath: /usr/src
+            name: {{ .Values.staticStore.name }}
       containers:
       - name: {{ include "love-nginx.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,12 +40,8 @@ spec:
           - mountPath: /etc/nginx/conf.d
             readOnly: true
             name: nginx-conf
-        {{- if .Values.pvcMountpoint }}
-        {{- range $values := .Values.pvcMountpoint }}
-          - mountPath: {{ $values.path }}
-            name: {{ $values.name }}
-        {{- end }}
-        {{- end }}
+          - mountPath: /usr/src
+            name: {{ .Values.staticStore.name }}
         {{- with $.Values.resources }}
         resources:
           {{- toYaml $.Values.resources | nindent 10 }}
@@ -42,13 +53,9 @@ spec:
             items:
               - key: nginx.conf
                 path: nginx.conf
-      {{- if .Values.pvcMountpoint }}
-      {{- range $values := .Values.pvcMountpoint }}
-        - name: {{ $values.name }}
+        - name: {{ .Values.staticStore.name }}
           persistentVolumeClaim:
-            claimName: {{ $values.name }}-pvc
-      {{- end }}
-      {{- end }}
+            claimName: {{ .Values.staticStore.name }}-pvc
       {{- with $.Values.nodeSelector }}
       nodeSelector:
         {{- toYaml $ | nindent 8 }}

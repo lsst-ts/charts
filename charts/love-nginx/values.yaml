@@ -20,7 +20,7 @@ config: |
       try_files $uri$args $uri$args/ $uri/ /index.html;
     }
     location /manager {
-        proxy_pass http://manager:8000;
+        proxy_pass http://love-manager-service:8000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -34,17 +34,20 @@ config: |
         alias /usr/src/love-manager/media;
     }
   }
-pvcMountpoint:
-- name: love-frontend
-  path: /usr/src/love-frontend
+initContainers:
+  frontend:
+    image: 
+      repository: lsstts/love-frontend
+      tag: develop
+  manager:
+    image: 
+      repository: lsstts/love-manager
+      tag: develop
+staticStore:
+  name: love-nginx-static
   storageClass: local-store
   accessMode: ReadWriteMany
-  claimSize: 1Gi
-- name: love-manager
-  path: /usr/src/love-manager
-  storageClass: local-store
-  accessMode: ReadWriteMany
-  claimSize: 1Gi
+  claimSize: 2Gi
 
 resources: {}
 

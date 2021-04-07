@@ -21,25 +21,9 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.ports.container }}
-        {{- with .Values.command }}
-        command:
-          {{- range $cmd := $.Values.command.run }}
-          - {{ $cmd | quote }}
-          {{- end }}
-        args:
-          {{- range $arg := $.Values.command.args }}
-          - {{ $arg | quote }}
-          {{- end }}
-        {{- end }}
         volumeMounts:
           - mountPath: {{ .Values.configMount }}
             name: love-conf
-        {{- if .Values.pvcMountpoint }}
-        {{- range $values := .Values.pvcMountpoint }}
-          - mountPath: {{ $values.path }}
-            name: {{ $values.name }}
-        {{- end }}
-        {{- end }}
         env:
         {{- $data := dict "env" .Values.env "secretName" "" }}
         {{- include "helpers.envFromList" $data | indent 10 }}
@@ -56,13 +40,6 @@ spec:
             items:
               - key: love.json
                 path: love.json
-      {{- if .Values.pvcMountpoint }}
-      {{- range $values := .Values.pvcMountpoint }}
-        - name: {{ $values.name }}
-          persistentVolumeClaim:
-            claimName: {{ $values.name }}-pvc
-      {{- end }}
-      {{- end }}
       {{- if $.Values.image.nexus3 }}
       imagePullSecrets:
         - name: {{ $.Values.namespace }}-{{ $.Values.image.nexus3 }}
