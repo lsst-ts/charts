@@ -1,6 +1,6 @@
 apiVersion: v2
 name: love-nginx
-version: 0.1.4
+version: 0.1.5
 maintainers:
   - name: mareuter
 description: Helm chart for the LOVE Nginx server.

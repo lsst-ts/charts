@@ -19,14 +19,14 @@ spec:
       - name: love-frontend
         image: "{{ .Values.initContainers.frontend.image.repository }}:{{ .Values.initContainers.frontend.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: [ "/bin/sh", "-c", "cp -R /usr/src/love/ /usr/src/love-frontend" ]
+        command: [ "/bin/sh", "-c", "cp -Rv /usr/src/love/ /usr/src/love-frontend" ]
         volumeMounts:
           - mountPath: /usr/src
             name: {{ .Values.staticStore.name }}
       - name: love-manager-static
         image: "{{ .Values.initContainers.manager.image.repository }}:{{ .Values.initContainers.manager.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: [ "/bin/sh", "-c", "mkdir /usr/src/love-manager; cp -R /usr/src/love/manager/static /usr/src/love/manager/media /usr/src/love-manager" ]
+        command: [ "/bin/sh", "-c", "mkdir -p /usr/src/love-manager/media/thumbnails; mkdir -p /usr/src/love-manager/media/configs; cp -Rv /usr/src/love/manager/static /usr/src/love-manager; cp -uv /usr/src/love/manager/ui_framework/fixtures/thumbnails/* /usr/src/love-manager/media/thumbnails; cp -uv /usr/src/love/manager/api/fixtures/configs/* /usr/src/love-manager/media/configs" ]
         volumeMounts:
           - mountPath: /usr/src
             name: {{ .Values.staticStore.name }}
