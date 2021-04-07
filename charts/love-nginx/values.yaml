@@ -43,6 +43,7 @@ initContainers:
     image: 
       repository: lsstts/love-manager
       tag: develop
+    command: [ "/bin/sh", "-c", "mkdir -p /usr/src/love-manager/media/thumbnails; mkdir -p /usr/src/love-manager/media/configs; cp -Rv /usr/src/love/manager/static /usr/src/love-manager; cp -uv /usr/src/love/manager/ui_framework/fixtures/thumbnails/* /usr/src/love-manager/media/thumbnails; cp -uv /usr/src/love/manager/api/fixtures/configs/* /usr/src/love-manager/media/configs" ]
 staticStore:
   name: love-nginx-static
   storageClass: local-store
