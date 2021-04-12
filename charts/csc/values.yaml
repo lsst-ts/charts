@@ -1,0 +1,13 @@
+image:
+  repository: lsstts/test
+  tag: develop
+  pullPolicy: IfNotPresent
+
+useExternalConfig: true
+osplVersion: V6.9.0
+namespace: csc
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

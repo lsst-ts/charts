@@ -16,5 +16,11 @@ env:
   replication: 3
   logLevel: 10
 
+useExternalConfig: true
 osplVersion: V6.9.0
 namespace: kafka-producers
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

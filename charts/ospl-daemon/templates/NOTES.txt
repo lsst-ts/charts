@@ -1,9 +1,9 @@
-Your release is named {{ .Release.Name }}.
+Your release is named {{ include "ospl-daemon.fullname" . }}.
 
 To learn more about the release, try:
 
-  helm status {{ .Release.Name }}
-  helm get {{ .Release.Name }}
+  helm status {{ include "ospl-daemon.fullname" . }}
+  helm get {{ include "ospl-daemon.fullname" . }}
 
 To check if all the OSPL daemons are running, try:
 

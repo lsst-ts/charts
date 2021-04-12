@@ -1,21 +1,23 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "ospl-daemon.fullname" . }}
   namespace: {{ .Values.namespace }}
   {{- include "multicast.annotation" . | nindent 2 }}
+  labels:
+    {{- include "ospl-daemon.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      name: {{ .Release.Name }}
+      {{- include "ospl-daemon.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        name: {{ .Release.Name }}
+        {{- include "ospl-daemon.selectorLabels" . | nindent 8 }}
       {{- include "multicast.annotation" . | nindent 6  }}
     spec:
       containers:
-        - name: {{ .Release.Name }}
+        - name: {{ include "ospl-daemon.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           stdin: true
@@ -28,26 +30,34 @@ spec:
           {{- end }}
           {{- end }}
           volumeMounts:
+            {{- if .Values.useExternalConfig }}
             - name: osplconfig
               mountPath: /opt/OpenSpliceDDS/{{ .Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
+            {{- end }}
             - name: osplshmem
               mountPath: /tmp
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
       {{- if .Values.initContainer }}
       initContainers:
-        - name: {{ .Release.Name }}-route-fixer
+        - name: {{ include "ospl-daemon.fullname" . }}-route-fixer
           image: "{{ .Values.initContainer.repository }}:{{ .Values.initContainer.tag }}"
           imagePullPolicy: {{ .Values.initContainer.pullPolicy }}
           securityContext:
             privileged: true
       {{- end }} 
       volumes:
+        {{- if .Values.useExternalConfig }}
         - name: osplconfig
           configMap:
             name: {{ .Values.namespace }}-ospl-config
             items:
               - key: ospl.xml
                 path: ospl.xml
+        {{- end }}
         - name: osplshmem
           hostPath:
             path: {{ .Values.shmemDir }}
@@ -58,3 +68,15 @@ spec:
       {{- end }}
       hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
       hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

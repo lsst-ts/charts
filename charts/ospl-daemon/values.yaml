@@ -1,5 +1,5 @@
 image:
-  repository: ts-dockerhub.lsst.org/ospl-daemon 
+  repository: ts-dockerhub.lsst.org/ospl-daemon
   tag: c0010
   pullPolicy: IfNotPresent
   nexus3: nexus3-docker
@@ -7,6 +7,12 @@ image:
 env:
   LSST_DDS_PARTITION_PREFIX: ncsa
 
+useExternalConfig: true
 osplVersion: V6.10.4
 shmemDir: /tmp/test
 namespace: ospl-daemon
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

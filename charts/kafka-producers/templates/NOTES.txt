@@ -12,5 +12,5 @@ To check if all the Kafka Producers are running, try:
 To check logs for the individual Kafka Producers, try
 
 {{- range $producer, $values := $.Values.producers }}
-  kubectl logs -n {{ $.Values.namespace }} $(kubectl get pods -n {{ $.Values.namespace }} -l "app={{ $.Release.Name }}-{{ $producer }}" -o jsonpath="{.items[0].metadata.name}")
+  kubectl logs -n {{ $.Values.namespace }} $(kubectl get pods -n {{ $.Values.namespace }} -l "app.kubernetes.io/name={{ $.Release.Name }}-{{ $producer }}" -o jsonpath="{.items[0].metadata.name}")
 {{- end }}
