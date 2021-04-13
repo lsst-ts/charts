@@ -1,12 +1,14 @@
 {{- range $producer, $values := .Values.producers }}
+{{ $appName := printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+  name: {{ $appName }}
   namespace: {{ $.Values.namespace }}
   labels:
     helm.sh/chart: {{ include "kafka-producers.chart" $ }}
+    app.kubernetes.io/name: {{ $appName }}
     app.kubernetes.io/instance: {{ $.Release.Name }}
   {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
   {{- include "multicast.annotation" . | nindent 2 }}
@@ -15,19 +17,19 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+      app.kubernetes.io/name: {{ $appName }}
       app.kubernetes.io/instance: {{ $.Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+        app.kubernetes.io/name: {{ $appName }}
         app.kubernetes.io/instance: {{ $.Release.Name }}
       {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
       {{- include "multicast.annotation" . | nindent 6 }}
       {{- end }}
     spec:
       containers:
-        - name: {{ printf "%s-%s" $.Release.Name $producer | trunc 63 | trimSuffix "-" }}
+        - name: {{ $appName }}
           {{- if .image }}
           {{- $image := .image.repository | default $.Values.image.repository }}
           {{- $tag := .image.tag | default $.Values.image.tag}}
@@ -97,18 +99,26 @@ spec:
             - name: CSC_LIST 
               value: {{ .cscs | quote }}
           volumeMounts:
+            {{- if $.Values.useExternalConfig }}
             - name: osplconfig
               mountPath: /opt/OpenSpliceDDS/{{ $.Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
+            {{- end }}
             - name: osplshmem
               mountPath: /tmp
+          {{- with $.Values.resources }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          {{- end }}
       volumes:
+        {{- if $.Values.useExternalConfig }}
         - name: osplconfig
           configMap:
             name: {{ $.Values.namespace }}-ospl-config
             items:
               - key: ospl.xml
                 path: ospl.xml
+        {{- end }}
         - name: osplshmem
           hostPath:
             path: {{ $.Values.shmemDir | default "/tmp/openshmem" }}
@@ -118,4 +128,16 @@ spec:
       {{- end }}
       hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
       hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
 {{ end }}

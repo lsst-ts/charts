@@ -7,6 +7,3 @@ env:
   LSST_DDS_PARTITION_PREFIX: citest
   CSC_INDEX: 1
   CSC_MODE: 1
-
-osplVersion: V6.9.0
-namespace: csc

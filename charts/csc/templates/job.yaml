@@ -39,9 +39,11 @@ spec:
           {{- end }}
           {{- end }}
           volumeMounts:
+            {{- if .Values.useExternalConfig }}
             - name: osplconfig
               mountPath: /opt/OpenSpliceDDS/{{ $.Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
+            {{- end }}
             - name: osplshmem
               mountPath: /tmp
           {{- if .Values.entrypoint }}
@@ -62,6 +64,10 @@ spec:
               readOnly: {{ $values.readOnly }}
           {{- end}}
           {{- end}}
+          {{- with $.Values.resources }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          {{- end }}
       {{- if .Values.initContainer }}
       initContainers:
         - name: {{ .Release.Name }}-route-fixer
@@ -71,12 +77,14 @@ spec:
             privileged: true
       {{- end }} 
       volumes:
+        {{- if .Values.useExternalConfig }}
         - name: osplconfig
           configMap:
             name: {{ $.Values.namespace }}-ospl-config
             items:
               - key: ospl.xml
                 path: ospl.xml
+        {{- end }}
         - name: osplshmem
           hostPath:
             path: {{ $.Values.shmemDir | default "/tmp/openshmem" }}
@@ -111,3 +119,15 @@ spec:
       {{- end }}
       hostIPC: {{ or $.Values.useHostIpc (eq ( $.Values.useHostIpc | toString ) "<nil>" ) }}
       hostPID: {{ or $.Values.useHostPid (eq ( $.Values.useHostPid | toString ) "<nil>" ) }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
