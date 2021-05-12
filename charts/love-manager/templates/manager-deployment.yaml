@@ -9,7 +9,9 @@ spec:
   selector:
     matchLabels:
       {{- include "love-manager.selectorLabels" . | nindent 6 }}
-  replicas: {{ .Values.replicas | default 1 }}
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicas }}
+  {{- end }}
   template:
     metadata:
       labels:
