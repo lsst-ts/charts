@@ -101,7 +101,11 @@ spec:
       {{- range $values := .Values.pvcMountpoint }}
         - name: {{ $values.name }}
           persistentVolumeClaim:
+            {{- if $values.altCsc }}
+            claimName: {{ $values.altCsc }}-{{ $values.name }}-pvc
+            {{- else }}
             claimName: {{ $.Release.Name }}-{{ $values.name }}-pvc
+            {{- end }}
       {{- end }}
       {{- end }}
       {{- if .Values.nfsMountpoint }}

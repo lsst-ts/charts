@@ -25,6 +25,7 @@ pvcMountpoint:
     accessMode: ReadOnlyMany
     claimSize: 500Mb
   - name: path3
+    altCsc: test
     path: /mnt
     ids:
       uid: 123
