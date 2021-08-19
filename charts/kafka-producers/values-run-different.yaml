@@ -27,5 +27,6 @@ env:
     TEST_IT: 127
 
 shmemDir: /my/test
-useMulticast: true
+annotations:
+  k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
 useHostPid: false
