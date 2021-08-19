@@ -1,4 +1,4 @@
 initContainer:
   repository: lsstit/ddsnet4u
   tag: latest
-  pullPolicy: IfNotPresent 
+  pullPolicy: IfNotPresent

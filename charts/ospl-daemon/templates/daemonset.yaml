@@ -3,7 +3,10 @@ kind: DaemonSet
 metadata:
   name: {{ include "ospl-daemon.fullname" . }}
   namespace: {{ .Values.namespace }}
-  {{- include "multicast.annotation" . | nindent 2 }}
+  {{- with .Values.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "ospl-daemon.labels" . | nindent 4 }}
 spec:
@@ -14,7 +17,10 @@ spec:
     metadata:
       labels:
         {{- include "ospl-daemon.selectorLabels" . | nindent 8 }}
-      {{- include "multicast.annotation" . | nindent 6  }}
+      {{- with .Values.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       containers:
         - name: {{ include "ospl-daemon.fullname" . }}
@@ -48,7 +54,7 @@ spec:
           imagePullPolicy: {{ .Values.initContainer.pullPolicy }}
           securityContext:
             privileged: true
-      {{- end }} 
+      {{- end }}
       volumes:
         {{- if .Values.useExternalConfig }}
         - name: osplconfig

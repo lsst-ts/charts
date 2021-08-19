@@ -1,18 +1,42 @@
+# -- This section holds the configuration of the container image
 image:
+  # -- The Docker registry name of the container image
   repository: ts-dockerhub.lsst.org/ospl-daemon
+  # -- The tag of the container image
   tag: c0010
+  # -- The policy to apply when pulling an image for deployment
   pullPolicy: IfNotPresent
+  # -- The tag name for the Nexus3 Docker repository secrets
   nexus3: nexus3-docker
-
+# -- This section holds a set of key, value pairs for environmental variables
 env:
   LSST_DDS_PARTITION_PREFIX: ncsa
-
+# -- This sets whether to rely on the ConfigMap for OSPL configuration or the internal OSPL configuration
 useExternalConfig: true
+# -- This is the version of the OpenSplice library to run. It is used to set the location of the OSPL configuration file
 osplVersion: V6.10.4
+# -- This is the path to the Kubernetes local store where the shared memory database will be written
 shmemDir: /tmp/test
+# -- This is the namespace in which the OSPL daemon will be placed
 namespace: ospl-daemon
-
+# -- This allows the specification of pod annotations. Default specifies the multus annotation
+annotations:
+  k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
+# -- This section sets the optional use of an init container for multus networking.
+# If this section is used, the following attributes must to be specified:
+# _repository_ (The Docker registry name of the init container image),
+# _tag_ (The tag of the init container image),
+# _pullPolicy_ (The policy to apply when pulling an image for init container deployment)
+initContainer: {}
+# -- (bool) This sets the use of the host process ID system. Defaults to true if not specified
+useHostPid:
+# -- (bool) This sets the use of the host inter-process communication system. Defaults to true if not specified
+useHostIpc:
+# -- This allows the specification of resources (CPU, memory) requires to run the container
 resources: {}
+# -- This allows the specification of using specific nodes to run the pod
 nodeSelector: {}
+# -- This specifies the tolerations of the pod for any system taints
 tolerations: []
+# -- This specifies the scheduling constraints of the pod
 affinity: {}
