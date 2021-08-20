@@ -42,8 +42,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "ospl-daemon.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{- define "multicast.annotation" -}}
-annotations:
-  k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
-{{- end -}}

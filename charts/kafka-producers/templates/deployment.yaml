@@ -10,8 +10,9 @@ metadata:
     helm.sh/chart: {{ include "kafka-producers.chart" $ }}
     app.kubernetes.io/name: {{ $appName }}
     app.kubernetes.io/instance: {{ $.Release.Name }}
-  {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
-  {{- include "multicast.annotation" . | nindent 2 }}
+  {{- with $.Values.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   replicas: 1
@@ -24,8 +25,9 @@ spec:
       labels:
         app.kubernetes.io/name: {{ $appName }}
         app.kubernetes.io/instance: {{ $.Release.Name }}
-      {{- if and $.Values.useMulticast (ne ( $.Values.useMulticast | toString ) "<nil>" ) }}
-      {{- include "multicast.annotation" . | nindent 6 }}
+      {{- with $.Values.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
       containers:
@@ -96,7 +98,7 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-            - name: CSC_LIST 
+            - name: CSC_LIST
               value: {{ .cscs | quote }}
           volumeMounts:
             {{- if $.Values.useExternalConfig }}

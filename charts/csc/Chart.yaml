@@ -1,6 +1,6 @@
 apiVersion: v2
 name: csc
-version: 0.8.1
+version: 0.9.0
 maintainers:
   - name: mareuter
 description: A Helm chart for deploying control system CSCs.

@@ -11,7 +11,8 @@ env:
 osplVersion: V6.9.0
 namespace: csc
 
-useMulticast: true
+annotations:
+  k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
 initContainer:
   repository: lsstit/ddsnet4u
   tag: latest
