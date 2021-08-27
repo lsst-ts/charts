@@ -1,6 +1,6 @@
 # csc
 
-![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square)
+![Version: 0.9.1](https://img.shields.io/badge/Version-0.9.1-informational?style=flat-square)
 
 A Helm chart for deploying control system CSCs.
 
@@ -28,7 +28,7 @@ A Helm chart for deploying control system CSCs.
 | nfsMountpoint | list | `[]` | This section holds the information necessary to create a NFS mount for the container. If this section is used, each object listed can have the following attributes defined: _name_ (A label identifier for the mountpoint), _path_ (The path inside the container to mount), _readOnly_ (This sets if the NFS mount is read only or read/write), _server_ (The hostname of the NFS server), _serverPath_ (The path exported by the NFS server) |
 | nodeSelector | object | `{}` | This allows the specification of using specific nodes to run the pod |
 | osplVersion | string | `"V6.9.0"` | This is the version of the OpenSplice library to run. It is used to set the location of the OSPL configuration file |
-| pvcMountpoint | list | `[]` | This section holds the information necessary to create a volume mount for the container. If this section is used, each object listed can have the following attributes defined: _name_ (A label identifier for the mountpoint), _path_ (The path inside the container to mount), _accessMode_ (This sets the required access mode for the volume mount), _claimSize_ (The requested physical disk space size for the volume mount), _ids.uid_ (OPTIONAL: An alternative UID for mounting), _ids.gid_ (OPTIONAL: An alternative GID for mounting) |
+| pvcMountpoint | list | `[]` | This section holds the information necessary to create a volume mount for the container. If this section is used, each object listed can have the following attributes defined: _name_ (A label identifier for the mountpoint), _path_ (The path inside the container to mount), _accessMode_ (This sets the required access mode for the volume mount), _claimSize_ (The requested physical disk space size for the volume mount), _storageClass_ (The Kubernetes provided storage class), _ids.uid_ (OPTIONAL: An alternative UID for mounting), _ids.gid_ (OPTIONAL: An alternative GID for mounting) |
 | resources | object | `{}` | This allows the specification of resources (CPU, memory) requires to run the container |
 | shmemDir | string | `nil` | This is the path to the Kubernetes local store where the shared memory database will be written |
 | tolerations | list | `[]` | This specifies the tolerations of the pod for any system taints |

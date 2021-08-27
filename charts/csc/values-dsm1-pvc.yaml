@@ -18,12 +18,14 @@ pvcMountpoint:
     ids:
       uid: 123
     claimSize: 1G
+    storageClass: local
   - name: path2
     path: /tmp
     ids:
       gid: 432
     accessMode: ReadOnlyMany
     claimSize: 500Mb
+    storageClass: local
   - name: path3
     path: /mnt
     ids:
@@ -31,3 +33,4 @@ pvcMountpoint:
       gid: 432
     accessMode: ReadWriteMany
     claimSize: 500G
+    storageClass: rook-ceph-block
