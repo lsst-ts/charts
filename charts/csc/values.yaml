@@ -23,6 +23,7 @@ entrypoint:
 # _path_ (The path inside the container to mount),
 # _accessMode_ (This sets the required access mode for the volume mount),
 # _claimSize_ (The requested physical disk space size for the volume mount),
+# _storageClass_ (The Kubernetes provided storage class),
 # _ids.uid_ (OPTIONAL: An alternative UID for mounting),
 # _ids.gid_ (OPTIONAL: An alternative GID for mounting)
 pvcMountpoint: []
