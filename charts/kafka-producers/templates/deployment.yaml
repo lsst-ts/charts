@@ -54,6 +54,8 @@ spec:
               {{- else }}
               value: {{ $.Values.env.lsstDdsPartitionPrefix | quote }}
               {{- end }}
+            - name: SALKAFKA_SEMAPHORE_SUFFIX
+              value: {{ $producer }}
             - name: BROKER_IP
               value: "{{ $.Values.env.brokerIp }}"
             - name: BROKER_PORT
@@ -111,6 +113,15 @@ spec:
           {{- with $.Values.resources }}
           resources:
             {{- toYaml $.Values.resources | nindent 12 }}
+          {{- end }}
+          {{- if $.Values.startupProbe.use }}
+          startupProbe:
+            exec:
+              command:
+              - cat
+              - /tmp/SALKAFKA_PRODUCER_RUNNING_{{ upper $producer }}
+            initialDelaySeconds: {{ $.Values.startupProbe.initialDelay }}
+            periodSeconds: {{ $.Values.startupProbe.period }}
           {{- end }}
       volumes:
         {{- if $.Values.useExternalConfig }}

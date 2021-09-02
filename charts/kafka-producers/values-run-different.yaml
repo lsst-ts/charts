@@ -30,3 +30,6 @@ shmemDir: /my/test
 annotations:
   k8s.v1.cni.cncf.io/networks: kube-system/macvlan-conf
 useHostPid: false
+
+startupProbe:
+  use: true
