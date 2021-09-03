@@ -45,6 +45,13 @@ useHostPid:
 useHostIpc:
 # -- This allows the specification of pod annotations
 annotations: {}
+startupProbe:
+  # -- This decides whether or not to use the startup probe
+  use: false
+  # -- The initial delay in seconds before the first check is made
+  initialDelay: 10
+  # -- The time in seconds between subsequent checks
+  period: 10
 # -- This allows the specification of resources (CPU, memory) requires to run the container
 resources: {}
 # -- This allows the specification of using specific nodes to run the pod
