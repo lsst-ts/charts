@@ -46,8 +46,10 @@ spec:
               mountPath: /opt/OpenSpliceDDS/{{ $.Values.osplVersion }}/HDE/x86_64.linux/etc/config/ospl.xml
               subPath: ospl.xml
             {{- end }}
+          {{- if $.Values.shmemDir }}
             - name: osplshmem
               mountPath: /tmp
+          {{- end }}
           {{- if .Values.entrypoint }}
             - name: entrypoint
               mountPath: /home/saluser/.startup.sh
@@ -87,9 +89,11 @@ spec:
               - key: ospl.xml
                 path: ospl.xml
         {{- end }}
+      {{- if $.Values.shmemDir }}
         - name: osplshmem
           hostPath:
-            path: {{ $.Values.shmemDir | default "/tmp/openshmem" }}
+            path: {{ $.Values.shmemDir }}
+      {{- end }}
       {{- if .Values.entrypoint }}
         - name: entrypoint
           configMap:
