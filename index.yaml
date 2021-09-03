@@ -116,6 +116,16 @@ entries:
     version: 0.7.0
   kafka-producers:
   - apiVersion: v2
+    created: "2021-09-03T16:21:07.949654548Z"
+    description: A Helm chart for deploying the Kafka producers.
+    digest: 18cce58b7dcc0683cd84e5987682727a5ecce1c997e5e4b54e404bc21338ae4c
+    maintainers:
+    - name: mareuter
+    name: kafka-producers
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/kafka-producers-0.10.0/kafka-producers-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
     created: "2021-08-20T18:44:43.528030145Z"
     description: A Helm chart for deploying the Kafka producers.
     digest: 1c3826721e2dc706136e85525e80272198fc733f39e7d9b880a52bc6d5b1519d
@@ -482,4 +492,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-08-27T17:43:55.27339667Z"
+generated: "2021-09-03T16:21:07.949761249Z"
