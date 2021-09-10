@@ -2,7 +2,7 @@
 namespaces:
   - csc
 # -- Site-specific Vault path for secrets.
-vault_path_prefix: ""
+vaultPathPrefix: ""
 # -- This section holds secret specifications.
 # Each object listed can have the following attributes defined:
 # _name_ (The name used by pods to access the secret)
