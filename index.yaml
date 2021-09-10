@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   cluster-config:
   - apiVersion: v2
+    created: "2021-09-10T20:34:33.250138443Z"
+    description: A Helm chart for handling CSC cluster configuration.
+    digest: fa9178a32d1888a1fa45943d56ca962257f143a2d6ac26f7452e7b546c1060e3
+    maintainers:
+    - name: mareuter
+    name: cluster-config
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/cluster-config-0.3.1/cluster-config-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     created: "2021-09-10T17:38:51.275064587Z"
     description: A Helm chart for handling CSC cluster configuration.
     digest: cc85bd167cfc29dbcb2f058615b2d177accc41d445d66c9ffed4ac8044f77367
@@ -512,4 +522,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/ospl-daemon-0.2.0/ospl-daemon-0.2.0.tgz
     version: 0.2.0
-generated: "2021-09-10T17:38:51.275179389Z"
+generated: "2021-09-10T20:34:33.250334945Z"
