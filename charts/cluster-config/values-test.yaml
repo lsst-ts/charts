@@ -1,7 +1,7 @@
 namespaces:
  - ns1
  - ns2
-vault_path_prefix: secrets/vault
+vaultPathPrefix: secrets/vault
 secrets:
   - name: cool-secret
     key: path1/key1
