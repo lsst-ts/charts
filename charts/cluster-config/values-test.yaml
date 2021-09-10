@@ -1,0 +1,16 @@
+namespaces:
+ - ns1
+ - ns2
+vault_path_prefix: secrets/vault
+secrets:
+  - name: cool-secret
+    key: path1/key1
+    namespaces:
+      - namespaces
+      - ns3
+  - name: another-secret
+    key: path1/key2
+    namespaces:
+      - namespaces
+      - ns4
+    type: kubernetes.io
