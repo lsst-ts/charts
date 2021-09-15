@@ -1,0 +1,84 @@
+{{ range $script := .Values.scripts }}
+{{ $_ := set $.Values "script" $script }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rubintv-broadcaster.fullname" $ }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    {{- include "rubintv-broadcaster.labels" $ | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "rubintv-broadcaster.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "rubintv-broadcaster.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml $.Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "rubintv-broadcaster.scriptName" $ }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          env:
+            - name: RUN_ARG
+              value: {{ $script }}
+          {{- if or $.Values.env }}
+          {{- range $env_var, $env_value := $.Values.env }}
+            - name: {{ $env_var }}
+              value: {{ $env_value | quote }}
+          {{- end }}
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "rubintv-broadcaster.fullname" $ }}-env-configmap
+          volumeMounts:
+            - name: {{ include "rubintv-broadcaster.fullname" $ }}-creds
+              mountPath: "/etc/{{ include "rubintv-broadcaster.fullname" $ }}/creds"
+              readOnly: true
+          {{- if $.Values.nfsMountpoint }}
+          {{- range $values := $.Values.nfsMountpoint }}
+            - name: {{ $values.name }}
+              mountPath: {{ $values.containerPath }}
+              readOnly: {{ $values.readOnly }}
+          {{- end }}
+          {{- end }}
+          {{- with $.Values.resources }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: {{ include "rubintv-broadcaster.fullname" $ }}-creds
+          secret:
+            secretName: {{ include "rubintv-broadcaster.fullname" $ }}-google-creds
+      {{- if $.Values.nfsMountpoint }}
+      {{- range $values := $.Values.nfsMountpoint }}
+        - name: {{ $values.name }}
+          nfs:
+            path: {{ $values.serverPath }}
+            readOnly: {{ $values.readOnly }}
+            server: {{ $values.server }}
+      {{- end }}
+      {{- end }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $.Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml $.Values.affinity | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml $.Values.tolerations | nindent 8 }}
+      {{- end }}
+{{- end }}

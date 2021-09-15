@@ -1,0 +1,16 @@
+vaultPrefixPath: secret/test
+imagePullSecrets:
+  - name: rubintv-broadcaster-pull-secret
+pullSecretsPath: pull-secret
+scripts:
+  - runTestIt.py
+credentialSecretsPath: creds
+credentialFile: my_creds
+nfsMountpoint:
+  - name: scratch
+    containerPath: /scratch
+    readOnly: true
+    server: nfs.local
+    serverPath: /scratch
+env:
+  TEST_ENV: 4
