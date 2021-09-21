@@ -524,6 +524,16 @@ entries:
     version: 0.2.0
   rubintv-broadcaster:
   - apiVersion: v2
+    created: "2021-09-21T20:07:27.435158579Z"
+    description: A Helm chart for deploying the RubinTV broadcaster services.
+    digest: 7e50ad57a67508155f95aff6aed2dc9b499af86448d6598e4ce97bb9533ec958
+    maintainers:
+    - name: mareuter
+    name: rubintv-broadcaster
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/rubintv-broadcaster-0.1.1/rubintv-broadcaster-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2021-09-15T22:00:40.480844131Z"
     description: A Helm chart for deploying the RubinTV broadcaster services.
     digest: 6de97ee38abe793b97e5d77c90433ffac57338a909715572f4cb0e85eafbd72a
@@ -533,4 +543,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/rubintv-broadcaster-0.1.0/rubintv-broadcaster-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-15T22:00:40.480968044Z"
+generated: "2021-09-21T20:07:27.435298889Z"
