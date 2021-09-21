@@ -49,6 +49,13 @@ Create script name extension
 Selector labels
 */}}
 {{- define "rubintv-broadcaster.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "rubintv-broadcaster.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}-{{ include "rubintv-broadcaster.scriptName" . }}
+app.kubernetes.io/name: {{ .Release.Name }}-{{ include "rubintv-broadcaster.scriptName" . }}
+app.kubernetes.io/instance: {{ include "rubintv-broadcaster.name" . }}
+{{- end }}
+
+{{/*
+Deployment name
+*/}}
+{{- define "rubintv-broadcaster.deploymentName" -}}
+{{ include "rubintv-broadcaster.fullname" . }}-{{ include "rubintv-broadcaster.scriptName" . }}
 {{- end }}

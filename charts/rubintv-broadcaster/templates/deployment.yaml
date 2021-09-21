@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "rubintv-broadcaster.fullname" $ }}
+  name: {{ include "rubintv-broadcaster.deploymentName" $ }}
   namespace: {{ $.Values.namespace }}
   labels:
     {{- include "rubintv-broadcaster.labels" $ | nindent 4 }}
