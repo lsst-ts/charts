@@ -33,3 +33,4 @@ useHostPid: false
 
 startupProbe:
   use: true
+  failureThreshold: 10

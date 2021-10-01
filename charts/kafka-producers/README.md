@@ -1,6 +1,6 @@
 # kafka-producers
 
-![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square)
+![Version: 0.10.1](https://img.shields.io/badge/Version-0.10.1-informational?style=flat-square)
 
 A Helm chart for deploying the Kafka producers.
 
@@ -34,8 +34,9 @@ A Helm chart for deploying the Kafka producers.
 | producers | object | `{}` | This section holds the configuration of the individual producers. Each producer is specified by a name (i.e. _auxtel_) which becomes the definition point for the rest of the information. Then name specifed must be used in place of the _name_ attribute. _name.cscs_ (The list of CSCs that the named producer will monitor), _name.image_ (OPTIONAL: This section provides override of the default image section), _name.env_ (OPTIONAL: This section provides override of the defaults env section) |
 | resources | object | `{}` | This allows the specification of resources (CPU, memory) requires to run the container |
 | shmemDir | string | `nil` | This is the path to the Kubernetes local store where the shared memory database will be written |
+| startupProbe.failureThreshold | int | `5` | The number of times the startup probe is allowed to fail before failing the probe |
 | startupProbe.initialDelay | int | `10` | The initial delay in seconds before the first check is made |
-| startupProbe.period | int | `10` | The time in seconds between checks |
+| startupProbe.period | int | `10` | The time in seconds between subsequent checks |
 | startupProbe.use | bool | `false` | This decides whether or not to use the startup probe |
 | tolerations | list | `[]` | This specifies the tolerations of the pod for any system taints |
 | useExternalConfig | bool | `true` | This sets whether to rely on the ConfigMap for OSPL configuration or the internal OSPL configuration |
