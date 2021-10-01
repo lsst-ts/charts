@@ -122,6 +122,7 @@ spec:
               - /tmp/SALKAFKA_PRODUCER_RUNNING_{{ upper $producer }}
             initialDelaySeconds: {{ $.Values.startupProbe.initialDelay }}
             periodSeconds: {{ $.Values.startupProbe.period }}
+            failureThreshold: {{ $.Values.startupProbe.failureThreshold }}
           {{- end }}
       volumes:
         {{- if $.Values.useExternalConfig }}

@@ -52,6 +52,8 @@ startupProbe:
   initialDelay: 10
   # -- The time in seconds between subsequent checks
   period: 10
+  # -- The number of times the startup probe is allowed to fail before failing the probe
+  failureThreshold: 5
 # -- This allows the specification of resources (CPU, memory) requires to run the container
 resources: {}
 # -- This allows the specification of using specific nodes to run the pod
