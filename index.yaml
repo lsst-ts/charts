@@ -146,6 +146,16 @@ entries:
     version: 0.7.0
   kafka-producers:
   - apiVersion: v2
+    created: "2021-10-01T20:25:12.798242859Z"
+    description: A Helm chart for deploying the Kafka producers.
+    digest: 645c975164a5b0f5696c3ec606d553990bfb37b95ba7143482eea1725179e7ba
+    maintainers:
+    - name: mareuter
+    name: kafka-producers
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/kafka-producers-0.10.1/kafka-producers-0.10.1.tgz
+    version: 0.10.1
+  - apiVersion: v2
     created: "2021-09-03T16:21:07.949654548Z"
     description: A Helm chart for deploying the Kafka producers.
     digest: 18cce58b7dcc0683cd84e5987682727a5ecce1c997e5e4b54e404bc21338ae4c
@@ -563,4 +573,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/rubintv-broadcaster-0.1.0/rubintv-broadcaster-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-21T22:29:44.103094855Z"
+generated: "2021-10-01T20:25:12.798827161Z"
