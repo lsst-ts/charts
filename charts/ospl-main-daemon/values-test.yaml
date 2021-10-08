@@ -1,0 +1,10 @@
+domainId: 7
+imagePullSecrets:
+  - name: ospl-daemon-nexus3-docker
+initContainer:
+  repository: lsstit/ddsnet4u
+  tag: latest
+  pullPolicy: IfNotPresent
+env:
+  OSPL_MASTER_PRIORITY: 200
+  LSST_DDS_PARTITION_PREFIX: test
