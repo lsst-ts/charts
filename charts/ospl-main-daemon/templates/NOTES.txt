@@ -1,0 +1,10 @@
+Your release is named {{ include "ospl-main-daemon.fullname" . }}.
+
+To learn more about the release, try:
+
+  helm status {{ include "ospl-main-daemon.fullname" . }}
+  helm get {{ include "ospl-main-daemon.fullname" . }}
+
+To check if the OSPL daemon is running, try:
+
+  kubectl get pods --namespace=ospl-daemon -l app.kubernetes.io/name={{ include "ospl-main-daemon.fullname" . }} -o jsonpath="{.items[0].metadata.name}"
