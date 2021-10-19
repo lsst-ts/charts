@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       {{- include "ospl-main-daemon.selectorLabels" . | nindent 6 }}
+  replicas: 0
   template:
     metadata:
       {{- with .Values.annotations }}

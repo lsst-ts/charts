@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ospl-main-daemon
-version: 0.1.1
+version: 0.1.2
 maintainers:
   - name: mareuter
 description: A Helm chart for handling the OSPL main shared memory daemon
