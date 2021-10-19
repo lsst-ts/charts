@@ -534,6 +534,16 @@ entries:
     version: 0.2.0
   ospl-main-daemon:
   - apiVersion: v2
+    created: "2021-10-19T23:06:08.682821216Z"
+    description: A Helm chart for handling the OSPL main shared memory daemon
+    digest: aad6f9936c246ba776341fcee77d980532e5276b11a4216c25e223a0a6a2a1c3
+    maintainers:
+    - name: mareuter
+    name: ospl-main-daemon
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/ospl-main-daemon-0.1.2/ospl-main-daemon-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     created: "2021-10-19T21:54:16.375100566Z"
     description: A Helm chart for handling the OSPL main shared memory daemon
     digest: c70c395d0463470d814831fc60de89d2f82e735e45553dfbe0d3527be4ad6f7a
@@ -594,4 +604,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/rubintv-broadcaster-0.1.0/rubintv-broadcaster-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-19T21:54:16.375426972Z"
+generated: "2021-10-19T23:06:08.683225116Z"
