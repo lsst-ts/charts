@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       {{- include "ospl-main-daemon.selectorLabels" . | nindent 6 }}
-  replicas: 1
   template:
     metadata:
       {{- with .Values.annotations }}
@@ -27,6 +26,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          stdin: true
+          tty: true
           env:
             - name: LSST_DOMAIN_ID
               value: {{ .Values.domainId | quote }}
