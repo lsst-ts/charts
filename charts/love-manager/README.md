@@ -1,6 +1,6 @@
 # love-manager
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square)
 
 Helm chart for the LOVE manager service.
 
@@ -29,11 +29,11 @@ Helm chart for the LOVE manager service.
 | database.image.repository | string | `"postgres"` | The database image to use |
 | database.image.tag | string | `"12.0"` | The tag to use for the database image |
 | database.port | int | `5432` | The database port number |
-| database.pvcMountpoint.accessMode | string | `"ReadWriteMany"` | The access mode for the PVC |
-| database.pvcMountpoint.claimSize | string | `"2Gi"` | The size of the claim for the PVC |
-| database.pvcMountpoint.name | string | `"love-manager-database"` | Label for the PVC mount point |
-| database.pvcMountpoint.path | string | `"/var/lib/postgresql/data"` | Path within the running container |
-| database.pvcMountpoint.storageClass | string | `"local-store"` | The storage class to request the disk allocation from |
+| database.storage.accessMode | string | `"ReadWriteMany"` | The access mode for the database storage |
+| database.storage.claimSize | string | `"2Gi"` | The size of the database storage request |
+| database.storage.name | string | `"love-manager-database"` | Label for the database storage point |
+| database.storage.path | string | `"/var/lib/postgresql/data"` | Path within the running container |
+| database.storage.storageClass | string | `"local-store"` | The storage class to request the disk allocation from |
 | env.COMMANDER_HOSTNAME | string | `"love-commander-service"` | Label for the LOVE commander service. Must match the one spcified in the LOVE commander chart |
 | env.COMMANDER_PORT | int | `5000` | Port number for the LOVE commander service. Must match the one spcified in the LOVE commander chart |
 | env.DB_ENGINE | string | `"postgresql"` | The type of database engine being used for the LOVE manager |
@@ -43,7 +43,7 @@ Helm chart for the LOVE manager service.
 | env.DB_USER | string | `"postgres"` | The database user needed for access from the LOVE manager. Must match `database.env.POSTGRES_USER` |
 | env.LOVE_PRODUCER_WEBSOCKET_HOST | string | `"love-service/manager/ws/subscription"` | The URL path for the LOVE producer websocket host |
 | env.REDIS_HOST | string | `"love-manager-redis-service"` | The name of the redis service |
-| env.SERVER_URL | string | `"love.lsst.local"` | The externalr URL from the NGINX server for LOVE |
+| env.SERVER_URL | string | `"love.lsst.local"` | The external URL from the NGINX server for LOVE |
 | envSecretKeyName | string | `"love"` | The top-level secret key name that houses the rest of the secrets |
 | envSecrets.ADMIN_USER_PASS | string | `"manager-admin-user-password"` | The LOVE manager admin user password secret key name |
 | envSecrets.CMD_USER_PASS | string | `"manager-cmd-user-password"` | The LOVE manager cmd_user user password secret key name |

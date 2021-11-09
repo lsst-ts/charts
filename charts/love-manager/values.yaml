@@ -17,7 +17,7 @@ ports:
 # -- The top-level secret key name that houses the rest of the secrets
 envSecretKeyName: love
 env:
-  # -- The externalr URL from the NGINX server for LOVE
+  # -- The external URL from the NGINX server for LOVE
   SERVER_URL: love.lsst.local
   # -- The URL path for the LOVE producer websocket host
   LOVE_PRODUCER_WEBSOCKET_HOST: love-service/manager/ws/subscription
@@ -96,16 +96,16 @@ database:
     pullPolicy: IfNotPresent
   # -- The database port number
   port: 5432
-  pvcMountpoint:
-    # -- Label for the PVC mount point
+  storage:
+    # -- Label for the database storage point
     name: love-manager-database
     # -- Path within the running container
     path: /var/lib/postgresql/data
     # -- The storage class to request the disk allocation from
     storageClass: local-store
-    # -- The access mode for the PVC
+    # -- The access mode for the database storage
     accessMode: ReadWriteMany
-    # -- The size of the claim for the PVC
+    # -- The size of the database storage request
     claimSize: 2Gi
   env:
     # -- Define the database type
