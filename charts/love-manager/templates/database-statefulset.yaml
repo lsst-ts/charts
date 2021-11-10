@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "love-manager.database.fullname" . }}
   namespace: {{ .Values.namespace }}
@@ -22,8 +22,8 @@ spec:
         ports:
           - containerPort: {{ .Values.database.port }}
         volumeMounts:
-          - mountPath: {{ .Values.database.pvcMountpoint.path }}
-            name: {{ .Values.database.pvcMountpoint.name }}-pvc
+          - mountPath: {{ .Values.database.storage.path }}
+            name: {{ .Values.database.storage.name }}-pvc
         env:
         {{- $data := dict "env" .Values.database.env "secretName" "" }}
         {{- include "helpers.envFromList" $data | indent 10 }}
@@ -33,10 +33,6 @@ spec:
         resources:
           {{- toYaml $.Values.resources | nindent 10 }}
         {{- end }}
-      volumes:
-        - name: {{ .Values.database.pvcMountpoint.name }}-pvc
-          persistentVolumeClaim:
-            claimName: {{ .Values.database.pvcMountpoint.name }}-pvc
       {{- with $.Values.nodeSelector }}
       nodeSelector:
         {{- toYaml $ | nindent 8 }}
@@ -49,3 +45,13 @@ spec:
       tolerations:
         {{- toYaml $ | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Values.database.storage.name }}-pvc
+      spec:
+        accessModes:
+          - {{ .Values.database.storage.accessMode | quote }}
+        storageClassName: {{ .Values.database.storage.storageClass }}
+        resources:
+          requests:
+            storage: {{ .Values.database.storage.claimSize }}
