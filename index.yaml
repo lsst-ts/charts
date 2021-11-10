@@ -252,6 +252,16 @@ entries:
     version: 0.1.0
   love-manager:
   - apiVersion: v2
+    created: "2021-11-10T23:39:59.361737667Z"
+    description: Helm chart for the LOVE manager service.
+    digest: 7d1289e58490ffd9a511ef023a58c2e603dc6e29ae0b570bfe2bed6e3e89d28e
+    maintainers:
+    - name: mareuter
+    name: love-manager
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-manager-0.3.1/love-manager-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     created: "2021-11-10T17:08:33.968804127Z"
     description: Helm chart for the LOVE manager service.
     digest: ac3c9f4f1fdb5479a958a148784b7e9a63d5a0050df291a1b8f88e3596e9760d
@@ -634,4 +644,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/rubintv-broadcaster-0.1.0/rubintv-broadcaster-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-10T17:08:33.968960025Z"
+generated: "2021-11-10T23:39:59.361938767Z"
