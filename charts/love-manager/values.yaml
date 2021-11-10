@@ -61,7 +61,7 @@ envSecrets:
   REDIS_PASS: redis-password
 # -- The container path to mount the LOVE manager configuration
 configMount: /usr/src/love/manager/config
-# -- THe specification of the LOVE manager configuration (JSON)
+# -- The specification of the LOVE manager configuration (JSON)
 config: |
     {
       "alarms": {
