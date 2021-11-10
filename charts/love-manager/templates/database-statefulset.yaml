@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "love-manager.database.labels" . | nindent 4 }}
 spec:
+  serviceName: {{ include "love-manager.database.fullname" . }}-service
   selector:
     matchLabels:
       {{- include "love-manager.database.selectorLabels" . | nindent 6 }}
