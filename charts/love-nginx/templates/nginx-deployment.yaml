@@ -15,11 +15,15 @@ spec:
       labels:
         {{- include "love-nginx.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml .Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
       initContainers:
       - name: love-frontend
         image: "{{ .Values.initContainers.frontend.image.repository }}:{{ .Values.initContainers.frontend.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: [ "/bin/sh", "-c", "cp -Rv /usr/src/love/ /usr/src/love-frontend" ]
+        command: ["/bin/sh", "-c", "cp -Rv /usr/src/love/ /usr/src/love-frontend"]
         volumeMounts:
           - mountPath: /usr/src
             name: {{ .Values.staticStore.name }}
