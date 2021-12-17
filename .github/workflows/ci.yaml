@@ -4,7 +4,7 @@ on:
   push:
     branches-ignore:
       - "gh-pages"
-      - "master"
+      - "main"
 
 jobs:
   test:
