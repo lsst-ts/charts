@@ -19,6 +19,10 @@ ingress:
   hostname: love.local
   # -- Path name associated with the NGINX ingress
   httpPath: /
+  # -- Assign the Ingress class name
+  className: ""
+  # -- Annotations for the ingress
+  annotations: {}
 # -- Configuration specification for the NGINX service
 config: |
   server {
