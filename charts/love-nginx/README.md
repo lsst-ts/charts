@@ -1,6 +1,6 @@
 # love-nginx
 
-![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square)
 
 Helm chart for the LOVE Nginx server.
 
@@ -20,6 +20,8 @@ Helm chart for the LOVE Nginx server.
 | image.repository | string | `"nginx"` | The NGINX image to use |
 | image.tag | string | `"1.14.2"` | The tag to use for the NGINX image |
 | imagePullSecrets | list | `[]` | The list of pull secrets needed for the images. If this section is used, each object listed can have the following attributes defined: _name_ (The label identifying the pull-secret to use) |
+| ingress.annotations | object | `{}` | Annotations for the ingress |
+| ingress.className | string | `""` | Assign the Ingress class name |
 | ingress.hostname | string | `"love.local"` | Hostname for the NGINX ingress |
 | ingress.httpPath | string | `"/"` | Path name associated with the NGINX ingress |
 | initContainers.frontend.image.repository | string | `"lsstts/love-frontend"` | The frontend image to use |
