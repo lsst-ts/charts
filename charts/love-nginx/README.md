@@ -1,6 +1,6 @@
 # love-nginx
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square)
+![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square)
 
 Helm chart for the LOVE Nginx server.
 
@@ -20,10 +20,11 @@ Helm chart for the LOVE Nginx server.
 | image.repository | string | `"nginx"` | The NGINX image to use |
 | image.tag | string | `"1.14.2"` | The tag to use for the NGINX image |
 | imagePullSecrets | list | `[]` | The list of pull secrets needed for the images. If this section is used, each object listed can have the following attributes defined: _name_ (The label identifying the pull-secret to use) |
-| ingress.annotations | object | `{}` | Annotations for the ingress |
+| ingress.annotations | object | `{}` | Annotations for the NGINX ingress |
 | ingress.className | string | `""` | Assign the Ingress class name |
 | ingress.hostname | string | `"love.local"` | Hostname for the NGINX ingress |
 | ingress.httpPath | string | `"/"` | Path name associated with the NGINX ingress |
+| ingress.pathType | string | `""` | Set the Kubernetes path type for the NGINX ingress |
 | initContainers.frontend.image.repository | string | `"lsstts/love-frontend"` | The frontend image to use |
 | initContainers.frontend.image.tag | string | `"develop"` | The tag to use for the frontend image |
 | initContainers.manager.command | list | `["/bin/sh","-c","mkdir -p /usr/src/love-manager/media/thumbnails; mkdir -p /usr/src/love-manager/media/configs; cp -Rv /usr/src/love/manager/static /usr/src/love-manager; cp -uv /usr/src/love/manager/ui_framework/fixtures/thumbnails/* /usr/src/love-manager/media/thumbnails; cp -uv /usr/src/love/manager/api/fixtures/configs/* /usr/src/love-manager/media/configs"]` | The command to execute for the love-manager static content |

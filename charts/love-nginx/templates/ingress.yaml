@@ -18,6 +18,7 @@ spec:
       http:
         paths:
           - path: {{ .Values.ingress.httpPath }}
+            pathType: {{ default "Prefix" .Values.ingress.pathType }}
             backend:
               service:
                 name: {{ .Release.Name }}-service
