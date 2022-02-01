@@ -371,6 +371,16 @@ entries:
     version: 0.1.0
   love-nginx:
   - apiVersion: v2
+    created: "2022-02-01T00:27:46.292616125Z"
+    description: Helm chart for the LOVE Nginx server.
+    digest: 12d007fd58741c2a3ad83fd02d11c85675f88ca2ad52e0e686a6f70618bfc5be
+    maintainers:
+    - name: mareuter
+    name: love-nginx
+    urls:
+    - https://github.com/lsst-ts/charts/releases/download/love-nginx-0.3.0/love-nginx-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2021-11-11T00:23:35.560219471Z"
     description: Helm chart for the LOVE Nginx server.
     digest: 58ffcd4cd087440becbd1097855aa5ae28fad58540c7e9055c956ef006b985d5
@@ -664,4 +674,4 @@ entries:
     urls:
     - https://github.com/lsst-ts/charts/releases/download/rubintv-broadcaster-0.1.0/rubintv-broadcaster-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-11T00:23:35.560391272Z"
+generated: "2022-02-01T00:27:46.292778325Z"
