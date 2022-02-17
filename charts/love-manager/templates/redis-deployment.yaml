@@ -27,19 +27,19 @@ spec:
         {{- include "helpers.envFromList" $data | indent 10 }}
         {{- $data := dict "env" .Values.redis.envSecrets "secretName" .Values.envSecretKeyName }}
         {{- include "helpers.envFromList" $data | indent 10 }}
-        {{- with $.Values.resources }}
+        {{- with $.Values.redis.resources }}
         resources:
-          {{- toYaml $.Values.resources | nindent 10 }}
+          {{- toYaml $.Values.redis.resources | nindent 10 }}
         {{- end }}
-      {{- with $.Values.nodeSelector }}
+      {{- with $.Values.redis.nodeSelector }}
       nodeSelector:
         {{- toYaml $ | nindent 8 }}
       {{- end }}
-      {{- with $.Values.affinity }}
+      {{- with $.Values.redis.affinity }}
       affinity:
         {{- toYaml $ | nindent 8 }}
       {{- end }}
-      {{- with $.Values.tolerations }}
+      {{- with $.Values.redis.tolerations }}
       tolerations:
         {{- toYaml $ | nindent 8 }}
       {{- end }}

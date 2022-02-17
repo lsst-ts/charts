@@ -86,6 +86,14 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # -- (int) The percentage of memory utilization that will trigger the scaling
   targetMemoryUtilizationPercentage: ""
+# -- Resource specifications for the LOVE manager pods
+resources: {}
+# -- Node selection rules for the LOVE manager pods
+nodeSelector: {}
+# -- Toleration specifications for the LOVE manager pods
+tolerations: []
+# -- Affinity rules for the LOVE manager pods
+affinity: {}
 database:
   image:
     # -- The database image to use
@@ -107,6 +115,14 @@ database:
     accessMode: ReadWriteMany
     # -- The size of the database storage request
     claimSize: 2Gi
+  # -- Resource specifications for the LOVE database pods
+  resources: {}
+  # -- Node selection rules for the LOVE database pods
+  nodeSelector: {}
+  # -- Toleration specifications for the LOVE database pods
+  tolerations: []
+  # -- Affinity rules for the LOVE database pods
+  affinity: {}
   env:
     # -- Define the database type
     POSTGRES_DB: postgres
@@ -128,11 +144,11 @@ redis:
     REDIS_PASS: redis-password
   # -- The redis port number
   port: 6379
-# -- Resource specifications for the LOVE manager, database and redis pods
-resources: {}
-# -- Node selection rules for the LOVE manager, database and redis pods
-nodeSelector: {}
-# -- Toleration specifications for the LOVE manager, database and redis pods
-tolerations: []
-# -- Affinity rules for the LOVE manager, database and redis pods
-affinity: {}
+  # -- Resource specifications for the LOVE redis pods
+  resources: {}
+  # -- Node selection rules for the LOVE redis pods
+  nodeSelector: {}
+  # -- Toleration specifications for the LOVE redis pods
+  tolerations: []
+  # -- Affinity rules for the LOVE redis pods
+  affinity: {}
