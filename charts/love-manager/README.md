@@ -1,6 +1,6 @@
 # love-manager
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square)
 
 Helm chart for the LOVE manager service.
 
@@ -63,6 +63,7 @@ Helm chart for the LOVE manager service.
 | nodeSelector | object | `{}` | Node selection rules for the LOVE manager pods |
 | ports.container | int | `8000` | The port on the container for normal communications |
 | ports.node | int | `30000` | The port on the node for normal communcations |
+| readinessProbe | object | `{}` | Configuration for the LOVE manager pods readiness probe |
 | redis.affinity | object | `{}` | Affinity rules for the LOVE redis pods |
 | redis.envSecrets.REDIS_PASS | string | `"redis-password"` | The redis password secret key name |
 | redis.image.pullPolicy | string | `"IfNotPresent"` | The pull policy for the redis image |

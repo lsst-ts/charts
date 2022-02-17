@@ -94,6 +94,8 @@ nodeSelector: {}
 tolerations: []
 # -- Affinity rules for the LOVE manager pods
 affinity: {}
+# -- Configuration for the LOVE manager pods readiness probe
+readinessProbe: {}
 database:
   image:
     # -- The database image to use

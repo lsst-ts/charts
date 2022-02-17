@@ -35,6 +35,10 @@ spec:
         resources:
           {{- toYaml $.Values.resources | nindent 10 }}
         {{- end }}
+        {{- with $.Values.readinessProbe }}
+        readinessProbe:
+          {{- toYaml $.Values.readinessProbe | nindent 10 }}
+        {{- end }}
       volumes:
         - name: love-conf
           configMap:
