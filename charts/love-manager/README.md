@@ -1,6 +1,6 @@
 # love-manager
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square)
+![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square)
 
 Helm chart for the LOVE manager service.
 
@@ -88,6 +88,7 @@ Helm chart for the LOVE manager service.
 | viewBackup.image.tag | string | `"develop"` | The tag to use for the view backup image |
 | viewBackup.nodeSelector | object | `{}` | Node selection rules for the LOVE view backup pods |
 | viewBackup.resources | object | `{}` | Resource specifications for the LOVE view backup pods |
+| viewBackup.restartPolicy | string | `"Never"` | The restart policy type for the view backup cronjob |
 | viewBackup.schedule | string | `"0 0 1 1 *"` | The view backup job schedule in cron format |
 | viewBackup.tolerations | list | `[]` | Toleration specifications for the LOVE view backup pods |
 | viewBackup.ttlSecondsAfterFinished | string | `""` | Time after view backup job finishes before deletion (ALPHA) |
