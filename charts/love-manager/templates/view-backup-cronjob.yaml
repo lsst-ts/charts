@@ -61,6 +61,7 @@ spec:
               resources:
                 {{- toYaml $.Values.viewBackup.resources | nindent 16 }}
               {{- end }}
+          restartPolicy: {{ .Values.viewBackup.restartPolicy }}
           {{- if $.Values.viewBackup.image.nexus3 }}
           imagePullSecrets:
             - name: {{ $.Values.namespace }}-{{ $.Values.viewBackup.image.nexus3 }}
