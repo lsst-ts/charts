@@ -139,3 +139,36 @@ Selector labels - redis
 app.kubernetes.io/name: {{ include "love-manager.name" . }}
 app.kubernetes.io/instance: {{ include "love-manager.redis.fullname" . }}
 {{- end }}
+
+{{/*
+Create a default fully qualified app name for the view backup.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "love-manager.view-backup.fullname" -}}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- if contains $name .Release.Name }}
+{{- printf "%s-view-backup" .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s-view-backup" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/*
+Common labels - view backup
+*/}}
+{{- define "love-manager.view-backup.labels" -}}
+helm.sh/chart: {{ include "love-manager.chart" . }}
+{{ include "love-manager.view-backup.selectorLabels" . }}
+{{- end }}
+
+{{/*
+Selector labels - view backup
+*/}}
+{{- define "love-manager.view-backup.selectorLabels" -}}
+type: love-manager-view-backup-job
+{{- end }}
