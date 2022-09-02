@@ -1,3 +1,9 @@
+# DEPRECATED as of September 2, 2022
+
+The ArgoCD repository now houses all of the charts we use for deployment.
+This respository is not to be used, but is being left open for a bit. 
+Once it is determined not to be of use any more, it will be archived.
+
 # Using this repository
 
 To install a Helm chart from this repository first add the repository:
